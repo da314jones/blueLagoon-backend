@@ -1,1 +1,1 @@
-# blue-lagoon
+# blue-lagoon-backend
