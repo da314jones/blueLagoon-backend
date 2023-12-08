@@ -1,81 +1,179 @@
-\c movies_dev;
+\c blueLagoon_dev;
+-- Users seed data (1 admin and 6 generic users)
+INSERT INTO users (Email, Password, ProfilePic, Interests, Challenges, Experiences, Locations, JoinDate, role) VALUES
+('jonesda314@outlook.com', 'hashed_PlatinumBella13*', '', 'Father of 2, Male', 'Single parenting', 'Experienced father, Brooklyn resident', 'Brooklyn, NY', '1975-03-14', 'admin'),
+('user1@example.com', 'hashed_password1', '', 'Interests1', 'Challenges1', 'Experiences1', 'Location1', '2021-01-01', 'user'),
+('user2@example.com', 'hashed_password2', '', 'Interests2', 'Challenges2', 'Experiences2', 'Location2', '2021-02-02', 'user'),
+('user3@example.com', 'hashed_password3', '', 'Interests3', 'Challenges3', 'Experiences3', 'Location3', '2021-03-03', 'user'),
+('user4@example.com', 'hashed_password4', '', 'Interests4', 'Challenges4', 'Experiences4', 'Location4', '2021-04-04', 'user'),
+('user5@example.com', 'hashed_password5', '', 'Interests5', 'Challenges5', 'Experiences5', 'Location5', '2021-05-05', 'user'),
+('user6@example.com', 'hashed_password6', '', 'Interests6', 'Challenges6', 'Experiences6', 'Location6', '2021-06-06', 'user');
 
-INSERT INTO movies (movie_name, poster_link, studio, director, staring, overview, runtime, release_year, budget, current_balance, schedule, genre, in_production) VALUES
-('The Twilight Saga: Eclipse', 'https://www.themoviedb.org/t/p/original/3mFM80dPzSqoXXuC2UMvLIRWX32.jpg', 'Summit Entertainment', 'David Slad', 'Kristen Stewart', 'Bella once again finds herself surrounded by danger as Seattle is ravaged by a string of mysterious killings and a malicious vampire continues her quest for revenge. In the midst of it all, she is forced to choose between her love for Edward and her friendship with Jacob, knowing that her decision has the potential to ignite the ageless struggle between vampire and werewolf. With her graduation quickly approaching, Bella is confronted with the most important decision of her life.', 123, 2010, 68, 20, '08/17/2009-08/29/2009', 'science fiction, romance', false),
-('Gattaca', 'https://image.tmdb.org/t/p/original/mi8ow4MIoPvgBnWB1OKe0ph0woa.jpg', 'Sony Pictures', 'Andrew Niccol', 'Ethan Hawke', 'In a future society in the era of indefinite eugenics, humans are set on a life course depending on their DNA. Young Vincent Freeman is born with a condition that would prevent him from space travel, yet is determined to infiltrate the GATTACA space program.', 112, 1997, 36, 12, '04/12/1996-09/29/1996', 'thriller, science fiction, mystery, romance', true ),
-('The Lion King', 'https://image.tmdb.org/t/p/original/sKCr78MXSLixwmZ8DyJLrpMsd15.jpg', 'Walt Disney Pictures', 'Roger Allers, Rob Minkoff', 'Matthew Broderick', 'A young lion prince is cast out of his pride by his cruel uncle, who claims he killed his father. While the uncle rules with an iron paw, the prince grows up beyond the Savannah, living by a philosophy: No worries for the rest of your days. But when his past comes to haunt him, the young prince must decide his fate: Will he remain an outcast or face his demons and become what he needs to be?', 88, 1994, 45, 10, '02/28/1993-10/07/1993', 'family, animation, drama', true ),
-('Bad Boys for Life', 'https://image.tmdb.org/t/p/original/y95lQLnuNKdPAzw9F9Ab8kJ80c3.jpg', 'Columbia Pictures', 'Adil & Bilall', 'Will Smith', 'Marcus and Mike are forced to confront new threats, career changes, and midlife crises as they join the newly created elite team AMMO of the Miami police department to take down the ruthless Armando Armas, the vicious leader of a Miami drug cartel.', 124, 2020, 90, 90, '01/23/2019-06/11/2019', 'thriller, action, crime', true ),
-('Percy Jackson: Sea of Monsters', 'https://image.tmdb.org/t/p/original/tAu90qEpLqwqiZLsMqpaMVr55oN.jpg', '20th Century Fox', 'Thor Freudenthal', 'Logan Lerman', 'In their quest to confront the ultimate evil, Percy and his friends battle swarms of mythical creatures to find the mythical Golden Fleece and to stop an ancient evil from rising.', 106, 2013, 90, 35, '01/13/2012-07/17/2012', 'adventure, family, fantasy', true ),
-('Ad Astra', 'https://image.tmdb.org/t/p/original/xBHvZcjRiWyobQ9kxBhO6B2dtRI.jpg', 'Walt Disney Studios Motion Pictures', 'James Gray', 'Brad Pitt', 'The near future, a time when both hope and hardships drive humanity to look to the stars and beyond. While a mysterious phenomenon menaces to destroy life on planet Earth, astronaut Roy McBride undertakes a mission across the immensity of space and its many perils to uncover the truth about a lost expedition that decades before boldly faced emptiness and silence in search of the unknown.', 124, 2019, 90, 90, '08/29/2017-10/20/2017', 'science fiction, drama', false  ),
-('The Good Shepherd', 'https://image.tmdb.org/t/p/original/frPAFd718R042GbMVWelLrk1h0D.jpg', 'TriBeCa Productions', 'Robert De Niro', 'Matt Damond', 'Edward Wilson, the only witness to his father''s suicide and member of the Skull and Bones Society while a student at Yale, is a morally upright young man who values honor and discretion, qualities that help him to be recruited for a career in the newly founded OSS. His dedication to his work does not come without a price though, leading him to sacrifice his ideals and eventually his family.', 167, 2006, 80, 10, '08/15/2005-12//02/2005', 'drama, thriller, history', false  ),
-('Starship Troopers', 'https://image.tmdb.org/t/p/original/cxCmv23O7p3hyHwqoktHYkZcGsY.jpg', 'TriStar Pictures', 'Paul Verhoeven', 'Casper Van Dien', 'Set in the future, the story follows a young soldier named Johnny Rico and his exploits in the Mobile Infantry. Rico''s military career progresses from recruit to non-commissioned officer and finally to officer against the backdrop of an interstellar war between mankind and an arachnoid species known as ''the Bugs''.', 129, 1997, 121, 100, '04/29/1996-10/23/1996', 'adventure, action, thriller, science fiction', false  ),
-('Star Wars: The Rise of Skywalker', 'https://image.tmdb.org/t/p/original/db32LaOibwEliAmSL2jjDF6oDdj.jpg', 'Lucasfilm Ltd.', 'J.J. Abrams', 'Daisy Ridley', 'The surviving Resistance faces the First Order once again as the journey of Rey, Finn and Poe Dameron continues. With the power and knowledge of generations behind them, the final battle begins.', 142, 2019, 416, 200, '08/01/2018-02/15/2019', 'action, adventure, science fiction', true),
-('Ant-Man', 'https://image.tmdb.org/t/p/original/rS97hUJ1otKTTripGwQ0ujbuIri.jpg', 'Marvel Studios', 'Peyton Reed', 'Paul Rudd', 'Armed with the astonishing ability to shrink in scale but increase in strength, master thief Scott Lang must embrace his inner-hero and help his mentor, Doctor Hank Pym, protect the secret behind his spectacular Ant-Man suit from a new generation of towering threats. Against seemingly insurmountable obstacles, Pym and Lang must plan and pull off a heist that will save the world.', 117, 2015, 150, 100, '08/14/2014-12/21/2014', 'science fiction, action, adcenture', true  ),
-('The Silence of the Lambs', 'https://image.tmdb.org/t/p/original/rplLJ2hPcOQmkFhTqUte0MkEaO2.jpg', 'Prion Pictures', 'Jonathan Demme', 'Jodie Foster', 'Clarice Starling is a top student at the FBI''s training academy. Jack Crawford wants Clarice to interview Dr. Hannibal Lecter, a brilliant psychiatrist who is also a violent psychopath, serving life behind bars for various acts of murder and cannibalism. Crawford believes that Lecter may have insight into a case and that Starling, as an attractive young woman, may be just the bait to draw him out.', 118, 1991, 19, 15, '11/15/1989-03/01/1990', 'crime, drama, thriller', false  );
+INSERT INTO vchat (user_id, ScheduleTime, Duration, ArchiveLink, StartTime, EndTime, ArchiveURL) VALUES
+(1, '2023-01-01 09:00:00', 30, 'archive1.link', '2023-01-01 09:00:00', '2023-01-01 09:30:00', 'archive1.url'),
+(2, '2023-01-02 10:00:00', 45, 'archive2.link', '2023-01-02 10:00:00', '2023-01-02 10:45:00', 'archive2.url'),
+(3, '2023-01-03 11:00:00', 60, 'archive3.link', '2023-01-03 11:00:00', '2023-01-03 12:00:00', 'archive3.url'),
+(4, '2023-01-04 12:00:00', 30, 'archive4.link', '2023-01-04 12:00:00', '2023-01-04 12:30:00', 'archive4.url'),
+(5, '2023-01-05 13:00:00', 45, 'archive5.link', '2023-01-05 13:00:00', '2023-01-05 13:45:00', 'archive5.url'),
+(6, '2023-01-06 14:00:00', 60, 'archive6.link', '2023-01-06 14:00:00', '2023-01-06 15:00:00', 'archive6.url'),
+(1, '2023-01-07 15:00:00', 30, 'archive7.link', '2023-01-07 15:00:00', '2023-01-07 15:30:00', 'archive7.url');
 
-INSERT INTO actors ( movie_id, actor_name, actor_img, active, age ) VALUES
-('1', 'Kristen Stewart', 'https://www.themoviedb.org/t/p/original/ryhCjTGqS6G6OprbR0qUEH355lA.jpg', true, 33 ),
-('1', 'Robert Pattinson', 'https://www.themoviedb.org/t/p/original/8A4PS5iG7GWEAVFftyqMZKl3qcr.jpg', true, 37 ),
-('1', 'Taylor Lautner', 'https://www.themoviedb.org/t/p/original/fYvBtLQMwPdomND9qLPFwn34wE4.jpg', true, 31 ),
-('2', 'Ethan Hawke', 'https://www.themoviedb.org/t/p/original/a7rgJl8TYUWAfJuM4fxbLHgD7BL.jpg', true, 53),
-('2', 'Uma Thurman', 'https://www.themoviedb.org/t/p/original/xuxgPXyv6KjUHIM8cZaxx4ry25L.jpg', true, 53),
-('2', 'Jude Law', 'https://www.themoviedb.org/t/p/original/A6Y0m7qEe04ZTHKyYDLbnyCHNzn.jpg', true, 50),
-('3', 'Matthew Broderick', 'https://www.themoviedb.org/t/p/original/papqFgpyroZJEqd7WvuNGN8ti2k.jpg', true, 61),
-('3', 'Moira Kelly', 'https://www.themoviedb.org/t/p/original/3yQRnGSfbPWQDInZHTzzXsrAhUR.jpg', true, 55),
-('3', 'James Earl Jones', 'https://www.themoviedb.org/t/p/original/oqMPIsXrl9SZkRfIKN08eFROmH6.jpg', true, 92),
-('3', 'Nathan Lane', 'https://www.themoviedb.org/t/p/original/nEYS0KO1qVO3y0RAt8V8pFxnPb7.jpg', true, 67),
-('4', 'Will Smith', 'https://www.themoviedb.org/t/p/original/abkwJJwZbDCB0MBSiYC2ODpswpY.jpg', true, 55),
-('4', 'Martin Lawrence', 'https://www.themoviedb.org/t/p/original/15Ck85zfgWkmSMfNYLkE9JLTP7s.jpg', true, 58),
-('4', 'Paola Nuñez', 'https://www.themoviedb.org/t/p/original/5k8tBBvoV43iK6u0k2YUSVXPmuK.jpg', true, 38),
-('4', 'Vanessa Hudgens', 'https://www.themoviedb.org/t/p/original/8S8Nn5m5qkiIrEJ3dzPRjltzrkx.jpg', true, 34),
-('5', 'Logan Lerman', 'https://www.themoviedb.org/t/p/original/qWbN2toEEQgW9DFjgy3gT2VoVlQ.jpg', true, 39),
-('5', 'Brandon T. Jackson', 'https://www.themoviedb.org/t/p/original/atdkrv0XzuZNYpjqn0kDub78TjQ.jpg', true, 39),
-('5', 'Alexandra Daddario', 'https://www.themoviedb.org/t/p/original/lh5zibQXYH1MNqkuX8TmxyNYHhK.jpg', true, 37),
-('5', 'Douglas Smith', 'https://www.themoviedb.org/t/p/original/rHZPWNxjIrpiHQnEOttscjTVvnm.jpg', true, 38),
-('6', 'Brad Pitt', 'https://www.themoviedb.org/t/p/original/cckcYc2v0yh1tc9QjRelptcOBko.jpg', true, 59),
-('6', 'Tommy Lee Jones', 'https://www.themoviedb.org/t/p/original/zixpaPmOonRh1I3TWgxDkeGxkrv.jpg', true, 77),
-('6', 'Ruth Negga', 'https://www.themoviedb.org/t/p/original/4lNfdH3ocaPuYC2vkGQ5CQUBwsh.jpg', true, 41),
-('6', 'Liv Tyler', 'https://www.themoviedb.org/t/p/original/rYlicHd8EQUrYvgkj7joO5RVv2T.jpg', true, 46),
-('7', 'Matt Damon', 'https://www.themoviedb.org/t/p/original/At3JgvaNeEN4Z4ESKlhhes85Xo3.jpg', true, 53),
-('7', 'Angelina Jolie', 'https://www.themoviedb.org/t/p/original/k3W1XXddDOH2zibPkNotIh5amHo.jpg', true, 48),
-('7', 'Alec Baldwin', 'https://www.themoviedb.org/t/p/original/hzKy7x574eeUS3wt1R3yvWBRpeR.jpg', true, 65),
-('7', 'Tammy Blanchard', 'https://www.themoviedb.org/t/p/original/ztbtRXEBJaOiQevIn0xNKAzu9MU.jpg', true, 46),
-('8', 'Casper Van Dien', 'https://www.themoviedb.org/t/p/original/gHnDUOCuckdZf60tKrfL9VkJD8M.jpg', true, 54),
-('8', 'Dina Meyer', 'https://www.themoviedb.org/t/p/original/bKte4cIXI1aQat8JLVNONZE4Y2.jpg', true, 54),
-('8', 'Denise Richards', 'https://www.themoviedb.org/t/p/original/mKRJ10xsz9dgDlEHCfqD7vD7zh.jpg', true, 52),
-('8', 'Jake Busey', 'https://www.themoviedb.org/t/p/original/3nZvuMtfKM2PzjkBmX4Dm7rQdv6.jpg', true, 52),
-('9', 'Daisy Ridley', 'https://www.themoviedb.org/t/p/original/qPzTLRxTWwhOXaqwMRuZ9oTKZtP.jpg', true, 31),
-('9', 'Mark Hamill', 'https://www.themoviedb.org/t/p/original/2ZulC2Ccq1yv3pemusks6Zlfy2s.jpg', true, 72),
-('9', 'Carrie Fisher', 'https://www.themoviedb.org/t/p/original/rfJtncHewKVnHjqpIZvjn24ESeC.jpg', true, 60),
-('9', 'Adam Driver', 'https://www.themoviedb.org/t/p/original/fsbGQ1eZFgdsG1XnKlhNSvHsiGo.jpg', true, 39),
-('10', 'Paul Rudd', 'https://www.themoviedb.org/t/p/original/9iBLPdj6AVnfBI1B2c0vTnGRR24.jpg', true, 54),
-('10', 'Michael Douglas', 'https://www.themoviedb.org/t/p/original/kVYGPIZowzXLEQfAGUNOqKjAbBb.jpg', true, 79),
-('10', 'Evangeline Lilly', 'https://www.themoviedb.org/t/p/original/4wWBoEWUkdsE8dp46zvDLf9jefC.jpg', true, 44),
-('11', 'Jodie Foster', 'https://www.themoviedb.org/t/p/original/resiaRfWvj4N84TgJi9DPOafCpq.jpg', true, 60),
-('11', 'Anthony Hopkins', 'https://www.themoviedb.org/t/p/original/9ukJS2QWTJ22HcwR1ktMmoJ6RSL.jpg', true, 85),
-('11', 'Scott Glenn', 'https://www.themoviedb.org/t/p/original/t3t8UK98DnAPOZE8IGsEUCDjcjp.jpg', true, 84),
-('11', 'Ted Levine', 'https://www.themoviedb.org/t/p/original/qRFq8y842T1uq51iQCwsEmQI3UT.jpg', true, 66);
+INSERT INTO vthreads (user_id, Title, Category, CreationDate) VALUES
+(1, 'Parenting Tips', 'Advice', '2021-01-01'),
+(2, 'Cooking for Kids', 'Lifestyle', '2021-02-01'),
+(3, 'DIY Projects', 'Hobbies', '2021-03-01'),
+(4, 'Educational Activities', 'Education', '2021-04-01'),
+(5, 'Outdoor Adventures', 'Recreation', '2021-05-01'),
+(6, 'Storytime Sessions', 'Entertainment', '2021-06-01'),
+(1, 'Fitness and Health', 'Wellness', '2021-07-01');
 
-INSERT INTO tasks( movie_id, task_name, description, department, cost, completed ) VALUES
-('1', 'makeup supplies', 'Kristen Stewart''s trailer has run out of makeup.', 'Costume', 1462, false),
-('1', 'possible new director', 'Director is threatening to quit, look for possible alternatives.', 'Human Resources', 0, false),
-('2', 'shooting sets', 'Lease new lot for shooting set.', 'Locations', 174294, false),
-('2', 'camera issues', 'First assistant camera having technical issues.', 'Photography', 25942, false),
-('3', 'screen rewriting', 'At the request of the director, screenplay is being rewritten.', 'Pre-Production', 59525, false),
-('3', 'animation deal', 'Need to complete contract with animation company.', 'Animation', 14572682, false),
-('4', 'casting change', 'Supporting cast member pregnant and looking to take leave of absence.', 'Casting', 163584, false),
-('4', 'possible lawsuit', 'Stuntman injured during filming, looking to sue, need to contract attorney.', 'Legal', 1502857, false),
-('5', 'location negotiations', 'Need to coordinate with local British Columbian officials on shooting permission costs.', 'Locations', 1845665, false),
-('5', 'actor strike', 'need to secure higher budget pending actor''s strike.', 'Production', 18749848, false),
-('6', 'staff change', 'Second assistant director changing careers, need new one.', 'Human Resources', 2482064, false),
-('6', 'on set catering', 'Food poisoning reported, contract new catering company.', 'Catering', 1000, false),
-('7', 'script change', 'Significant historical inaccuracies pointed out, mid-filming script change.', 'Production', 13374323, false),
-('7', 'contract transportation', 'Need to contract transportation to-from sets between studio lots.', 'Transportation', 203842, false),
-('8', 'costume design', 'Costume department set on design, need to place order for costumes.', 'Costume', 3804837, false),
-('8', 'actor pay', 'Based on nudity scene, supporting actor wants higher pay.', 'Human Resources', 2393833, false),
-('9', 'ADR needed', 're-recording of dialogue needed for several scenes.', 'Post-Production', 3272727, false),
-('9', 'soundtrack contract', 'John Williams contracted to compose soundtrack.', 'Sound', 14958773, false),
-('10', 'camera choice', 'Consensus on camera choice, Arri Alexa XT and M, reached.', 'Photography', 2545434, false),
-('10', 'casting deal.', 'Reached a deal with a staring actor, contract can move forward.', 'Casting', 2777392, false),
-('11', 'negotiations on rights', 'Novel rights between Studio and other parties reached', 'Pre-Production', 12848201, false),
-('11', 'actors request', 'Upgraded trailers secured for remote filming', 'Transportation', 103987 , false);
+INSERT INTO notifications (user_id, Type, Message, Date) VALUES
+(1, 'Reminder', 'Upcoming Event Reminder', '2021-01-01 09:00:00'),
+(2, 'Alert', 'New Message Received', '2021-02-01 10:00:00'),
+(3, 'Update', 'Profile Updated Successfully', '2021-03-01 11:00:00'),
+(4, 'News', 'New Feature Announcement', '2021-04-01 12:00:00'),
+(5, 'Reminder', 'Schedule Your Next VChat', '2021-05-01 13:00:00'),
+(6, 'Alert', 'New Connection Request', '2021-06-01 14:00:00'),
+(1, 'Update', 'System Maintenance Notification', '2021-07-01 15:00:00');
+
+INSERT INTO groups (GroupName, Description, CreationDate) VALUES
+('Single Fathers Group', 'A group for single fathers', '2021-01-01'),
+('Budgeting Tips', 'Financial advice for parents', '2021-02-01'),
+('Healthy Cooking', 'Recipes and cooking tips', '2021-03-01'),
+('DIY Crafts', 'Crafting activities for kids', '2021-04-01'),
+('Parenting 101', 'Basic parenting tips and tricks', '2021-05-01'),
+('Fitness Enthusiasts', 'Keeping fit as a parent', '2021-06-01'),
+('Tech-Savvy Parents', 'Integrating technology in parenting', '2021-07-01');
+
+INSERT INTO user_groups (user_id, group_id, JoinDate) VALUES
+(1, 1, '2021-01-01'),
+(2, 2, '2021-02-01'),
+(3, 3, '2021-03-01'),
+(4, 4, '2021-04-01'),
+(5, 5, '2021-05-01'),
+(6, 6, '2021-06-01'),
+(1, 7, '2021-07-01');
+
+INSERT INTO events (Title, Description, Location, Date, Time, Capacity, Organizer, ContactEmail) VALUES
+('Parenting Workshop', 'Join us for a parenting workshop covering various topics.', 'New York', '2023-01-20', '14:00', 50, 'Parenting Association', 'info@parentingassociation.com'),
+('Family Fun Day', 'A day of fun activities for families at the park.', 'Los Angeles', '2023-02-15', '10:00', 100, 'Community Center', 'info@communitycenter.org'),
+('Kids Educational Fair', 'An educational fair for kids with interactive exhibits.', 'Chicago', '2023-03-10', '11:30', 80, 'Education Expo', 'info@educationexpo.com'),
+('Parenting Seminar', 'Learn effective parenting strategies from experts.', 'Miami', '2023-04-05', '15:30', 60, 'Parenting Solutions', 'info@parentingsolutions.org'),
+('Outdoor Adventure Day', 'Explore the great outdoors with your family.', 'Seattle', '2023-05-12', '09:00', 70, 'Adventure Club', 'info@adventureclub.com'),
+('Cooking Class for Kids', 'A cooking class for children to learn new recipes.', 'Denver', '2023-06-18', '13:00', 40, 'Chef's' Kitchen', 'info@chefskitchen.com'),
+('Family Fitness Challenge', 'Get active as a family with our fitness challenge.', 'Brooklyn', '2023-07-25', '16:30', 90, 'Fitness Hub', 'info@fitnesshub.com');
+
+
+INSERT INTO resources (Title, Type, Link, LocationBased, Location) VALUES
+('Legal Aid for Single Fathers', 'Legal', 'legalaid.com', TRUE, 'New York'),
+('Financial Planning for Parents', 'Financial', 'finance4parents.com', FALSE, ''),
+('Childcare Services in Brooklyn', 'Childcare', 'childcarebrooklyn.com', TRUE, 'Brooklyn'),
+('Online Educational Resources', 'Education', 'eduonline.com', FALSE, ''),
+('Health and Wellness Tips', 'Health', 'healthyparents.com', FALSE, ''),
+('Parenting Podcasts', 'Entertainment', 'parentpodcasts.com', FALSE, ''),
+('Community Support Groups', 'Community', 'supportgroups.com', TRUE, 'Los Angeles');
+
+INSERT INTO professional_vchats (Topic, Speaker, Date, Time, ArchiveLink, isLive, Archived) VALUES
+('Effective Parenting', 'Dr. Smith', '2021-01-01', '19:00', 'archive1.link', FALSE, TRUE),
+('Financial Management', 'John Doe', '2021-02-01', '20:00', 'archive2.link', FALSE, TRUE),
+('Child Education', 'Jane Doe', '2021-03-01', '18:00', 'archive3.link', TRUE, FALSE),
+('Health and Fitness', 'Dr. Green', '2021-04-01', '17:00', 'archive4.link', TRUE, FALSE),
+('Cooking Healthy Meals', 'Chef Ryan', '2021-05-01', '16:00', 'archive5.link', FALSE, TRUE),
+('Mental Health Awareness', 'Dr. Brown', '2021-06-01', '15:00', 'archive6.link', FALSE, TRUE),
+('Technology for Kids', 'Tech Guru', '2021-07-01', '14:00', 'archive7.link', TRUE, FALSE);
+
+INSERT INTO social_media_accounts (user_id, SocialMediaPlatform, SocialMediaID, ProfileURL, ConnectedOn) VALUES
+(1, 'Facebook', 'fb_id_1', 'facebook.com/user1', '2021-01-01 10:00:00'),
+(2, 'Twitter', 'tw_id_2', 'twitter.com/user2', '2021-02-02 11:00:00'),
+(3, 'Instagram', 'ig_id_3', 'instagram.com/user3'),
+
+INSERT INTO user_connections (user1_id, user2_id, ConnectionOn) VALUES
+(1, 2, '2021-01-01 12:00:00'),
+(1, 3, '2021-01-02 12:00:00'),
+(2, 3, '2021-01-03 12:00:00'),
+(2, 4, '2021-01-04 12:00:00'),
+(3, 4, '2021-01-05 12:00:00'),
+(3, 5, '2021-01-06 12:00:00'),
+(4, 5, '2021-01-07 12:00:00');
+
+INSERT INTO recommendations (user_id, Title, Description, Link, recommendedOn) VALUES
+(1, 'Great Parenting Book', 'A book on modern parenting techniques', 'parentingbook.com', '2021-01-01'),
+(2, 'Educational Apps for Kids', 'Apps to help with child education', 'eduapps.com', '2021-02-02'),
+(3, 'Local Childcare Services', 'Recommended childcare services in the area', 'childcare.com', '2021-03-03'),
+(4, 'Financial Planning for Parents', 'Resources for managing family finances', 'financeparents.com', '2021-04-04'),
+(5, 'Healthy Recipes for Kids', 'Nutritious and delicious recipes', 'healthyrecipes.com', '2021-05-05'),
+(6, 'Outdoor Activities for Families', 'Great outdoor activities for parents and children', 'outdoorfun.com', '2021-06-06'),
+(1, 'Parenting Support Groups', 'Local support groups for single parents', 'supportgroups.com', '2021-07-07');
+
+INSERT INTO affiliates (Name, ServiceOrProduct, DiscountDetails, ContactInfo) VALUES
+('Affiliate 8', 'Product', 'Exclusive offer for members', 'Contact: affiliate8@example.com'),
+('Affiliate 9', 'Service', '10% discount for members', 'Contact: affiliate9@example.com'),
+('Affiliate 10', 'Product', 'Special discount for members', 'Contact: affiliate10@example.com'),
+('Affiliate 11', 'Service', '15% off for members', 'Contact: affiliate11@example.com'),
+('Affiliate 12', 'Product', 'Limited-time offer for members', 'Contact: affiliate12@example.com'),
+('Affiliate 13', 'Service', 'Free trial for members', 'Contact: affiliate13@example.com'),
+('Affiliate 14', 'Product', 'Exclusive deal for members', 'Contact: affiliate14@example.com');
+
+INSERT INTO mentorship (MentorID, MenteeID, StartDate, EndDate, Status) VALUES
+(1, 2, '2023-01-15', '2023-04-15', 'Active'),
+(3, 4, '2023-02-10', '2023-05-10', 'Active'),
+(5, 6, '2023-03-20', '2023-06-20', 'Active'),
+(2, 1, '2023-04-01', '2023-07-01', 'Active'),
+(4, 3, '2023-05-05', '2023-08-05', 'Active'),
+(6, 5, '2023-06-15', '2023-09-15', 'Active');
+
+INSERT INTO reviews (UserID, EventID, Rating, Comment, CreatedAt) VALUES
+(1, 1, 5, 'Great event! I learned a lot.', '2023-01-15 09:30:00'),
+(2, 1, 4, 'Informative and well-organized.', '2023-01-16 11:45:00'),
+(3, 2, 5, 'Excellent mentorship program.', '2023-02-10 15:20:00'),
+(4, 2, 4, 'Helped me grow in my field.', '2023-02-11 10:15:00'),
+(5, 3, 5, 'Amazing experience!', '2023-03-20 14:00:00'),
+(6, 3, 4, 'Valuable insights and guidance.', '2023-03-21 13:30:00');
+
+INSERT INTO reports (UserID, EventID, ReportType, Description, CreatedAt) VALUES
+(1, 1, 'Inappropriate Content', 'This event had inappropriate content.', '2023-01-15 12:30:00'),
+(2, 2, 'Technical Issues', 'Encountered technical problems during the event.', '2023-02-10 14:45:00'),
+(3, 3, 'Misconduct', 'One of the participants exhibited misconduct.', '2023-03-20 16:10:00'),
+(4, 4, 'Late Start', 'The event started much later than scheduled.', '2023-04-05 09:15:00'),
+(5, 5, 'No-show Speaker', 'The event speaker did not show up.', '2023-05-12 17:30:00'),
+(6, 6, 'Harassment', 'I experienced harassment during the mentorship program.', '2023-06-25 11:20:00');
+
+INSERT INTO emergency_contacts (user_id, Name, ContactInfo, Description, Location) VALUES
+(1, 'NYC Emergency Services', '911', 'Immediate emergency assistance', 'New York'),
+(2, 'LA Health Services', '911', 'Health-related emergencies', 'Los Angeles'),
+(3, 'Chicago Fire Department', '911', 'Fire-related emergencies', 'Chicago'),
+(4, 'Miami Police Department', '911', 'Law enforcement assistance', 'Miami'),
+(5, 'Seattle Childcare Services', '800-123-4567', 'Childcare emergencies and support', 'Seattle'),
+(6, 'Denver Mental Health Hotline', '800-456-7890', 'Mental health crisis line', 'Denver'),
+(1, 'Brooklyn Community Support', '800-789-1234', 'Community and social support services', 'Brooklyn');
+
+-- Legal Documents seed data
+INSERT INTO legal_documents (DocumentName, DocumentType, Content, CreatedAt) VALUES
+('Terms of Service', 'Terms', 'This is the Terms of Service document.', '2023-01-01 10:00:00'),
+('Privacy Policy', 'Privacy', 'This is the Privacy Policy document.', '2023-01-02 11:00:00'),
+('User Agreement', 'Agreement', 'This is the User Agreement document.', '2023-01-03 12:00:00'),
+('Cookie Policy', 'Policy', 'This is the Cookie Policy document.', '2023-01-04 13:00:00'),
+('Code of Conduct', 'Policy', 'This is the Code of Conduct document.', '2023-01-05 14:00:00'),
+('Data Usage Policy', 'Policy', 'This is the Data Usage Policy document.', '2023-01-06 15:00:00'),
+('Refund Policy', 'Policy', 'This is the Refund Policy document.', '2023-01-07 16:00:00');
+
+-- User Consent seed data
+INSERT INTO user_consent (UserID, DocumentID, ConsentDate) VALUES
+(1, 1, '2023-01-08 09:30:00'),
+(2, 2, '2023-01-09 10:45:00'),
+(3, 3, '2023-01-10 11:15:00'),
+(4, 4, '2023-01-11 12:30:00'),
+(5, 5, '2023-01-12 13:45:00'),
+(6, 6, '2023-01-13 14:30:00'),
+(7, 7, '2023-01-14 15:45:00');
+
+-- Error Logs seed data
+INSERT INTO error_logs (LogType, ErrorMessage, ErrorDetails, LogDate) VALUES
+('Application Error', 'An unexpected error occurred.', 'Stack trace and additional details.', '2023-01-15 10:30:00'),
+('Database Error', 'Failed to insert data into the events table.', 'Database error message and details.', '2023-01-16 11:45:00'),
+('Server Error', 'The server encountered an issue.', 'Server log and error description.', '2023-01-17 12:20:00'),
+('Security Alert', 'Unauthorized access attempt detected.', 'IP address and security event details.', '2023-01-18 13:15:00'),
+('Performance Issue', 'Application performance degraded.', 'Performance metrics and analysis.', '2023-01-19 14:30:00'),
+('Authentication Error', 'Failed login attempt.', 'User information and login details.', '2023-01-20 15:45:00'),
+('Payment Gateway Error', 'Payment processing error.', 'Transaction details and error message.', '2023-01-21 16:20:00');
+

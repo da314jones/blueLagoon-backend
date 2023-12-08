@@ -9,7 +9,7 @@ const { getAllMovies,
 const { checkMovies,
         checkMovieName,
         checkMovieIndex,
-        checkInProductionBoolean } = require("../validations/checkMovies")
+        checkInProductionBoolean } = require("../validations/checkMovies.js")
 
 const actorsController = require("./actorsController.js")
 movies.use("/:movie_id/actors", actorsController)

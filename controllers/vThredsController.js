@@ -14,7 +14,7 @@ const { checkActors,
         checkActorIndex, 
         checkMovieIndex, 
         checkActiveBoolean
-      } = require("../validations/checkActors.js")
+      } = require("../validations/checkUsers.js")
 
 
 actors.get("/", checkActors, checkMovieIndex,  async (req, res) => {
