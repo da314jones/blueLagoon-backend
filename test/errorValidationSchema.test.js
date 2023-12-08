@@ -1,27 +1,28 @@
 const Joi = require('joi');
-const { errorValidationSchema } = require('../src/your-schema-module'); // Adjust the path as needed
+const { errorLogsValidationSchema } = require('../src/validations/checkErrorLogs.js'); // Adjust the path as needed
 const { expect } = require('chai');
+const validData = require('../validData/errorValidations.js'); // Update with the correct path
+const invalidData = require('../validData/errorValidations.js'); // Update with the correct path
 
-// ... Test cases for error validation schema
-const { errorValidationSchema } = require('../src/your-schema-module'); // Adjust the path as needed
-const { expect } = require('chai');
-
-describe('Error Validation Schema', () => {
+describe('Error Logs Validation Schema', () => {
   it('should validate a valid error object', () => {
-    const validData = {
-      // Valid data for error schema here
+    const validErrorData = {
+      id: 1,
+      message: 'An error occurred',
+      timestamp: '2023-12-15T12:00:00Z',
     };
 
-    const result = errorValidationSchema.validate(validData);
+    const result = errorLogsValidationSchema.validate(validErrorData);
     expect(result.error).to.be.null;
   });
 
-  it('should return validation error for an invalid error object', () => {
-    const invalidData = {
-      // Invalid data for error schema here
+  it('should return a validation error for an invalid error object', () => {
+    const invalidErrorData = {
+      // Missing the "error_message" field, which is required
+      error_code: 'ERR123',
     };
 
-    const result = errorValidationSchema.validate(invalidData);
+    const result = errorLogsValidationSchema.validate(invalidErrorData);
     expect(result.error).to.exist;
   });
 });

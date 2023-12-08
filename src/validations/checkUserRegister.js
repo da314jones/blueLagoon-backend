@@ -10,8 +10,8 @@ const errorMessages = {
   'any.required': '{{#label}} is required',
 };
 
-const registerSchema = Joi.object({
-  role: Joi.string().alphanumeric().min(3).max(50).messages(errorMessages),
+const userRegistrationSchema = Joi.object({
+  role: Joi.string().alphanum().min(3).max(50).messages(errorMessages),
   Email: Joi.string().email().required().messages(errorMessages),
   Password: Joi.string().min(6).required().messages(errorMessages),
   ProfilePic: Joi.string().min(6).max(255).uri().messages(errorMessages),
@@ -20,9 +20,9 @@ const registerSchema = Joi.object({
   Experiences: Joi.string().max(500).messages(errorMessages),
   Locations: Joi.string().max(100).messages(errorMessages),
   JoinDate: Joi.date(),
-  name: Joi.string().alphanumeric().min(3).max(30).required().messages(errorMessages),
+  name: Joi.string().alphanum().min(3).max(30).required().messages(errorMessages),
 });
 
-module.exports = { 
-  registerSchema
+module.exports = {
+  userRegistrationSchema
 };

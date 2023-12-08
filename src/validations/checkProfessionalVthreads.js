@@ -12,7 +12,7 @@ const errorMessages = {
   'boolean.base': '{{#label}} must be a boolean.',
 };
 
-const vthreadsValidationSchema = Joi.object({
+const professionalVthreadsValidationSchema = Joi.object({
   id: Joi.number().integer().required()
     .messages({
       ...errorMessages,
@@ -52,5 +52,5 @@ const vthreadsValidationSchema = Joi.object({
 });
 
 module.exports = {
-  vthreadsValidationSchema,
+  professionalVthreadsValidationSchema,
 };
