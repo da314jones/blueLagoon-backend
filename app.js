@@ -6,11 +6,11 @@ app.use(cors())
 app.use(express.json())
 
 app.get("/", (req, res) => {
-  res.send("Welcome to Production Apprentice")
+  res.send("Welcome to DADS!")
 })
 
-const moviesController = require("./controllers/moviesController.js")
-app.use("/movies", moviesController)
+// const moviesController = require("./controllers/moviesController.js")
+// app.use("/movies", moviesController)
 
 app.get("*", (req, res) => {
     res.status(404).send("Page not found")
