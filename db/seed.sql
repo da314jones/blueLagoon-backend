@@ -82,10 +82,15 @@ INSERT INTO professional_vchats (Topic, Speaker, Date, Time, ArchiveLink, isLive
 ('Mental Health Awareness', 'Dr. Brown', '2021-06-01', '15:00', 'archive6.link', FALSE, TRUE),
 ('Technology for Kids', 'Tech Guru', '2021-07-01', '14:00', 'archive7.link', TRUE, FALSE);
 
+-- Social Media Accounts seed data
 INSERT INTO social_media_accounts (user_id, SocialMediaPlatform, SocialMediaID, ProfileURL, ConnectedOn) VALUES
-(1, 'Facebook', 'fb_id_1', 'facebook.com/user1', '2021-01-01 10:00:00'),
-(2, 'Twitter', 'tw_id_2', 'twitter.com/user2', '2021-02-02 11:00:00'),
-(3, 'Instagram', 'ig_id_3', 'instagram.com/user3'),
+(4, 'Facebook', 'fb_id_4', 'facebook.com/user4', '2021-04-04 14:00:00'),
+(5, 'Twitter', 'tw_id_5', 'twitter.com/user5', '2021-05-05 15:00:00'),
+(6, 'Instagram', 'ig_id_6', 'instagram.com/user6', '2021-06-06 16:00:00'),
+(7, 'LinkedIn', 'li_id_7', 'linkedin.com/user7', '2021-07-07 17:00:00'),
+(8, 'Pinterest', 'pin_id_8', 'pinterest.com/user8', '2021-08-08 18:00:00'),
+(9, 'YouTube', 'yt_id_9', 'youtube.com/user9', '2021-09-09 19:00:00'),
+(10, 'TikTok', 'tik_id_10', 'tiktok.com/user10', '2021-10-10 20:00:00');
 
 INSERT INTO user_connections (user1_id, user2_id, ConnectionOn) VALUES
 (1, 2, '2021-01-01 12:00:00'),
@@ -120,7 +125,8 @@ INSERT INTO mentorship (MentorID, MenteeID, StartDate, EndDate, Status) VALUES
 (5, 6, '2023-03-20', '2023-06-20', 'Active'),
 (2, 1, '2023-04-01', '2023-07-01', 'Active'),
 (4, 3, '2023-05-05', '2023-08-05', 'Active'),
-(6, 5, '2023-06-15', '2023-09-15', 'Active');
+(6, 5, '2023-06-15', '2023-09-15', 'Active'),
+(7, 8, '2023-07-10', '2023-10-10', 'Active');
 
 INSERT INTO reviews (UserID, EventID, Rating, Comment, CreatedAt) VALUES
 (1, 1, 5, 'Great event! I learned a lot.', '2023-01-15 09:30:00'),
@@ -128,7 +134,8 @@ INSERT INTO reviews (UserID, EventID, Rating, Comment, CreatedAt) VALUES
 (3, 2, 5, 'Excellent mentorship program.', '2023-02-10 15:20:00'),
 (4, 2, 4, 'Helped me grow in my field.', '2023-02-11 10:15:00'),
 (5, 3, 5, 'Amazing experience!', '2023-03-20 14:00:00'),
-(6, 3, 4, 'Valuable insights and guidance.', '2023-03-21 13:30:00');
+(6, 3, 4, 'Valuable insights and guidance.', '2023-03-21 13:30:00'),
+(7, 4, 3, 'The event was okay, could be improved.', '2023-04-15 08:00:00');
 
 INSERT INTO reports (UserID, EventID, ReportType, Description, CreatedAt) VALUES
 (1, 1, 'Inappropriate Content', 'This event had inappropriate content.', '2023-01-15 12:30:00'),
@@ -136,7 +143,8 @@ INSERT INTO reports (UserID, EventID, ReportType, Description, CreatedAt) VALUES
 (3, 3, 'Misconduct', 'One of the participants exhibited misconduct.', '2023-03-20 16:10:00'),
 (4, 4, 'Late Start', 'The event started much later than scheduled.', '2023-04-05 09:15:00'),
 (5, 5, 'No-show Speaker', 'The event speaker did not show up.', '2023-05-12 17:30:00'),
-(6, 6, 'Harassment', 'I experienced harassment during the mentorship program.', '2023-06-25 11:20:00');
+(6, 6, 'Harassment', 'I experienced harassment during the mentorship program.', '2023-06-25 11:20:00'),
+(7, 7, 'Late Start', 'The event started late as usual.', '2023-07-02 10:30:00');
 
 INSERT INTO emergency_contacts (user_id, Name, ContactInfo, Description, Location) VALUES
 (1, 'NYC Emergency Services', '911', 'Immediate emergency assistance', 'New York'),

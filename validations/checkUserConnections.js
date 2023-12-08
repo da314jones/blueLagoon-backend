@@ -1,13 +1,31 @@
 const Joi = require('joi');
 
-const userConnectionsValidationSchema = Joi.object({
-    id: Joi.number().integer().required(),
-    user1_id: Joi.number().integer().required(),
-    user2_id: Joi.number().integer().required(),
-    ConnectionOn: Joi.date().timestamp().required()
-  });
+// Define the error messages for each validation rule
+const errorMessages = {
+  'number.base': '{{#label}} must be a number.',
+  'number.integer': '{{#label}} must be an integer.',
+  'date.timestamp.base': '{{#label}} must be a valid timestamp.',
+};
 
-  
-  module.exports = {
-    userConnectionsValidationSchema
-  }
+const userConnectionsValidationSchema = Joi.object({
+  id: Joi.number().integer().required()
+    .messages({
+      ...errorMessages,
+    }),
+  user1_id: Joi.number().integer().required()
+    .messages({
+      ...errorMessages,
+    }),
+  user2_id: Joi.number().integer().required()
+    .messages({
+      ...errorMessages,
+    }),
+  ConnectionOn: Joi.date().timestamp().required()
+    .messages({
+      ...errorMessages,
+    }),
+});
+
+module.exports = {
+  userConnectionsValidationSchema,
+};

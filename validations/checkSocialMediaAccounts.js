@@ -1,15 +1,42 @@
 const Joi = require('joi');
 
-const socialMediaAccountsValidationSchema = Joi.object({
-    id: Joi.number().integer().required(),
-    user_id: Joi.number().integer().required(),
-    SocialMediaPlatform: Joi.string().max(50).required(),
-    SocialMediaID: Joi.string().max(255).required(),
-    ProfileURL: Joi.string().uri().required(),
-    ConnectedOn: Joi.date().timestamp().required()
-  });
+// Define the error messages for each validation rule
+const errorMessages = {
+  'number.base': '{{#label}} must be a number.',
+  'number.integer': '{{#label}} must be an integer.',
+  'string.empty': '{{#label}} cannot be empty.',
+  'string.max': '{{#label}} should not exceed {{#limit}} characters.',
+  'string.uri': '{{#label}} must be a valid URI.',
+  'date.timestamp.base': '{{#label}} must be a valid timestamp.',
+};
 
-  
-  module.exports = {
-    socialMediaAccountsValidationSchema
-  }
+const socialMediaAccountsValidationSchema = Joi.object({
+  id: Joi.number().integer().required()
+    .messages({
+      ...errorMessages,
+    }),
+  user_id: Joi.number().integer().required()
+    .messages({
+      ...errorMessages,
+    }),
+  SocialMediaPlatform: Joi.string().max(50).required()
+    .messages({
+      ...errorMessages,
+    }),
+  SocialMediaID: Joi.string().max(255).required()
+    .messages({
+      ...errorMessages,
+    }),
+  ProfileURL: Joi.string().uri().required()
+    .messages({
+      ...errorMessages,
+    }),
+  ConnectedOn: Joi.date().timestamp().required()
+    .messages({
+      ...errorMessages,
+    }),
+});
+
+module.exports = {
+  socialMediaAccountsValidationSchema,
+};

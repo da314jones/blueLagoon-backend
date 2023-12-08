@@ -1,14 +1,37 @@
 const Joi = require('joi');
 
-const notificationsValidationSchema = Joi.object({
-    id: Joi.number().integer().required(),
-    user_id: Joi.number().integer().required(),
-    Type: Joi.string().max(50).required(),
-    Message: Joi.string().required(),
-    Date: Joi.date().timestamp().required()
-  });
+// Define the error messages for each validation rule
+const errorMessages = {
+  'number.base': '{{#label}} must be a number.',
+  'number.integer': '{{#label}} must be an integer.',
+  'string.empty': '{{#label}} cannot be empty.',
+  'string.max': '{{#label}} should not exceed {{#limit}} characters.',
+  'date.timestamp.base': '{{#label}} must be a valid timestamp.',
+};
 
-  
-  module.exports = {
-    notificationsValidationSchema
-  }
+const notificationsValidationSchema = Joi.object({
+  id: Joi.number().integer().required()
+    .messages({
+      ...errorMessages,
+    }),
+  user_id: Joi.number().integer().required()
+    .messages({
+      ...errorMessages,
+    }),
+  Type: Joi.string().max(50).required()
+    .messages({
+      ...errorMessages,
+    }),
+  Message: Joi.string().required()
+    .messages({
+      ...errorMessages,
+    }),
+  Date: Joi.date().timestamp().required()
+    .messages({
+      ...errorMessages,
+    }),
+});
+
+module.exports = {
+  notificationsValidationSchema,
+};
