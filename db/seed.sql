@@ -1,4 +1,14 @@
 \c blueLagoon_dev;
+
+INSERT INTO user_registrations (user_id, RegistrationDate, AdditionalInfo) VALUES
+(1, '2023-01-01', 'First user registration'),
+(2, '2023-01-02', 'Interested in technology'),
+(3, '2023-01-03', 'Looking for networking opportunities'),
+(4, '2023-01-04', 'Enthusiast in AI and machine learning'),
+(5, '2023-01-05', 'Beginner in programming'),
+(6, '2023-01-06', 'Experienced in web development'),
+(7, '2023-01-07', 'Seeking mentorship in software engineering');
+
 -- Users seed data (1 admin and 6 generic users)
 INSERT INTO users (Email, Password, ProfilePic, Interests, Challenges, Experiences, Locations, JoinDate, role) VALUES
 ('jonesda314@outlook.com', 'hashed_PlatinumBella13*', '', 'Father of 2, Male', 'Single parenting', 'Experienced father, Brooklyn resident', 'Brooklyn, NY', '1975-03-14', 'admin'),
@@ -81,6 +91,17 @@ INSERT INTO professional_vchats (Topic, Speaker, Date, Time, ArchiveLink, isLive
 ('Cooking Healthy Meals', 'Chef Ryan', '2021-05-01', '16:00', 'archive5.link', FALSE, TRUE),
 ('Mental Health Awareness', 'Dr. Brown', '2021-06-01', '15:00', 'archive6.link', FALSE, TRUE),
 ('Technology for Kids', 'Tech Guru', '2021-07-01', '14:00', 'archive7.link', TRUE, FALSE);
+
+-- Seed data for professional_vchats table
+INSERT INTO professional_vchats (Topic, Speaker, VideoURL, Date, Time, ArchiveLink, isLive, Archived)
+VALUES
+  ('Web Development Trends', 'John Doe', 'https://example.com/webdevchat1', '2023-12-10', '15:00:00', 'https://example.com/archive1', true, true),
+  ('Data Science Panel', 'Jane Smith', 'https://example.com/datasciencechat1', '2023-12-15', '14:30:00', 'https://example.com/archive2', false, true),
+  ('AI and Machine Learning', 'Alice Johnson', 'https://example.com/aichat1', '2023-12-20', '16:45:00', 'https://example.com/archive3', true, true),
+  ('Product Management', 'Bob Wilson', 'https://example.com/productchat1', '2023-12-25', '10:00:00', 'https://example.com/archive4', true, false),
+  ('Blockchain Technology', 'Eve Brown', 'https://example.com/blockchainchat1', '2023-12-30', '13:15:00', 'https://example.com/archive5', false, false),
+  ('Cybersecurity Trends', 'Chris Adams', 'https://example.com/securitychat1', '2024-01-05', '12:30:00', 'https://example.com/archive6', true, true),
+  ('Cloud Computing', 'David Lee', 'https://example.com/cloudchat1', '2024-01-10', '11:45:00', 'https://example.com/archive7', false, true);
 
 -- Social Media Accounts seed data
 INSERT INTO social_media_accounts (user_id, SocialMediaPlatform, SocialMediaID, ProfileURL, ConnectedOn) VALUES

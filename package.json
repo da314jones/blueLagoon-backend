@@ -6,7 +6,7 @@
   "scripts": {
     "build": "npm install",
     "start": "nodemon server.js",
-    "test": "jest",
+    "test": "mocha",
     "db_schema": "psql -U postgres -f db/schema.sql",
     "db_seed": "psql -U postgres -f db/seed.sql"
   },
@@ -15,6 +15,7 @@
   "dependencies": {
     "bcrypt": "^5.1.1",
     "body-parser": "^1.20.2",
+    "chai-joi": "^2.0.3",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.17.1",
@@ -26,6 +27,7 @@
   "devDependencies": {
     "chai": "^4.3.10",
     "jest": "^29.7.0",
+    "mocha": "^10.2.0",
     "nodemon": "^3.0.2"
   }
 }

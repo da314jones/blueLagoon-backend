@@ -7,6 +7,14 @@ CREATE DATABASE blueLagoon_dev;
 -- Connect to the newly created database
 \c blueLagoon_dev;
 
+-- Define the 'users_registration' table with registration-related information
+CREATE TABLE user_registrations (
+  id SERIAL PRIMARY KEY,  -- Unique identifier for each registration
+  user_id INTEGER REFERENCES users(id),  -- Link to the user
+  RegistrationDate DATE,  -- Date when the registration occurred
+  AdditionalInfo TEXT  -- Any additional information
+);
+
 -- Define the 'users' table with user-related information
 Table users {
   id integer [primary key]  -- Unique identifier for each user
@@ -20,6 +28,7 @@ Table users {
   Locations varchar(100)  -- User's location
   JoinDate DATE  -- Date when the user joined the application
 }
+
 
 -- Define the 'vchat' table for video chat sessions
 Table vchat {
@@ -102,6 +111,17 @@ Table professional_vchats {
   ArchiveLink TEXT  -- Link to the archived chat
   isLive BOOLEAN  -- Indicates if the chat is live
   Archived BOOLEAN  -- Indicates if the chat is archived
+}
+
+-- Define the 'professional_vthreads' table for professional video threads
+Table professional_vthreads {
+  id SERIAL [primary key]  -- Unique identifier for each professional video thread
+  Topic varchar(255)  -- Topic of the video thread
+  Creator varchar(100)  -- Creator or host of the video thread
+  VideoURL TEXT  -- URL to the video of the thread
+  Date DATE  -- Date of the thread
+  Time Time  -- Time of the thread
+  Archived BOOLEAN  -- Indicates if the thread is archived
 }
 
 -- Define the 'social_media_accounts' table for user's social media accounts

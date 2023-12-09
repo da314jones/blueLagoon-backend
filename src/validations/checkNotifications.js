@@ -1,35 +1,22 @@
 const Joi = require('joi');
 
-// Define the error messages for each validation rule
 const errorMessages = {
-  'number.base': '{{#label}} must be a number.',
-  'number.integer': '{{#label}} must be an integer.',
-  'string.empty': '{{#label}} cannot be empty.',
-  'string.max': '{{#label}} should not exceed {{#limit}} characters.',
-  'date.timestamp.base': '{{#label}} must be a valid timestamp.',
+  'number.base': '"{{#label}}" must be a number',
+  'number.integer': '"{{#label}}" must be an integer',
+  'string.base': '"{{#label}}" must be text',
+  'string.max': '"{{#label}}" must not exceed {{#limit}} characters',
+  'string.valid': '"{{#label}}" must be a valid {{#valid}}',
+  'date.base': '"{{#label}}" must be a valid date',
+  'date.format': '"{{#label}}" must be in YYYY-MM-DD format',
+  'any.required': '"{{#label}}" is a required field',
 };
 
 const notificationsValidationSchema = Joi.object({
-  id: Joi.number().integer().required()
-    .messages({
-      ...errorMessages,
-    }),
-  user_id: Joi.number().integer().required()
-    .messages({
-      ...errorMessages,
-    }),
-  Type: Joi.string().max(50).required()
-    .messages({
-      ...errorMessages,
-    }),
-  Message: Joi.string().required()
-    .messages({
-      ...errorMessages,
-    }),
-  Date: Joi.date().timestamp().required()
-    .messages({
-      ...errorMessages,
-    }),
+  id: Joi.number().integer().required().messages(errorMessages),
+  user_id: Joi.number().integer().required().messages(errorMessages),
+  Type: Joi.string().valid('alert', 'message').required().messages(errorMessages),
+  Message: Joi.string().max(255).required().messages(errorMessages),
+  Date: Joi.date().iso().required().messages(errorMessages),
 });
 
 module.exports = {

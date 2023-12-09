@@ -1,34 +1,21 @@
 const Joi = require('joi');
 
-// Define the error messages for each validation rule
 const errorMessages = {
-  'number.base': '{{#label}} must be a number.',
-  'number.integer': '{{#label}} must be an integer.',
-  'any.required': '{{#label}} is required.',
-  'date.base': '{{#label}} must be a valid date in ISO format (YYYY-MM-DD).',
+  'number.base': '"{{#label}}" must be a number',
+  'number.integer': '"{{#label}}" must be an integer',
+  'string.base': '"{{#label}}" must be text',
+  'string.max': '"{{#label}}" must not exceed {{#limit}} characters',
+  'date.base': '"{{#label}}" must be a valid date',
+  'date.format': '"{{#label}}" must be in YYYY-MM-DD format',
+  'any.required': '"{{#label}}" is a required field',
 };
 
 const mentorshipValidationSchema = Joi.object({
-  id: Joi.number().integer().required()
-    .messages({
-      ...errorMessages,
-    }),
-  mentor_id: Joi.number().integer().required()
-    .messages({
-      ...errorMessages,
-    }),
-  mentee_id: Joi.number().integer().required()
-    .messages({
-      ...errorMessages,
-    }),
-  StartDate: Joi.date().iso().required()
-    .messages({
-      ...errorMessages,
-    }),
-  Notes: Joi.string().allow(null, '')
-    .messages({
-      ...errorMessages,
-    }),
+  id: Joi.number().integer().required().messages(errorMessages),
+  mentor_id: Joi.number().integer().required().messages(errorMessages),
+  mentee_id: Joi.number().integer().required().messages(errorMessages),
+  StartDate: Joi.date().iso().required().messages(errorMessages),
+  Notes: Joi.string().messages(errorMessages),
 });
 
 module.exports = {
