@@ -14,7 +14,7 @@ const db = pgp(cn)
 db.connect()
   .then((cn) => {
     const { user, host, port, database } = cn.client;
-    console.log(
+    console.log("Connected to db Successfully" +
       "\x1b[90m" +
         `Postgres connection established with user:${user}, host:${host}, port:${port}, database:${database}` +
         "\x1b[0m"
