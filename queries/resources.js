@@ -1,14 +1,50 @@
-const Joi = require('joi');
+const db = require('../db/dbConfig.js');
 
-const resourcesSchema = Joi.object({
-    id: Joi.number().integer().required(),
-    Title: Joi.string().max(255).required(),
-    Type: Joi.string().max(50).required(),
-    link: Joi.string().uri().required(),
-    LocationBased: Joi.boolean().required(),
-    Location: Joi.string().max(255).when('LocationBased', { is: true, then: Joi.required() })
-});
+const getAllResources = async () => {
+    try {
+
+    } catch(err) {
+        return err
+    }
+};
+
+const getOneResources = async () => {
+    try {
+
+    } catch(err) {
+        return err
+    }
+};
+
+const createResources = async () => {
+    try {
+
+    } catch(err) {
+        return err
+    }
+};
+
+const deleteResources = async () => {
+    try {
+
+    } catch(err) {
+        return err
+    }
+};
+
+const updateResources = async => {
+    try {
+
+    } catch(err) {
+        return err
+    }
+};
+
 
 module.exports = {
-    resourcesSchema
+    getAllResources,
+    getOneResources,
+    createResources,
+    deleteResources,
+    updateResources
 }

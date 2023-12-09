@@ -1,26 +1,49 @@
-const Joi = require('joi');
+const db = require('../db/dbConfig.js');
 
-const vThreadSchema = Joi.object({
-    is: Joi.number().integer().required(),
-    user_id: Joi.number().integer().required(),
-    VideoURL: Joi.string().uri().required(),
+const getAllVthreads =async () => {
+    try {
 
-    title: Joi.string().min(3).max(100).required()
-        .message({
-            'string.min': 'Title must be at least 3 characters long',
-            'string.max': 'Title must be less than 100 characters long',
-            'any.require': 'category ia required'
-        }),
-    category: Joi.string().min(3).max(50).required()
-        .message({
-            'string.min': 'Ctegory must be at least  3 characters long',
-            'string.max': 'Category must be at less than  50 characters long',
-        'any.required': 'Category is required'
-        }), 
-    CreationDate:  Joi.date().iso().required()
-});
+    } catch(err) {
+        return err
+    }
+};
 
+const getOneVthread = async () => {
+    try {
+
+    } catch(err) {
+        return err
+    }
+};
+
+const createVthread = async () => {
+    try {
+
+    } catch(err) {
+        return err
+    }
+};
+
+const deleteVthread = async () => {
+    try {
+
+    } catch(err) {
+        return err
+    }
+};
+
+const updateVthread =async () => {
+    try {
+
+    } catch(err) {
+        return err
+    }
+};
 
 module.exports = {
-    vThreadSchema
+    getAllVthreads,
+    getOneVthread,
+    createVthread,
+    deleteVthread,
+    updateVthread
 }

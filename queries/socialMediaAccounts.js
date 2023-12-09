@@ -1,15 +1,49 @@
-const Joi = require('joi');
+const db = require('../db/dbConfig.js');
 
-const socialMediaAccountsSchema = Joi.object({
-    id: Joi.number().integer().required(),
-    user_id: Joi.number().integer().required(),
-    SocialMediaPlatform: Joi.string().max(50).required(),
-    SocialMediaID: Joi.string().max(255).required(),
-    ProfileURL: Joi.string().uri().required(),
-    ConnectionOn: Joi.date().timestamp().required()
-});
+const getAllSocialMediaAccounts = async () => {
+    try {
 
+    } catch(err) {
+        return err
+    }
+};
+
+const getOneSocialMediaAccount = async () => {
+    try {
+
+    } catch(err) {
+        return err
+    }
+};
+
+const createSocialMediaAccount = async () => {
+    try {
+
+    }  catch(err) {
+        return err
+    }
+};
+
+const deleteSocialMediaAccount = async () => {
+    try {
+
+    } catch(err) {
+        return err
+    }
+};
+
+const updateSocialMediaAccount = async () => {
+    try {
+
+    } catch(err) {
+        return err
+    }
+};
 
 module.exports = {
-    socialMediaAccountsSchema
-};
+    getAllSocialMediaAccounts,
+    getOneSocialMediaAccount,
+    createSocialMediaAccount,
+    deleteSocialMediaAccount,
+    updateSocialMediaAccount
+}

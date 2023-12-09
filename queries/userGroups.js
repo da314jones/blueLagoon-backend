@@ -1,12 +1,50 @@
-const Joi = require('joi');
+const db = require('../db/dbConfig.js');
 
-const userGroupsSchema = Joi.object({
-    id: Joi.number().integer().required(),
-    user_is: Joi().number().integer().require(),
-    group_id: Joi.number().integer().required(),
-    JoinDate: Joi.date().iso().required()
-});
+const getAllGroups = async () => {
+    try {
+
+    } catch(err) {
+        return err
+    }
+};
+
+const getOneGroup = async () => {
+    try {
+
+    } catch(err) {
+        return err
+    }
+};
+
+const createGroup = async () => {
+    try {
+
+    } catch(err) {
+        return err
+    }
+};
+
+const deleteGroup = async () => {
+    try {
+
+    } catch(err) {
+        return err
+    }
+};
+
+const updateGroup = async () => {
+    try {
+
+    } catch(err) {
+        return err
+    }
+};
+
 
 module.exports = {
-    userGroupsSchema
+    getAllGroups,
+    getOneGroup,
+    createGroup,
+    deleteGroup,
+    updateGroup
 }
