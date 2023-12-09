@@ -1,16 +1,51 @@
-const Joi = require('joi');
+const db = require('../db/dbConfig.js');
 
-const eventsSchema = Joi.object({
-    id: Joi.number().integer().required(),
-    Title: Joi.string().max(255).required(),
-    Description: Joi.string().required(),
-    Location: Joi.string().max(100).required(),
-    Category: Joi.string().max(100).required(),
-    SignUpLink: Joi.string().uri().allow(null, ""),
-    Date: Joi.date().iso().required(),
-    Time: Joi.string().pattern(/^[0-2][0-9]:[0-5][0-9]$/).required()
-});
+const getAllEvents = async () => {
+    try {
+
+    }catch(err) {
+        return err
+    }
+};
+
+const getOneEvent = async () => {
+    try {
+
+    }catch(err) {
+        return err
+    }
+};
+
+const createEvent = async () => {
+    try {
+
+    }catch(err) {
+        return err
+    }
+};
+
+const deleteEvent = async () => {
+    try {
+
+    }catch(err) {
+        return err
+    }
+};
+
+const updateEvent = async () => {
+    try {
+
+    }catch(err) {
+        return err
+    }
+};
+
 
 module.exports = {
-    eventsSchema
+    getAllEvents,
+    getOneEvent,
+    createEvent,
+    deleteEvent,
+    updateEvent
 }
+

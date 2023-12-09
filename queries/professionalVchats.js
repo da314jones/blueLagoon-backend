@@ -1,17 +1,50 @@
-const Joi = require('joi');
+const db = require('../db/dbConfig.js');
 
-const professionalVchatsSchema = Joi.object({
-    id: Joi.number().integer().required(),
-    Topic: Joi.string().max(255).required(),
-    Speaker: Joi.string().max(100).required(),
-    VideoURL: Joi.string().uri().required(),
-    Date: Joi.date().iso().required(),
-    Time: Joi.time().pattern(/^[0-2][0-9]:[0-5][0-9]$/).require(),
-    ArchiveLink: Joi.string().uri().allow(null, ""),
-    isLive: Joi.boolean().required(),
-    Archived: Joi.boolean().required()
-});
+const getAllProfessionalVthreads = async () => {
+    try {
+
+    } catch(err) {
+        return err
+    }
+};
+
+const getOneProfessionalVthread = async () => {
+    try {
+
+    } catch(err) {
+        return err
+    }
+};
+
+const createProfessionalVthread = async () => {
+    try {
+
+    } catch(err) {
+        return err
+    }
+};
+
+const deleteProfessionalVthread = async () => {
+    try {
+
+    } catch(err) {
+        return err
+    }
+};
+
+const updateProfessionalVthread = async () => {
+     try {
+         
+     } catch(err) {
+        return err
+     }
+};
+
 
 module.exports = {
-    professionalVchatsSchema
+    getAllProfessionalVthreads,
+    getOneProfessionalVthread,
+    createProfessionalVthread,
+    deleteProfessionalVthread,
+    updateProfessionalVthread
 }

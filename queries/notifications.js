@@ -1,13 +1,50 @@
-const Joi = require('joi');
+const db = require('../db/dbConfig.js');
 
-const notificationsSchema = Joi.object({
-    id: Joi.number().integer().required(),
-    user_id: Joi.number().integer().required(),
-    Type: Joi.string().max(50).required(),
-    Message: Joi.string().required(),
-    Date: Joi.date().timestamp().required()
-});
+const getAllNotifications = async () => {
+    try {
+        
+    } catch(err) {
+        return err
+    }
+};
+
+const getOneNotification = async () => {
+    try {
+
+    } catch(err) {
+        return err
+    }
+};
+
+const createNotification =async () => {
+    try {
+
+    } catch(err) {
+        return err
+    }
+};
+
+const deleteNotification =async () => {
+    try {
+
+    } catch(err) {
+        return err
+    }
+};
+
+const updateNotifications = async () => {
+    try {
+
+    } catch(err) {
+        return err
+    }
+};
+
 
 module.exports = {
-    notificationsSchema
+    getAllNotifications,
+    getOneNotification,
+    createNotification,
+    deleteNotification,
+    updateNotifications
 }
