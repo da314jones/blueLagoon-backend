@@ -1,30 +1,82 @@
+const chai = require('chai');
+const chaiHttp = require('chai-http');
+chai.use(chaiHttp);
+const should = chai.should();
+const request = require('supertest');
+const app = require('../app');
 const { expect } = require('chai');
-const { vchatValidationSchema } = require('../src/validations/checkVchat.js');
+const { vchatValidationSchema } = require('../src/validations/checkVchat');
 
-describe('Vchat Validation Schema', () => {
-  it('should validate a valid vchat object', () => {
-    const validVchat = {
-      id: 1,
-      user_id: 2,
-      VideoURL: 'http://example.com/video.mp4',
-      ScheduleTime: '2023-01-01T10:00:00.000Z',
-      Duration: 60,
-      ArchiveLink: 'http://example.com/archive.mp4',
-      StartTime: '2023-01-01T10:00:00.000Z',
-      EndTime: '2023-01-01T11:00:00.000Z',
-      ArchiveURL: 'http://example.com/archive.mp4'
-    };
 
-    const validationResult = vchatValidationSchema.validate(validVchat);
-    expect(validationResult.error).to.be.undefined;
-  });
+describe('VChat API Tests', () => {
+    let vchatId;
 
-  it('should return a validation error for an invalid vchat object', () => {
-    const invalidVchat = {
-      // Invalid object structure
-    };
+    // should create a new VChat
+it('should create a new VChat', (done) => {
+  chai
+      .request(app)
+      .post('/vchats')
+      .send({
+          user_id: 1, // Include user_id in the request body
+          video_url: 'https://example.com/video',
+          schedule_time: '2023-01-01 09:00:00',
+          duration: 30,
+          archive_link: 'https://example.com/archive',
+          start_time: '2023-01-01 09:00:00',
+          end_time: '2023-01-01 09:30:00',
+          archive_url: 'https://example.com/archive-url',
+      })
+      .end((err, res) => {
+          res.should.have.status(201);
+          res.body.should.be.a('object');
+          res.body.should.have.property('user_id'); // Make sure it has user_id property
+          done();
+      });
+})
 
-    const validationResult = vchatValidationSchema.validate(invalidVchat);
-    expect(validationResult.error).to.exist;
-  });
+    it('should get a VChat by ID', async () => {
+        const res = await request(app).get(`/vchats/${vchatId}`);
+        expect(res.statusCode).to.equal(200);
+        expect(res.body.id).to.equal(vchatId);
+    });
+
+// should update a VChat
+it('should update a VChat', (done) => {
+  const vchatId = 8; // Replace with the actual VChat ID to update
+  chai
+      .request(app)
+      .put(`/vchats/${vchatId}`)
+      .send({
+          user_id: 2,
+          video_url: 'https://example.com/video',
+          schedule_time: '2023-01-01 09:00:00',
+          duration: 30,
+          archive_link: 'https://example.com/archive',
+          start_time: '2023-01-01 09:00:00',
+          end_time: '2023-01-01 09:30:00',
+          archive_url: 'https://example.com/archive-url',
+      })
+      .end((err, res) => {
+          res.should.have.status(200); // Expect 200 status code for successful update
+          res.body.should.be.a('object');
+          res.body.should.have.property('id');
+          done();
+      });
 });
+
+
+    it('should delete a VChat', async () => {
+        const res = await request(app).delete(`/vchats/${vchatId}`);
+        expect(res.statusCode).to.equal(200);
+        expect(res.body.id).to.equal(vchatId);
+    });
+
+    // Corrected Test 3
+it('should get all VChats', async () => {
+  const res = await request(app).get('/vchats');
+  expect(res.statusCode).to.equal(200);
+  expect(res.body.payload).to.be.an('array'); // Access payload property
+});
+});
+
+module.exports = { vchatValidationSchema };

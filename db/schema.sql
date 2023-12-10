@@ -9,10 +9,17 @@ CREATE DATABASE bluelagoon_dev;
 
 
 -- Define the 'users' table with user-related information
+-- schema.sql
+
+-- Create the 'users' table
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
   email varchar(255),
-  password varchar(255),
+  hashed_password varchar(255),
+  date_of_birth DATE,
+  is_age_verified BOOLEAN DEFAULT false,
+  account_status VARCHAR(50) DEFAULT 'active',
+  phone_number VARCHAR(15) UNIQUE,
   profile_pic TEXT,
   interests TEXT,
   challenges TEXT,
@@ -22,13 +29,44 @@ CREATE TABLE users (
   role varchar(50)
 );
 
--- Define the 'users_registration' table with registration-related information
+-- Create the 'user_registrations' table
 CREATE TABLE user_registrations (
-  id SERIAL PRIMARY KEY,  -- Unique identifier for each registration
-  user_id INTEGER REFERENCES users(id),  -- Link to the user
-  registration_date DATE,  -- Date when the registration occurred
-  additional_info TEXT  -- Any additional information
+  registration_id SERIAL PRIMARY KEY,
+  user_id INTEGER REFERENCES users(id),
+  email varchar(255),
+  registration_started TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  initial_data JSONB,
+  registration_token UUID,
+  token_expiration TIMESTAMP,
+  additional_info TEXT,
+  verification_process varchar(255),
+  agree_to_terms_of_service BOOLEAN
 );
+
+-- Create the 'user_security' table
+CREATE TABLE user_security (
+    security_id SERIAL PRIMARY KEY,
+    user_id INT UNIQUE NOT NULL REFERENCES users(id),
+    email_verified BOOLEAN DEFAULT false,
+    phone_verified BOOLEAN DEFAULT false,
+    phone_verification_code VARCHAR(6),
+    two_factor_enabled BOOLEAN DEFAULT false,
+    last_login TIMESTAMP
+);
+
+-- Create the 'profiles' table
+CREATE TABLE profiles (
+    profile_id SERIAL PRIMARY KEY,
+    user_id INT UNIQUE NOT NULL REFERENCES users(id),
+    name VARCHAR(100),
+    gender VARCHAR(50),
+    profile_picture_url TEXT,
+    bio TEXT,
+    location VARCHAR(100)
+);
+
+
+
 
 -- Define the 'vchat' table for video chat sessions
 CREATE TABLE vchat (

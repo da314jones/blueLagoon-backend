@@ -42,7 +42,7 @@ const deleteAffiliate = async (id) => {
 const updateAffiliate = async (id, affiliate) => {
     try {
         const { name, service_or_product, discount_details, contact_info } = affiliate;
-        const updatedAffiliate = await db.one("UPDATE affiliates SET name=$1, service_or_product=$2, discount_details=$3, contact_info=$4 WHERE id=$5 RETURNING *", [name, service_or_product, discount_details, contact_info]
+        const updatedAffiliate = await db.one("UPDATE affiliates SET name=$1, service_or_product=$2, discount_details=$3, contact_info=$4 WHERE id=$5 RETURNING *", [name, service_or_product, discount_details, contact_info, id]
         );
         return updatedAffiliate
     }catch(err) {

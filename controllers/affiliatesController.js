@@ -69,7 +69,6 @@ affiliates.delete("/:id", async (req, res) => {
 affiliates.put("/:id", validateAffiliate, async (req, res) => {
   const { id } = req.params;
   try {
-
       const updatedAffiliate = await updateAffiliate(id, req.body);
       if (updatedAffiliate.id) {
           res.status(200).json(updatedAffiliate);

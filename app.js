@@ -1,27 +1,41 @@
+const cors = require("cors");
 const express = require("express");
-const db = require('./db/dbConfig.js');
-require('dotenv').config();
-const affiliatesController = require('./controllers/affiliatesController.js');
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const db = require("./db/dbConfig");
+require("dotenv").config();
 
 const app = express();
-const cors = require("cors");
+
 app.use(cors());
 app.use(express.json());
-app.use("/affiliates", affiliatesController);
 
-
+// Home route
 app.get("/", (req, res) => {
   res.send("Welcome to DADS!")
 })
 
+// Import affiliate controller (existing route)
+// const affiliateController = require("./controllers/affiliatesController.js");
+//  Import user-related controller
+// const usersController = require("./controllers/usersController.js");
+const  vchatController = require('./controllers/vChatController')
+// Define routes for user-related functionality
+
+// app.use("/users", usersController);
+
+// Define route for affiliate functionality
+// app.use("/affiliate", affiliateController);
+app.use("/vchats", vchatController);
+// Error Handling Middleware
 app.use((err, req, res, next) => {
-  console.error("Unhandled error:", err);
-  res.status(500).send('Internal Server Error');
+  console.error(err.stack);
+  res.status(500).json({ error: "Internal Server Error" });
 });
 
-app.get("*", (req, res) => {
-  console.error('Error in GET /affiliates:', err);
-    res.status(404).send("Page not found")
-})
+// 404 Not Found Middleware
+app.use((req, res) => {
+  res.status(404).json({ error: "Not Found" });
+});
 
-module.exports = app
+module.exports = app;

@@ -2,7 +2,8 @@
 
 
 -- Users seed data (1 admin and 6 generic users)
-INSERT INTO users (email, password, profile_pic, interests, challenges, experiences, locations, join_date, role) VALUES
+-- Users seed data (1 admin and 6 generic users)
+INSERT INTO users (email, hashed_password, profile_pic, interests, challenges, experiences, locations, join_date, role) VALUES
 ('jonesda314@outlook.com', 'hashed_PlatinumBella13*', NULL, 'Father of 2, Male', 'Single parenting', 'Experienced father, Brooklyn resident', 'Brooklyn, NY', '1975-03-14', 'admin'),
 ('user1@example.com', 'hashed_password1', NULL, 'Interests1', 'Challenges1', 'Experiences1', 'Location1', '2021-01-01', 'user'),
 ('user2@example.com', 'hashed_password2', NULL, 'Interests2', 'Challenges2', 'Experiences2', 'Location2', '2021-02-02', 'user'),
@@ -11,24 +12,27 @@ INSERT INTO users (email, password, profile_pic, interests, challenges, experien
 ('user5@example.com', 'hashed_password5', NULL, 'Interests5', 'Challenges5', 'Experiences5', 'Location5', '2021-05-05', 'user'),
 ('user6@example.com', 'hashed_password6', NULL, 'Interests6', 'Challenges6', 'Experiences6', 'Location6', '2021-06-06', 'user');
 
+-- Rest of your SQL code remains the same with the corrected reference IDs.
 
-INSERT INTO user_registrations (user_id, registration_date, additional_info) VALUES
-(1, '2023-01-01', 'First user registration'),
-(2, '2023-01-02', 'Interested in technology'),
-(3, '2023-01-03', 'Looking for networking opportunities'),
-(4, '2023-01-04', 'Enthusiast in AI and machine learning'),
-(5, '2023-01-05', 'Beginner in programming'),
-(6, '2023-01-06', 'Experienced in web development'),
-(7, '2023-01-07', 'Seeking mentorship in software engineering');
+
+
+INSERT INTO user_registrations (user_id, email, registration_started, additional_info) VALUES
+(1, 'user7@outlook.com', '2023-01-01', 'First user registration'),
+(2, 'user6@outlook.com', '2023-01-02', 'Interested in technology'),
+(3, 'user5@outlook.com', '2023-01-03', 'Looking for networking opportunities'),
+(4, 'user1@outlook.com', '2023-01-04', 'Enthusiast in AI and machine learning'),
+(5, 'jonesda314@outlook.com', '2023-01-05', 'Beginner in programming'),
+(6, 'user3@outlook.com', '2023-01-06', 'Experienced in web development'),
+(7, 'user4@outlook.com', '2023-01-07', 'Seeking mentorship in software engineering');
 
 INSERT INTO vchat (user_id, schedule_time, duration, archive_link, start_time, end_time, archive_url) VALUES
-(1, '2023-01-01 09:00:00', 30, 'archive1.link', '2023-01-01 09:00:00', '2023-01-01 09:30:00', 'archive1.url'),
-(2, '2023-01-02 10:00:00', 45, 'archive2.link', '2023-01-02 10:00:00', '2023-01-02 10:45:00', 'archive2.url'),
-(3, '2023-01-03 11:00:00', 60, 'archive3.link', '2023-01-03 11:00:00', '2023-01-03 12:00:00', 'archive3.url'),
-(4, '2023-01-04 12:00:00', 30, 'archive4.link', '2023-01-04 12:00:00', '2023-01-04 12:30:00', 'archive4.url'),
-(5, '2023-01-05 13:00:00', 45, 'archive5.link', '2023-01-05 13:00:00', '2023-01-05 13:45:00', 'archive5.url'),
-(7, '2023-01-06 14:00:00', 60, 'archive6.link', '2023-01-06 14:00:00', '2023-01-06 15:00:00', 'archive6.url'),
-(1, '2023-01-07 15:00:00', 30, 'archive7.link', '2023-01-07 15:00:00', '2023-01-07 15:30:00', 'archive7.url');
+(1, '2023-01-01 09:00:00', 30, 'https://www.example.com/archive1.link', '2023-01-01 09:00:00', '2023-01-01 09:30:00', 'https://www.example.com/archive1.url'),
+(2, '2023-01-02 10:00:00', 45, 'https://www.example.com/archive2.link', '2023-01-02 10:00:00', '2023-01-02 10:45:00', 'https://www.example.com/archive2.url'),
+(3, '2023-01-03 11:00:00', 60, 'https://www.example.com/archive3.link', '2023-01-03 11:00:00', '2023-01-03 12:00:00', 'https://www.example.com/archive3.url'),
+(4, '2023-01-04 12:00:00', 30, 'https://www.example.com/archive4.link', '2023-01-04 12:00:00', '2023-01-04 12:30:00', 'https://www.example.com/archive4.url'),
+(5, '2023-01-05 13:00:00', 45, 'https://www.example.com/archive5.link', '2023-01-05 13:00:00', '2023-01-05 13:45:00', 'https://www.example.com/archive5.url'),
+(7, '2023-01-06 14:00:00', 60, 'https://www.example.com/archive6.link', '2023-01-06 14:00:00', '2023-01-06 15:00:00', 'https://www.example.com/archive6.url'),
+(1, '2023-01-07 15:00:00', 30, 'https://www.example.com/archive7.link', '2023-01-07 15:00:00', '2023-01-07 15:30:00', 'https://www.example.com/archive7.url');
 
 
 INSERT INTO vthreads (user_id, title, video_url, category, creation_date) VALUES

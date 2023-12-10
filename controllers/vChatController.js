@@ -1,87 +1,89 @@
-const express = require("express")
-const movies = express.Router()
-const { getAllMovies, 
-        getOneMovie,
-        createMovie,
-        deleteMovie,
-        updateMovie
-    } = require("../queries/movies")
-const { checkMovies,
-        checkMovieName,
-        checkMovieIndex,
-        checkInProductionBoolean } = require("../validations/checkMovies.js")
+const express = require("express");
+const vchats = express.Router();
+const { vchatValidationSchema } = require("../src/validations/checkVchat");
+const {
+    getAllVChats,
+    getOneVChat,
+    createVChat,
+    deleteVChat,
+    updateVChat
+} = require("../queries/vChat.js");
 
-const actorsController = require("./actorsController.js")
-movies.use("/:movie_id/actors", actorsController)
-
-const tasksController = require("./tasksController.js")
-movies.use("/:movie_id/tasks", tasksController)
-
-
-movies.get("/", checkMovies, async  (req, res) => {
-    const allMovies = await getAllMovies()
-    if(req.query.order){
-        allMovies.sort((a,b) => {
-            if(req.query.order==="asc"||req.query.order==="desc"){
-                if(a.movie_name.toLowerCase() < b.movie_name.toLowerCase())
-                    return -1
-                else if (a.movie_name.toLowerCase() > b.movie_name.toLowerCase())
-                    return 1
-                else
-                    return 0
-            }
-        })
-        if(req.query.order==="asc")
-            res.json(allMovies)
-        else if(req.query.order==="desc")
-            res.json(allMovies.reverse())    
-        else
-            res.redirect('/order should be asc or desc')
+vchats.get("/", async (req, res) => {
+    console.log('Get /vchat endpoint hit');
+    try {
+        const allVchats = await getAllVChats();
+        console.log('Response from getAllVchats:', allVchats);
+        if (allVchats[0]) {
+            res.status(200).json({ success: true, payload: allVchats }); // Wrap the response in a 'payload' object
+        } else {
+            res.status(500).json({ success: false, data: { error: "Server Error failed to fetch VChats" } });
+        }
+    } catch (err) {
+        console.error('Error in GET /vchats:', err);
+        res.status(500).json({ success: false, data: { error: "Server Error - vchats fetch failed" } });
     }
-    else
-        res.status(200).json(allMovies)
-})
-
-movies.get("/:id", checkMovieIndex, async (req, res) => {
-    const { id } = req.params
-    const movie = await getOneMovie(id)
-    res.json(movie)
-})
-
-movies.post("/", checkMovieName,
-                 checkInProductionBoolean ,async (req, res) => {
-     try {
-        const movie = await createMovie(req.body);
-        res.status(200).json(movie);
-     } catch (error) {
-        res.status(400).json({ error: "New movie not created." });
-     }
 });
 
-movies.delete("/:id", checkMovieIndex, async (req, res) => {
+vchats.get("/:id", async (req, res) => {
+    const { id } = req.params;
+    try {
+        const oneVchat = await getOneVChat(id);
+        if (oneVchat) {
+            res.json(oneVchat);
+        } else {
+            res.status(404).json({ error: "VChat not found" });
+        }
+    } catch (err) {
+        res.status(500).json({ error: "Sever error" });
+    }
+});
+
+vchats.post("/", async (req, res) => {
+    const { error } = vchatValidationSchema.validate(req.body);
+    if (error) return res.status(400).json({ error: error.details[0].message });
+
+    try {
+        const createdVchat = await createVChat(req.body);
+        res.status(201).json(createdVchat);
+    } catch (error) {
+        res.status(400).json({ error: "VChat creation failure" });
+    }
+});
+
+vchats.delete("/:id", async (req, res) => {
     try {
         const { id } = req.params;
-        const deletedMovie = await deleteMovie(id);
-        if (deletedMovie) {
-            res.status(200).json({success: true, payload: {data: deletedMovie}})
+        const deletedVchat = await deleteVChat(id);
+        if (deletedVchat) {
+            res.status(200).json({ success: true, payload: { data: deletedVchat } });
         } else {
-            res.status(404).json({ error: "Movie not found."})
+            res.status(404).json({ error: "VChat not found" });
         }
-    } catch (error) {
-        res.send(err)
+    } catch (err) {
+        res.status(500).json({ error: "Server error" });
     }
-})
+});
 
-movies.put("/:id", checkMovieName, 
-                   checkMovieIndex,
-                   checkInProductionBoolean, async (req, res) => {
+vchats.put("/:id", async (req, res) => {
     const { id } = req.params;
-   const updatedMovie = await updateMovie(id, req.body);
-   if (updatedMovie.id) {
-    res.status(200).json(updatedMovie);
-   }  else {
-    res.status(404).json({ error: "Movie not found."})
-   }
-})
+    try {
+        const existingVchat = await getOneVChat(id); // Check if the VChat exists
+        if (!existingVchat) {
+            return res.status(404).json({ error: "VChat not found with that id" });
+        }
 
-module.exports = movies
+        const { error } = vchatValidationSchema.validate(req.body);
+        if (error) {
+            return res.status(400).json({ error: error.details[0].message });
+        }
+
+        const updatedVchat = await updateVChat(id, req.body);
+        res.status(200).json(updatedVchat);
+    } catch (err) {
+        res.status(500).json({ error: "Update failed" });
+    }
+});
+
+
+module.exports = vchats;
