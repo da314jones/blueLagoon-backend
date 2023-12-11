@@ -36,13 +36,13 @@ INSERT INTO vchat (user_id, schedule_time, duration, archive_link, start_time, e
 
 
 INSERT INTO vthreads (user_id, title, video_url, category, creation_date) VALUES
-(1, 'Parenting Tips', 'video1.url', 'Advice', '2021-01-01'),
-(2, 'Cooking for Kids', 'video2.url', 'Lifestyle', '2021-02-01'),
-(3, 'DIY Projects', 'video3.url', 'Hobbies', '2021-03-01'),
-(4, 'Educational Activities', 'video4.url', 'Education', '2021-04-01'),
-(5, 'Outdoor Adventures', 'video5.url', 'Recreation', '2021-05-01'),
-(6, 'Storytime Sessions', 'video6.url', 'Entertainment', '2021-06-01'),
-(1, 'Fitness and Health', 'video7.url', 'Wellness', '2021-07-01');
+(1, 'Parenting Tips', 'https://example.com/videos/parenting-tips.mp4', 'Advice', '2021-01-01'),
+(2, 'Cooking for Kids', 'https://example.com/videos/cooking-kids.mp4', 'Lifestyle', '2021-02-01'),
+(3, 'DIY Projects', 'https://example.com/videos/diy-projects.mp4', 'Hobbies', '2021-03-01'),
+(4, 'Educational Activities', 'https://example.com/videos/educational-activities.mp4', 'Education', '2021-04-01'),
+(5, 'Outdoor Adventures', 'https://example.com/videos/outdoor-adventures.mp4', 'Recreation', '2021-05-01'),
+(6, 'Storytime Sessions', 'https://example.com/videos/storytime-sessions.mp4', 'Entertainment', '2021-06-01'),
+(1, 'Fitness and Health', 'https://example.com/videos/fitness-health.mp4', 'Wellness', '2021-07-01');
 
 INSERT INTO notifications (user_id, type, message, date) VALUES
 (1, 'Reminder', 'Upcoming Event Reminder', '2021-01-01 09:00:00'),

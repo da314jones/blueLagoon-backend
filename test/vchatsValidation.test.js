@@ -42,7 +42,7 @@ it('should create a new VChat', (done) => {
 
 // should update a VChat
 it('should update a VChat', (done) => {
-  const vchatId = 8; // Replace with the actual VChat ID to update
+  const vchatId = 10; // Replace with the actual VChat ID to update
   chai
       .request(app)
       .put(`/vchats/${vchatId}`)

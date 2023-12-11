@@ -1,13 +1,13 @@
 const express = require("express");
 const vchats = express.Router();
-const { vchatValidationSchema } = require("../src/validations/checkVchat");
+const { vchatValidationSchema } = require("../src/validations/checkVchats.js");
 const {
     getAllVChats,
     getOneVChat,
     createVChat,
     deleteVChat,
     updateVChat
-} = require("../queries/vChat.js");
+} = require("../queries/vChats.js");
 
 vchats.get("/", async (req, res) => {
     console.log('Get /vchat endpoint hit');

@@ -19,14 +19,16 @@ app.get("/", (req, res) => {
 // const affiliateController = require("./controllers/affiliatesController.js");
 //  Import user-related controller
 // const usersController = require("./controllers/usersController.js");
-const  vchatController = require('./controllers/vChatController')
+const  vchatsController = require('./controllers/vChatsController.js')
+const  vThreadsController = require('./controllers/vThreadsController.js')
 // Define routes for user-related functionality
 
 // app.use("/users", usersController);
 
 // Define route for affiliate functionality
 // app.use("/affiliate", affiliateController);
-app.use("/vchats", vchatController);
+app.use("/vchats", vchatsController);
+app.use("/vthreads", vThreadsController);
 // Error Handling Middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);

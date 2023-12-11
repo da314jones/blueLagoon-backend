@@ -69,7 +69,7 @@ CREATE TABLE profiles (
 
 
 -- Define the 'vchat' table for video chat sessions
-CREATE TABLE vchat (
+CREATE TABLE vchats (
   id SERIAL PRIMARY KEY,  -- Unique identifier for each video chat session
   user_id INTEGER REFERENCES users(id),  -- Link to the user who initiated the chat
   video_url TEXT,  -- URL to the video file of the chat

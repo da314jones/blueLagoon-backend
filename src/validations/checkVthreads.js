@@ -13,12 +13,11 @@ const errorMessages = {
 };
 
 const vthreadsValidationSchema = Joi.object({
-  id: Joi.number().integer().required().messages(errorMessages),
   user_id: Joi.number().integer().required().messages(errorMessages),
-  VideoURL: Joi.string().uri().required().messages(errorMessages),
-  Title: Joi.string().max(255).required().messages(errorMessages),
-  Category: Joi.string().max(100).required().messages(errorMessages),
-  CreationDate: Joi.date().iso().required().messages(errorMessages)
+  title: Joi.string().max(255).required().messages(errorMessages),
+  video_url: Joi.string().uri().required().messages(errorMessages),
+  category: Joi.string().max(100).required().messages(errorMessages),
+  creation_date: Joi.date().iso().required().messages(errorMessages)
 });
 
 module.exports = { vthreadsValidationSchema };
