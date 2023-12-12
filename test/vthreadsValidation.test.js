@@ -4,7 +4,7 @@ chai.use(chaiHttp);
 const { expect } = chai;
 const request = require('supertest');
 const app = require('../app');
-const { vthreadsValidationSchema } = require('../src/validations/checkVthreads');
+const { vthreadsValidationSchema } = require('../validations/checkVthreads');
 
 describe('Vthreads API Tests', () => {
   let vthreadId;
@@ -67,7 +67,7 @@ describe('Vthreads API Tests', () => {
   it('should get all VThreads', async () => {
     const res = await request(app).get('/vthreads');
     expect(res).to.have.status(200);
-    expect(res.body).to.be.an('array');
+    expect(res.body.payload).to.be.an('array');
   });
 });
 

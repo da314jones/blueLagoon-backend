@@ -11,7 +11,7 @@ const getAllVthreads = async () => {
   }
 };
 
-const getOneVthread = async () => {
+const getOneVthread = async (id) => {
   try {
     const oneVthread = await db.one("SELECT * FROM vthreads WHERE id=$1", id);
     return oneVthread;
@@ -20,7 +20,7 @@ const getOneVthread = async () => {
   }
 };
 
-const createVthread = async () => {
+const createVthread = async (vthread) => {
   try {
     const createdVthread = await db.one(
       "INSERT INTO vthreads (user_id, video_url, title, category, creation_date) VALUES ($1, $2, $3, $4, $5) RETURNING *",
@@ -38,7 +38,7 @@ const createVthread = async () => {
   }
 };
 
-const deleteVthread = async () => {
+const deleteVthread = async (id) => {
   try {
     const deletedVthread = await db.one(
       "DELETE FROM vthreads WHERE id=$1 RETURNING *",
@@ -50,7 +50,7 @@ const deleteVthread = async () => {
   }
 };
 
-const updateVthread = async () => {
+const updateVthread = async (id, vthread) => {
   try {
     const { user_id, video_url, title, category, creation_date } = vthread;
     const updatedVthread = await db.one(
@@ -59,6 +59,7 @@ const updateVthread = async () => {
     );
     return updatedVthread;
   } catch (err) {
+    console.error('Error updatingVChat:', err);
     return err;
   }
 };

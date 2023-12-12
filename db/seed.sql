@@ -3,8 +3,8 @@
 
 -- Users seed data (1 admin and 6 generic users)
 -- Users seed data (1 admin and 6 generic users)
-INSERT INTO users (email, hashed_password, profile_pic, interests, challenges, experiences, locations, join_date, role) VALUES
-('jonesda314@outlook.com', 'hashed_PlatinumBella13*', NULL, 'Father of 2, Male', 'Single parenting', 'Experienced father, Brooklyn resident', 'Brooklyn, NY', '1975-03-14', 'admin'),
+INSERT INTO users (username, email, password_hash, date_of_birth, is_age_verified, account_status, phone_number, profile_pic, interests, challenges, experiences, locations, join_date, role, last_login) VALUES
+('alphaOmega', 'jonesda314@outlook.com', 'hashed_PlatinumBella13*', '1975-03-14', false, 'active', NULL, NULL, 'Father of 2, Male', 'Single parenting', 'Experienced father, Brooklyn resident', 'Brooklyn, NY', '2021-01-01', 'admin', NULL),
 ('user1@example.com', 'hashed_password1', NULL, 'Interests1', 'Challenges1', 'Experiences1', 'Location1', '2021-01-01', 'user'),
 ('user2@example.com', 'hashed_password2', NULL, 'Interests2', 'Challenges2', 'Experiences2', 'Location2', '2021-02-02', 'user'),
 ('user3@example.com', 'hashed_password3', NULL, 'Interests3', 'Challenges3', 'Experiences3', 'Location3', '2021-03-03', 'user'),
@@ -12,37 +12,82 @@ INSERT INTO users (email, hashed_password, profile_pic, interests, challenges, e
 ('user5@example.com', 'hashed_password5', NULL, 'Interests5', 'Challenges5', 'Experiences5', 'Location5', '2021-05-05', 'user'),
 ('user6@example.com', 'hashed_password6', NULL, 'Interests6', 'Challenges6', 'Experiences6', 'Location6', '2021-06-06', 'user');
 
--- Rest of your SQL code remains the same with the corrected reference IDs.
-
-
-
+-- Assuming registration_id and user_id are linked correctly
 INSERT INTO user_registrations (user_id, email, registration_started, additional_info) VALUES
-(1, 'user7@outlook.com', '2023-01-01', 'First user registration'),
-(2, 'user6@outlook.com', '2023-01-02', 'Interested in technology'),
-(3, 'user5@outlook.com', '2023-01-03', 'Looking for networking opportunities'),
-(4, 'user1@outlook.com', '2023-01-04', 'Enthusiast in AI and machine learning'),
-(5, 'jonesda314@outlook.com', '2023-01-05', 'Beginner in programming'),
-(6, 'user3@outlook.com', '2023-01-06', 'Experienced in web development'),
-(7, 'user4@outlook.com', '2023-01-07', 'Seeking mentorship in software engineering');
+(1, 'user1@example.com', NOW(), 'Additional Info 1'),
+(2, 'user2@example.com', NOW(), 'Additional Info 2'),
+(3, 'user3@example.com', NOW(), 'Additional Info 3'),
+(4, 'user4@example.com', NOW(), 'Additional Info 4'),
+(5, 'user5@example.com', NOW(), 'Additional Info 5'),
+(6, 'user6@example.com', NOW(), 'Additional Info 6'),
+(7, 'user7@example.com', NOW(), 'Additional Info 7');
 
-INSERT INTO vchat (user_id, schedule_time, duration, archive_link, start_time, end_time, archive_url) VALUES
-(1, '2023-01-01 09:00:00', 30, 'https://www.example.com/archive1.link', '2023-01-01 09:00:00', '2023-01-01 09:30:00', 'https://www.example.com/archive1.url'),
-(2, '2023-01-02 10:00:00', 45, 'https://www.example.com/archive2.link', '2023-01-02 10:00:00', '2023-01-02 10:45:00', 'https://www.example.com/archive2.url'),
-(3, '2023-01-03 11:00:00', 60, 'https://www.example.com/archive3.link', '2023-01-03 11:00:00', '2023-01-03 12:00:00', 'https://www.example.com/archive3.url'),
-(4, '2023-01-04 12:00:00', 30, 'https://www.example.com/archive4.link', '2023-01-04 12:00:00', '2023-01-04 12:30:00', 'https://www.example.com/archive4.url'),
-(5, '2023-01-05 13:00:00', 45, 'https://www.example.com/archive5.link', '2023-01-05 13:00:00', '2023-01-05 13:45:00', 'https://www.example.com/archive5.url'),
-(7, '2023-01-06 14:00:00', 60, 'https://www.example.com/archive6.link', '2023-01-06 14:00:00', '2023-01-06 15:00:00', 'https://www.example.com/archive6.url'),
-(1, '2023-01-07 15:00:00', 30, 'https://www.example.com/archive7.link', '2023-01-07 15:00:00', '2023-01-07 15:30:00', 'https://www.example.com/archive7.url');
+INSERT INTO user_security (user_id, email_verified, phone_verified) VALUES
+(1, false, false),
+(2, false, false),
+(3, false, false),
+(4, false, false),
+(5, false, false),
+(6, false, false),
+(7, false, false);
+
+INSERT INTO profiles (user_id, name, gender, profile_picture_url, bio, location) VALUES
+(1, 'User One', 'Gender1', NULL, 'Bio 1', 'Location 1'),
+(2, 'User Two', 'Gender2', NULL, 'Bio 2', 'Location 2'),
+(3, 'User Three', 'Gender3', NULL, 'Bio 3', 'Location 3'),
+(4, 'User Four', 'Gender4', NULL, 'Bio 4', 'Location 4'),
+(5, 'User Five', 'Gender5', NULL, 'Bio 5', 'Location 5'),
+(6, 'User Six', 'Gender6', NULL, 'Bio 6', 'Location 6'),
+(7, 'User Seven', 'Gender7', NULL, 'Bio 7', 'Location 7');
+
+-- Assuming session_id and host_user_id are linked correctly
+INSERT INTO vchats (host_user_id, schedule_time, duration, archive_link, start_time, end_time, archive_url) VALUES
+(1, NOW(), 30, NULL, NOW(), NOW(), NULL),
+(2, NOW(), 45, NULL, NOW(), NOW(), NULL),
+(3, NOW(), 60, NULL, NOW(), NOW(), NULL),
+(4, NOW(), 30, NULL, NOW(), NOW(), NULL),
+(5, NOW(), 45, NULL, NOW(), NOW(), NULL),
+(6, NOW(), 60, NULL, NOW(), NOW(), NULL),
+(7, NOW(), 30, NULL, NOW(), NOW(), NULL);
 
 
+
+-- Assuming thread_id and user_id are linked correctly
 INSERT INTO vthreads (user_id, title, video_url, category, creation_date) VALUES
-(1, 'Parenting Tips', 'https://example.com/videos/parenting-tips.mp4', 'Advice', '2021-01-01'),
-(2, 'Cooking for Kids', 'https://example.com/videos/cooking-kids.mp4', 'Lifestyle', '2021-02-01'),
-(3, 'DIY Projects', 'https://example.com/videos/diy-projects.mp4', 'Hobbies', '2021-03-01'),
-(4, 'Educational Activities', 'https://example.com/videos/educational-activities.mp4', 'Education', '2021-04-01'),
-(5, 'Outdoor Adventures', 'https://example.com/videos/outdoor-adventures.mp4', 'Recreation', '2021-05-01'),
-(6, 'Storytime Sessions', 'https://example.com/videos/storytime-sessions.mp4', 'Entertainment', '2021-06-01'),
-(1, 'Fitness and Health', 'https://example.com/videos/fitness-health.mp4', 'Wellness', '2021-07-01');
+(1, 'Title 1', 'https://example.com/video1.mp4', 'Category 1', NOW()),
+(2, 'Title 2', 'https://example.com/video2.mp4', 'Category 2', NOW()),
+(3, 'Title 3', 'https://example.com/video3.mp4', 'Category 3', NOW()),
+(4, 'Title 4', 'https://example.com/video4.mp4', 'Category 4', NOW()),
+(5, 'Title 5', 'https://example.com/video5.mp4', 'Category 5', NOW()),
+(6, 'Title 6', 'https://example.com/video6.mp4', 'Category 6', NOW()),
+(7, 'Title 7', 'https://example.com/video7.mp4', 'Category 7', NOW());
+
+-- Sample data with random session_id and user_id pairings
+INSERT INTO participants (session_id, user_id, join_time, leave_time) VALUES
+(1, 1, NOW(), NOW()),
+(2, 2, NOW(), NOW()),
+(3, 3, NOW(), NOW()),
+(4, 4, NOW(), NOW()),
+(5, 5, NOW(), NOW()),
+(6, 6, NOW(), NOW()),
+(7, 7, NOW(), NOW());
+
+INSERT INTO chat_messages (session_id, user_id, message, timestamp) VALUES
+(1, 1, 'Hello everyone, welcome to the chat!', '2023-01-01 09:05:00'),
+(1, 2, 'Thanks for hosting this session.', '2023-01-01 09:06:00'),
+(2, 3, 'Can't wait to start discussing today's topic.', '2023-01-02 10:10:00'),
+(2, 4, 'I have some questions about the topic.', '2023-01-02 10:15:00'),
+(3, 5, 'Great presentation so far!', '2023-01-03 11:20:00'),
+(3, 6, 'Agreed, very informative.', '2023-01-03 11:25:00'),
+(4, 7, 'Looking forward to the next one!', '2023-01-04 12:30:00'),
+(4, 1, 'Thanks everyone for joining!', '2023-01-04 12:35:00'),
+(5, 2, 'Can we have a follow-up session?', '2023-01-05 13:40:00'),
+(5, 3, 'That would be great, count me in.', '2023-01-05 13:45:00'),
+(6, 4, 'Really enjoyed today's' chat.', '2023-01-06 14:50:00'),
+(6, 5, 'Yes, it was fantastic!', '2023-01-06 14:55:00'),
+(7, 6, 'Thanks for the insights, everyone.', '2023-01-07 15:00:00'),
+(7, 7, 'See you all next time!', '2023-01-07 15:05:00');
+
 
 INSERT INTO notifications (user_id, type, message, date) VALUES
 (1, 'Reminder', 'Upcoming Event Reminder', '2021-01-01 09:00:00'),

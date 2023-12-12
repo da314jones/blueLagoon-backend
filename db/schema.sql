@@ -12,21 +12,24 @@ CREATE DATABASE bluelagoon_dev;
 -- schema.sql
 
 -- Create the 'users' table
+-- Users Table
 CREATE TABLE users (
-  id SERIAL PRIMARY KEY,
-  email varchar(255),
-  hashed_password varchar(255),
-  date_of_birth DATE,
-  is_age_verified BOOLEAN DEFAULT false,
-  account_status VARCHAR(50) DEFAULT 'active',
-  phone_number VARCHAR(15) UNIQUE,
-  profile_pic TEXT,
-  interests TEXT,
-  challenges TEXT,
-  experiences TEXT,
-  locations varchar(100),
-  join_date DATE,
-  role varchar(50)
+    user_id SERIAL PRIMARY KEY,
+    username VARCHAR(255) NOT NULL,
+    email VARCHAR(255),
+    password_hash VARCHAR(255),
+    date_of_birth DATE,
+    is_age_verified BOOLEAN DEFAULT false,
+    account_status VARCHAR(50) DEFAULT 'active',
+    phone_number VARCHAR(15) UNIQUE,
+    profile_pic TEXT,
+    interests TEXT,
+    challenges TEXT,
+    experiences TEXT,
+    locations VARCHAR(100),
+    join_date DATE,
+    role VARCHAR(50),
+    last_login TIMESTAMP
 );
 
 -- Create the 'user_registrations' table
@@ -65,30 +68,44 @@ CREATE TABLE profiles (
     location VARCHAR(100)
 );
 
-
-
-
 -- Define the 'vchat' table for video chat sessions
 CREATE TABLE vchats (
-  id SERIAL PRIMARY KEY,  -- Unique identifier for each video chat session
-  user_id INTEGER REFERENCES users(id),  -- Link to the user who initiated the chat
-  video_url TEXT,  -- URL to the video file of the chat
-  schedule_time timestamp,  -- Scheduled time for the chat
-  duration integer,  -- Duration of the chat in minutes
-  archive_link TEXT,  -- Link to the archived chat
-  start_time timestamp,  -- Actual start time of the chat
-  end_time timestamp,  -- Actual end time of the chat
-  archive_url TEXT  -- URL for the archived video chat
+    session_id SERIAL PRIMARY KEY,
+    host_user_id INTEGER REFERENCES users(user_id),
+    video_url TEXT,
+    schedule_time TIMESTAMP,
+    duration INTEGER,
+    archive_link TEXT,
+    start_time TIMESTAMP,
+    end_time TIMESTAMP,
+    archive_url TEXT
 );
 
 -- Define the 'vthreads' table for video threads
 CREATE TABLE vthreads (
-  id SERIAL PRIMARY KEY,  -- Unique identifier for each video thread
-  user_id INTEGER REFERENCES users(id),  -- Link to the user who created the thread
-  video_url TEXT,  -- URL to the video in the thread
-  title varchar(255),  -- Title of the video thread
-  category varchar(100),  -- Category of the video thread
-  creation_date DATE  -- Date the thread was created
+    thread_id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users(user_id),  -- Link to the user who created the thread
+    video_url TEXT,  -- URL to the video in the thread
+    title VARCHAR(255),  -- Title of the video thread
+    category VARCHAR(100),  -- Category of the video thread
+    creation_date DATE  -- Date the thread was created
+);
+
+CREATE TABLE participants (
+    participant_id SERIAL PRIMARY KEY,
+    session_id INTEGER REFERENCES video_sessions(session_id),
+    user_id INTEGER REFERENCES users(user_id),
+    join_time TIMESTAMP ,
+    leave_time TIMESTAMP
+);
+
+-- Chat Messages Table
+CREATE TABLE chat_messages (
+    message_id SERIAL PRIMARY KEY,
+    session_id INTEGER REFERENCES vchats(session_id),
+    user_id INTEGER REFERENCES users(user_id),
+    message TEXT,
+    timestamp TIMESTAMP
 );
 
 -- Define the 'notifications' table for user notifications
