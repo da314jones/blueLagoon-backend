@@ -42,7 +42,7 @@ const deleteGroup = async (id) => {
 const updateGroup = async (id, userGroup) => {
     try {
         const { user_id, group_id, join_date } = userGroup;
-        const updatedUserGroup = await db.one("UPDATE userGroups SET (user_id=$1, group_id=$2, join_date=$3) RETURNING *", id);
+        const updatedUserGroup = await db.one("UPDATE userGroups SET user_id=$1, group_id=$2, join_date=$3, WHERE id=$4, RETURNING *", [user_id, group_id, join_date, id])
         return updatedUserGroup
     } catch(err) {
         return err

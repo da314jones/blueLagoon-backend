@@ -25,11 +25,11 @@ const createVthread = async (vthread) => {
     const createdVthread = await db.one(
       "INSERT INTO vthreads (user_id, video_url, title, category, creation_date) VALUES ($1, $2, $3, $4, $5) RETURNING *",
       [
-        vthreads.user_id,
-        vthreads.video_url,
-        vthreads.title,
-        vthreads.category,
-        vthreads.creation_date,
+        vthread.user_id,
+        vthread.video_url,
+        vthread.title,
+        vthread.category,
+        vthread.creation_date,
       ]
     );
     return createdVthread;

@@ -44,7 +44,7 @@ const createVChat = async (vchat) => {
 const deleteVChat = async (id) => {
   try {
     const deletedVchat = await db.one(
-      "DELETE FROM vchats WHERE id = $1 RETURNING *",
+      "DELETE FROM vchats WHERE id=$1 RETURNING *",
       id
     );
     return deletedVchat;

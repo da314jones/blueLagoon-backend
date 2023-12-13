@@ -7,6 +7,7 @@ const getAllEvents = async () => {
         console.log("Query result:", allEvents);
         return allEvents
     }catch(err) {
+        console.error("Failed fetch all Professional VChat")
         return err
     }
 };
@@ -22,6 +23,7 @@ const getOneEvent = async (id) => {
 
 const createEvent = async (event) => {
     try {
+        const { title, description, location, date, time, capacity, organizer, category, contact_email, sign_up_link } = event
         const createdEvent = await db.one("INSERT INTO events (title, description, location, date, time, capacity, organizer, category, contact_email, sign_up_link) VALUES ($1, $2, $3, #4, $5, $6, $7, $8, $9, $10) RETURNING *", [event.title, event.description, event.location, event.date, event.time, event.capacity, event.organizer, event.category, event.contact_email, event.sign_up_link])
         return createdEvent
     }catch(err) {
@@ -41,7 +43,7 @@ const deleteEvent = async (id) => {
 const updateEvent = async (id, event) => {
     try {
         const { title, description, location, date, time, capacity, organizer, category, contact_email, sign_up_link } = event
-        const updatedEvent = await db.one("UPDATE events set title=$1, description=$2, location=$3, date=$4, time=$5, capacity=$6, organizer=$7, category=$8, contact_email=$9, sign_up_link=$10 WHERE id=$11", id);
+        const updatedEvent = await db.one("UPDATE events set title=$1, description=$2, location=$3, date=$4, time=$5, capacity=$6, organizer=$7, category=$8, contact_email=$9, sign_up_link=$10 WHERE id=$11 RETURNING *", [title, description, location, date, time, capacity, organizer, category, contact_email, sign_up_link, id]);
         return updatedEvent
     }catch(err) {
         return err

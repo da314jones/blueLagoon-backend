@@ -7,6 +7,7 @@ const getAllNotifications = async () => {
         console.log("Query request:", allNotifications)
         return allNotifications
     } catch(err) {
+        console.error("Failed fetch all Professional VChat")
         return err
     }
 };
@@ -41,7 +42,7 @@ const deleteNotification = async (id) => {
 const updateNotifications = async (id , notifications) => {
     try {
         const { user_id, type, message, date } = notifications;
-        const updatedNotifications = await db.one("UPDATE notifications SET user_id=$1, type=$2, message=$3, date=$4 WHERE id=$5", id);
+        const updatedNotifications = await db.one("UPDATE notifications SET user_id=$1, type=$2, message=$3, date=$4 WHERE id=$5 RETURNING *", [user_id, type, message, date, id]);
         return updatedNotifications;
     } catch(err) {
         return err

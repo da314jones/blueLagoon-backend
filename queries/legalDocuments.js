@@ -42,8 +42,8 @@ const deleteLegalDocument = async (id) => {
 const updateLegalDocument = async (id, legalDocument) => {
     try {
         const { title, document_type, content, effective_date } = legalDocument;
-        const uppdatedLegalDocument = await db.one("UPDATE legal_documents SET title=$1, document_type=$@, content=$3, effective_sate=$4 WHERE id=$5 RETURNING *", id);
-        return updateLegalDocument
+        const updatedLegalDocument = await db.one("UPDATE legal_documents SET title=$1, document_type=$@, content=$3, effective_sate=$4, WHERE id=$5, RETURNING *", [title, document_type, content, effective_date, id]);
+        return updatedLegalDocument
     }catch(err) {
         return err
     }

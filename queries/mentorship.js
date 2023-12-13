@@ -6,6 +6,7 @@ const getAllMentorships = async () => {
         const allMentorships = await db.any('SELECT * FROM mentorships');
         return allMentorships;
     } catch (err) {
+        console.error("Failed fetch all Professional VChat")
         return err;
     }
 };
@@ -37,7 +38,7 @@ const createMentorship = async (mentorship) => {
 // Delete a mentorship
 const deleteMentorship = async (id) => {
     try {
-        const deletedMentorship = await db.result('DELETE FROM mentorships WHERE id = $1', id);
+        const deletedMentorship = await db.result('DELETE FROM mentorships WHERE id=$1', id);
         return deletedMentorship;
     } catch (err) {
         return err;
@@ -49,7 +50,7 @@ const updateMentorship = async (id, mentorship) => {
     try {
         const { mentor_id, mentee_id, start_date, end_date, status, notes } = mentorship;
         const updatedMentorship = await db.one(
-            'UPDATE mentorships SET mentor_id=$1, mentee_id=$2, start_date=$3, end_date=$4, status=$5, notes=$6 WHERE id = $7 RETURNING *',
+            'UPDATE mentorships SET mentor_id=$1, mentee_id=$2, start_date=$3, end_date=$4, status=$5, notes=$6, WHERE id=$7, RETURNING *',
             [mentor_id, mentee_id, start_date, end_date, status, notes, id]
         );
         return updatedMentorship;

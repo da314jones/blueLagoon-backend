@@ -50,7 +50,7 @@ const deleteMessage = async (id) => {
     }
 
     try {
-        const deletedMessage = await db.one('DELETE FROM chat_messages WHERE id = $1 RETURNING *', id);
+        const deletedMessage = await db.one('DELETE FROM chat_messages WHERE id=$1 RETURNING *', id);
         return deletedMessage;
     } catch (err) {
         console.error('Failed to delete message:', err);
@@ -66,7 +66,7 @@ const updateMessage = async (id, updateData) => {
     }
 
     try {
-        const updatedMessage = await db.one('UPDATE chat_messages SET session_id = $1, user_id = $2, message = $3, timestamp = $4 WHERE id = $5 RETURNING *', [session_id, user_id, message_text, timestamp, id]);
+        const updatedMessage = await db.one('UPDATE chat_messages SET session_id = $1, user_id=$2, message=$3, timestamp=$4, WHERE id=$5, RETURNING *', [session_id, user_id, message_text, timestamp, id]);
         return updatedMessage;
     } catch (err) {
         console.error('Failed to update message:', err);

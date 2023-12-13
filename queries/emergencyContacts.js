@@ -24,7 +24,7 @@ const getOneEmergencyContact = async (id) => {
 
 const createEmergencyContact = async (emergency_contacts) => {
     try {
-        const createdEmergencyContacts = await db.one("INSERT INTO emergency_contacts (user_id, name, contact_info, description, location, emergency_contact) VALUES ($1, $2,$3, $4, $5, $6) RETURNING *", [emergency_contacts.user_id, emergency_contacts.name, emergency_contacts.contact_info, emergency_contacts.description, emergency_contacts.location, emergency_contacts.emergency_contact]);
+        const createdEmergencyContacts = await db.one("INSERT INTO emergency_contacts (user_id, name, contact_info, description, location, emergency_contact) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *", [emergency_contacts.user_id, emergency_contacts.name, emergency_contacts.contact_info, emergency_contacts.description, emergency_contacts.location, emergency_contacts.emergency_contact]);
         return createEmergencyContact;
     }catch(err) {
         return err

@@ -41,7 +41,7 @@ const deleteUserConnection = async (id) => {
 const updateUserConnection = async (id, userConnections) => {
      try {
         const { user1_id, user2_id, connection_on } = userConnections;
-        const updatedUserConnections = await db.one("UPDATE user_connections SET user1_id=$1, user2_id=$2, connections_on=$3 WHERE id=$4 RETURNING *", [user1_id, user2_id, connection_on]);
+        const updatedUserConnections = await db.one("UPDATE user_connections SET user1_id=$1, user2_id=$2, connections_on=$3 WHERE id=$4 RETURNING *", [user1_id, user2_id, connection_on, id]);
         return updateUserConnection;
      } catch(err) {
         return err

@@ -7,6 +7,7 @@ const getAllUserConsents = async () => {
         console.log("Query results:", allUserConsentLogs);
         return allUserConsentLogs;
     } catch(err) {
+        console.error("Failed fetch all Professional VChat")
         return err
     }
 };
