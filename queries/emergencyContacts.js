@@ -4,7 +4,7 @@ const getAllEmergencyContacts = async () => {
     try {
         console.log("Executing query to fetch all emergency contacts");
         const allEmergencyContacts = await db.any("SELECT * FROM emergency_contacts");
-        console.log("Query result:", allAffiliates);
+        console.log("Query result:", allEmergencyContacts);
         return allEmergencyContacts;
     }catch(err) {
         console.error("Failed to fetch Emergency Contacts.");
