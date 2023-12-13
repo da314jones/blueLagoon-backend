@@ -14,7 +14,7 @@ const getAllAffiliates = async () => {
 
 const getOneAffiliate = async (id) => {
     try {
-        const oneAffiliate = await db.one("SELECT * FROM affiliates WHERE   id=$1", id)
+        const oneAffiliate = await db.one("SELECT * FROM affiliates WHERE id=$1", id)
         return oneAffiliate
     }catch(err) {
         return err
@@ -32,7 +32,7 @@ const createAffiliate = async (affiliate) => {
 
 const deleteAffiliate = async (id) => {
     try {
-        const deletedAffiliate = await db.one("DELETE FROM affiliates WHERE id = $1 RETURNING *", id)
+        const deletedAffiliate = await db.one("DELETE FROM affiliates WHERE id=$1 RETURNING *", id)
         return deletedAffiliate
     }catch(err) {
         return err
