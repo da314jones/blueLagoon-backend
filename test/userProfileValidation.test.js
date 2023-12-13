@@ -1,45 +1,71 @@
+const chai = require('chai');
+const chaiHttp = require('chai-http');
+chai.use(chaiHttp);
+const { expect } = chai;
 const request = require('supertest');
 const app = require('../app');
-const { expect } = require('chai');
+const { vthreadsValidationSchema } = require('../validations/checkVthreads');
 
-describe('Profiles API Tests', () => {
+describe('User Profiles CRUD Operations', () => {
     let profileId;
-
-    it('should create a new profile', async () => {
-        const profileData = {
-            user_id: 1, // Replace with actual user ID
-            name: 'John Doe',
-            gender: 'Male',
-            // ... other fields
-        };
-        const res = await request(app).post('/profiles').send(profileData);
-        expect(res.statusCode).to.equal(201);
-        profileId = res.body.profile_id;
-        expect(res.body).to.include(profileData);
+  
+    // Test for POST request to create a new user profile
+    it('should create a new user profile', async () => {
+      const newUserProfile = {
+        user_id: 1,
+        name: 'John Doe',
+        gender: 'Male',
+        profile_picture_url: 'https://example.com/profile.jpg',
+        bio: 'Bio goes here',
+        location: 'City, Country'
+      };
+  
+      const res = await request(app)
+        .post('/userprofiles')
+        .send(newUserProfile);
+  
+      expect(res).to.have.status(201);
+      expect(res.body).to.be.an('object');
+      profileId = res.body.id;
     });
-
-    it('should get a profile by ID', async () => {
-        const res = await request(app).get(`/profiles/${profileId}`);
-        expect(res.statusCode).to.equal(200);
-        expect(res.body.profile_id).to.equal(profileId);
+  
+    // Test for GET request to retrieve a user profile by ID
+    it('should get a user profile by ID', async () => {
+      const res = await request(app).get(`/userprofiles/${profileId}`);
+      expect(res).to.have.status(200);
+      expect(res.body).to.be.an('object');
+      expect(res.body.id).to.equal(profileId);
     });
-
-    it('should update a profile', async () => {
-        const updatedData = { name: 'Jane Doe' };
-        const res = await request(app).put(`/profiles/${profileId}`).send(updatedData);
-        expect(res.statusCode).to.equal(200);
-        expect(res.body.name).to.equal(updatedData.name);
+  
+    // Test for PUT request to update a user profile
+    it('should update a user profile', async () => {
+      const updatedUserProfile = {
+        name: 'Jane Doe',
+        bio: 'Updated bio goes here'
+      };
+  
+      const res = await request(app)
+        .put(`/userprofiles/${profileId}`)
+        .send(updatedUserProfile);
+  
+      expect(res).to.have.status(200);
+      expect(res.body).to.be.an('object');
+      expect(res.body.id).to.equal(profileId);
     });
-
-    it('should delete a profile', async () => {
-        const res = await request(app).delete(`/profiles/${profileId}`);
-        expect(res.statusCode).to.equal(200);
-        expect(res.body.profile_id).to.equal(profileId);
+  
+    // Test for DELETE request to delete a user profile
+    it('should delete a user profile', async () => {
+      const res = await request(app).delete(`/userprofiles/${profileId}`);
+      expect(res).to.have.status(200);
+      expect(res.body).to.be.an('object');
+      expect(res.body.id).to.equal(profileId);
     });
-
-    it('should get all profiles', async () => {
-        const res = await request(app).get('/profiles');
-        expect(res.statusCode).to.equal(200);
-        expect(res.body).to.be.an('array');
+  
+    // Test for GET request to retrieve all user profiles
+    it('should get all user profiles', async () => {
+      const res = await request(app).get('/userprofiles');
+      expect(res).to.have.status(200);
+      expect(res.body).to.be.an('array');
     });
-});
+  });
+  

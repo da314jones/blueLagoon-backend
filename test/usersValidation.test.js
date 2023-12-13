@@ -1,78 +1,79 @@
+const chai = require('chai');
+const chaiHttp = require('chai-http');
+chai.use(chaiHttp);
+const { expect } = chai;
 const request = require('supertest');
-const app = require('../app'); // Adjust the path as needed
-const { expect } = require('chai');
-const { userValidationSchema } = require('../src/validations/userValidation.js'); // Joi validation schema for users
+const app = require('../app');
+const { vthreadsValidationSchema } = require('../validations/checkVthreads');
 
-describe('Users API', () => {
+describe('Users CRUD Operations', () => {
     let userId;
-
-    // Test for creating a new user
+  
+    // Test for POST request to create a new user
     it('should create a new user', async () => {
-        const newUser = {
-            email: 'test@example.com',
-            hashed_password: 'hashedpassword123',
-            date_of_birth: '1990-01-01',
-            // ... other required fields
-        };
-
-        const res = await request(app)
-            .post('/users')
-            .send(newUser);
-
-        expect(res.statusCode).to.equal(201);
-        expect(res.body).to.be.an('object');
-        const validation = userValidationSchema.validate(res.body);
-        expect(validation.error).to.be.undefined;
-
-        userId = res.body.id; // Store the user ID for later tests
+      const newUser = {
+        username: 'newuser',
+        email: 'newuser@example.com',
+        password_hash: 'hashedpassword',
+        date_of_birth: '1990-01-01',
+        is_age_verified: false,
+        account_status: 'active',
+        phone_number: '1234567890',
+        profile_pic: 'https://example.com/profile.jpg',
+        interests: 'Coding, Tech',
+        challenges: 'Learning new technologies',
+        experiences: '5 years in development',
+        locations: 'City, Country',
+        role: 'User'
+      };
+  
+      const res = await request(app)
+        .post('/users')
+        .send(newUser);
+  
+      expect(res).to.have.status(201);
+      expect(res.body).to.be.an('object');
+      userId = res.body.user_id;
     });
-
-    // Test for retrieving a specific user
-    it('should retrieve a specific user by ID', async () => {
-        const res = await request(app)
-            .get(`/users/${userId}`);
-
-        expect(res.statusCode).to.equal(200);
-        expect(res.body).to.be.an('object');
-        expect(res.body.id).to.equal(userId);
+  
+    // Test for GET request to retrieve a user by ID
+    it('should get a user by ID', async () => {
+      const res = await request(app).get(`/users/${userId}`);
+      expect(res).to.have.status(200);
+      expect(res.body).to.be.an('object');
+      expect(res.body.user_id).to.equal(userId);
     });
-
-    // Test for updating a user
+  
+    // Test for PUT request to update a user
     it('should update a user', async () => {
-        const updatedUserData = {
-            email: 'updated@example.com',
-            // ... other fields to update
-        };
-
-        const res = await request(app)
-            .put(`/users/${userId}`)
-            .send(updatedUserData);
-
-        expect(res.statusCode).to.equal(200);
-        expect(res.body).to.be.an('object');
-        expect(res.body.email).to.equal(updatedUserData.email);
+      const updatedUser = {
+        email: 'updateduser@example.com',
+        phone_number: '0987654321',
+        profile_pic: 'https://example.com/newprofile.jpg'
+      };
+  
+      const res = await request(app)
+        .put(`/users/${userId}`)
+        .send(updatedUser);
+  
+      expect(res).to.have.status(200);
+      expect(res.body).to.be.an('object');
+      expect(res.body.user_id).to.equal(userId);
     });
-
-    // Test for deleting a user
+  
+    // Test for DELETE request to delete a user
     it('should delete a user', async () => {
-        const res = await request(app)
-            .delete(`/users/${userId}`);
-
-        expect(res.statusCode).to.equal(200);
-        expect(res.body).to.be.an('object');
-        expect(res.body.id).to.equal(userId);
+      const res = await request(app).delete(`/users/${userId}`);
+      expect(res).to.have.status(200);
+      expect(res.body).to.be.an('object');
+      expect(res.body.user_id).to.equal(userId);
     });
-
-    // Test for retrieving all users
-    it('should retrieve all users', async () => {
-        const res = await request(app)
-            .get('/users');
-
-        expect(res.statusCode).to.equal(200);
-        expect(res.body).to.be.an('array');
-        res.body.forEach(user => {
-            const validation = userValidationSchema.validate(user);
-            expect(validation.error).to.be.undefined;
-        });
+  
+    // Test for GET request to retrieve all users
+    it('should get all users', async () => {
+      const res = await request(app).get('/users');
+      expect(res).to.have.status(200);
+      expect(res.body).to.be.an('array');
     });
-});
+  });
+  

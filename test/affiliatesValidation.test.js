@@ -1,5 +1,10 @@
-const { expect } = require('chai');
-const { affiliatesValidationSchema } = require('../src/validations/checkAffiliates.js'); // Adjust the path as needed
+const chai = require('chai');
+const chaiHttp = require('chai-http');
+chai.use(chaiHttp);
+const { expect } = chai;
+const request = require('supertest');
+const app = require('../app');
+const { vthreadsValidationSchema } = require('../validations/checkVthreads');const { expect } = require('chai');
 
 describe('Affiliates Validation Schema', () => {
     const validAffiliate = {

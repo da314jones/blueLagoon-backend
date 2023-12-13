@@ -1,27 +1,31 @@
-const { expect } = require('chai');
-const { errorLogsValidationSchema } = require('../src/validations/checkErrorLogs.js'); // Adjust the path as needed
+const chai = require('chai');
+const chaiHttp = require('chai-http');
+chai.use(chaiHttp);
+const { expect } = chai;
+const request = require('supertest');
+const app = require('../app'); // Replace with the path to your Express app
 
-describe('Error Logs Validation Schema', () => {
-  const validErrorLog = {
-    id: 1,
-    user_id: 123,
-    error_type: 'Database Error',
-    error_message: 'Error occurred while querying the database',
-    error_time: '2023-01-15T12:00:00Z',
-    additional_info: { requestHeaders: { 'user-agent': 'Mozilla/5.0' } },
-  };
-
-  const invalidErrorLog = {
-    // Missing required fields
-  };
-
-  it('should validate a valid error log object', () => {
-    const { error } = errorLogsValidationSchema.validate(validErrorLog);
-    expect(error).to.be.undefined;
+describe('Error Logs Read Operations', () => {
+  
+  // Test for GET request to retrieve all error logs
+  it('should get all error logs', async () => {
+    const res = await request(app).get('/errorlogs');
+    expect(res).to.have.status(200);
+    expect(res.body).to.be.an('array');
+    // Additional assertions as necessary
   });
 
-  it('should return a validation error for an invalid error log object', () => {
-    const { error } = errorLogsValidationSchema.validate(invalidErrorLog);
-    expect(error).to.exist;
+  // Test for GET request to retrieve an error log by ID
+  it('should get an error log by ID', async () => {
+    const logId = 1; // Replace with an appropriate log ID
+    const res = await request(app).get(`/errorlogs/${logId}`);
+    expect(res).to.have.status(200);
+    expect(res.body).to.be.an('object');
+    expect(res.body.id).to.equal(logId);
+    // Additional assertions as necessary
   });
+
+  // If your application supports other operations on error logs,
+  // such as creating, updating, or deleting (which is uncommon for error logs),
+  // you would add tests for those operations here.
 });

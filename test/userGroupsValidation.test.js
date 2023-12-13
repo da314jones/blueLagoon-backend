@@ -1,25 +1,51 @@
-const { expect } = require('chai');
-const { userGroupsValidationSchema } = require('../src/validations/checkUserGroup.js');
+const chai = require('chai');
+const chaiHttp = require('chai-http');
+chai.use(chaiHttp);
+const { expect } = chai;
+const request = require('supertest');
+const app = require('../app');
+const { vthreadsValidationSchema } = require('../validations/checkVthreads');
 
-describe('User Groups Validation Schema', () => {
-  it('should validate a valid user group object', () => {
-    const validUserGroup = {
-      id: 1,
-      user_id: 2,
-      group_id: 3,
-      JoinDate: '2023-01-01'
+describe('User Groups CRUD Operations', () => {
+  let userGroupId;
+
+  // Test for POST request to create a new user group
+  it('should create a new user group', async () => {
+    const newUserGroup = {
+      user_id: 1,
+      group_id: 1,
+      join_date: new Date().toISOString()
     };
 
-    const validationResult = userGroupsValidationSchema.validate(validUserGroup);
-    expect(validationResult.error).to.be.undefined;
+    const res = await request(app)
+      .post('/usergroups')
+      .send(newUserGroup);
+
+    expect(res).to.have.status(201);
+    expect(res.body).to.be.an('object');
+    userGroupId = res.body.id;
   });
 
-  it('should return a validation error for an invalid user group object', () => {
-    const invalidUserGroup = {
-      // invalid object structure
-    };
+  // Test for GET request to retrieve a user group by ID
+  it('should get a user group by ID', async () => {
+    const res = await request(app).get(`/usergroups/${userGroupId}`);
+    expect(res).to.have.status(200);
+    expect(res.body).to.be.an('object');
+    expect(res.body.id).to.equal(userGroupId);
+  });
 
-    const validationResult = userGroupsValidationSchema.validate(invalidUserGroup);
-    expect(validationResult.error).to.exist;
+  // Test for DELETE request to delete a user group
+  it('should delete a user group', async () => {
+    const res = await request(app).delete(`/usergroups/${userGroupId}`);
+    expect(res).to.have.status(200);
+    expect(res.body).to.be.an('object');
+    expect(res.body.id).to.equal(userGroupId);
+  });
+
+  // Test for GET request to retrieve all user groups
+  it('should get all user groups', async () => {
+    const res = await request(app).get('/usergroups');
+    expect(res).to.have.status(200);
+    expect(res.body).to.be.an('array');
   });
 });
