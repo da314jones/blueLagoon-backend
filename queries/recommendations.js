@@ -23,7 +23,7 @@ const getOneRecommendation = async (id) => {
 
 const createRecommendation = async (recommendation) => {
     try {
-        const createdRecommendation = await db.one("INSERT INTO recommendations (user_id, title, link, recommended_on) VALUES ($1, $2, $3, $4) RETURNING *" [user_id, title, link, recommended_on]);
+        const createdRecommendation = await db.one("INSERT INTO recommendations (user_id, title, link, recommended_on) VALUES ($1, $2, $3, $4) RETURNING *" [recommendation.user_id, recommendation.title, recommendation.link, recommendation.recommended_on]);
         return createdRecommendation;
     } catch(err) {
         return err

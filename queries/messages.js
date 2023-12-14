@@ -59,13 +59,14 @@ const deleteMessage = async (id) => {
 };
 
 
-const updateMessage = async (id, updateData) => {
+const updateMessage = async (id, message) => {
     const { session_id, user_id, message_text, timestamp } = updateData;
     if (!Number.isInteger(id) || !session_id || !user_id || !message_text || !timestamp) {
         throw new Error('Invalid input');
     }
 
     try {
+        const { session_id, user_id, message_text, timestamp } = message
         const updatedMessage = await db.one('UPDATE chat_messages SET session_id = $1, user_id=$2, message=$3, timestamp=$4, WHERE id=$5, RETURNING *', [session_id, user_id, message_text, timestamp, id]);
         return updatedMessage;
     } catch (err) {

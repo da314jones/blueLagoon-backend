@@ -1,44 +1,49 @@
 const db = require('../db/dbConfig.js');
 
-const getAllProfessionalVthreads = async () => {
+const getAllProfessionalVchats = async () => {
     try {
         console.log("Executing query fetching all");
-        const all = await db.any("SELECT * FROM");
-        console.log("Query results:", all);
-        return all
+        const allProfessionalVchats = await db.any("SELECT * FROM professional_vchats");
+        console.log("Query results:", allProfessionalVchats);
+        return allProfessionalVchats
     } catch(err) {
         console.error("Failed fetch all Professional VChat")
         return err
     }
 };
 
-const getOneProfessionalVthread = async () => {
+const getOneProfessionalVchat = async (id) => {
     try {
-
+        const oneProfessionalVchat = await db.one("SELECT * FROM professional_vchats WHERE id=$1 RETURNING *", id);
+        return oneProfessionalVchat
     } catch(err) {
         return err
     }
 };
 
-const createProfessionalVthread = async () => {
+const createProfessionalVchat = async (professionalVchat) => {
     try {
-
+        const createdProfessionalVchat = await db.one("INSERT INTO professional_vchats (topic, creator, video_url, date, time, is_live, archived, archived_link) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *", [professionalVchat.topic, professionalVchat.creator, professionalVchat.video_url, professionalVchat.date, professionalVchat.time, professionalVchat.is_live, professionalVchat.archived, professionalVchat.archived_link]);
+        createdProfessionalVchat
     } catch(err) {
         return err
     }
 };
 
-const deleteProfessionalVthread = async () => {
+const deleteProfessionalVchat = async (id) => {
     try {
-
+        const deletedProfessionalVchat = await db.one("DELETE FROM professional_vchats WHERE id=$1 RETURNING *", id);
+        return deleteProfessionalVchat;
     } catch(err) {
         return err
     }
 };
 
-const updateProfessionalVthread = async () => {
+const updateProfessionalVchat = async (id, professionalVchat) => {
      try {
-         
+         const { topic, creator, video_url, date, time, is_live, archived, archived_link } = professionalVchat;
+         const updatedProfessionalVchat = await db.one("UPDATE professional_vchats SET topic=$1, creator=$2, video_url=$#, date=$4, time=$5, is_live=$6, archived=$7, archived_link=$8 WHERE id=9 RETURNING *", [topic, creator, video_url, date, time, is_live, archived, archived_link, id]);
+         return updatedProfessionalVchat;
      } catch(err) {
         return err
      }
@@ -46,9 +51,9 @@ const updateProfessionalVthread = async () => {
 
 
 module.exports = {
-    getAllProfessionalVthreads,
-    getOneProfessionalVthread,
-    createProfessionalVthread,
-    deleteProfessionalVthread,
-    updateProfessionalVthread
+    getAllProfessionalVchats,
+    getOneProfessionalVchat,
+    createProfessionalVchat,
+    deleteProfessionalVchat,
+    updateProfessionalVchat
 }

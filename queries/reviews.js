@@ -34,7 +34,7 @@ const createReview = async (review) => {
 
 const deleteReview = async (id) => {
     try {
-    const deletedReview = await db.one("DELETE FROM reviews WHERE id=$1, id");
+    const deletedReview = await db.one("DELETE FROM reviews WHERE id=$1 RETURNING *", id);
     return deletedReview
     } catch(err) {
         return err

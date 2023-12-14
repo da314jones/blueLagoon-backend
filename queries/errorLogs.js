@@ -12,7 +12,7 @@ const getAllErrorLogs = async () => {
     }
 };
 
-const getOneErrorLog =async (id) => {
+const getOneErrorLog = async (id) => {
     try {
         const oneErrorLog = await db.one("SELECT * FROM error_logs")
     }catch(err) {

@@ -25,8 +25,7 @@ const getUserSecurityById = async (id) => {
 
 const createUserSecurity = async (userSecurity) => {
     try {
-        const { user_id, email_verified, phone_verified, phone_verification_code, two_factor_enabled, last_login } = userSecurity;
-        const createdUserSecurity = await db.one("INSERT INTO user_security (user_id, email_verified, phone_verified, phone_verification_code, two_factor_enabled, last_login) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *", [user_id, email_verified, phone_verified, phone_verification_code, two_factor_enabled, last_login]);
+        const createdUserSecurity = await db.one("INSERT INTO user_security (user_id, email_verified, phone_verified, phone_verification_code, two_factor_enabled, last_login) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *", [userSecurity.user_id, userSecurity.email_verified, userSecurity.phone_verified, userSecurity.phone_verification_code, userSecurity.two_factor_enabled, userSecurity.last_login]);
         return createdUserSecurity;
         }
         catch(err) {

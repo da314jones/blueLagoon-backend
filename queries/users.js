@@ -23,9 +23,8 @@ const getUserById = async (id) => {
 };
 
 const createUser = async (user) => {
-    const { email, hashed_password, date_of_birth, is_age_verified, account_status, phone_number, profile_pic, interests, challenges, experiences, locations, join_date, role } = user;
     try {
-        const createdUser = await db.one("INSERT INTO users (email, hashed_password, date_of_birth, is_age_verified, account_status, phone_number, profile_pic, interests, challenges, experiences, locations, join_date, role) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING *", [email, hashed_password, date_of_birth, is_age_verified, account_status, phone_number, profile_pic, interests, challenges, experiences, locations, join_date, role]);
+        const createdUser = await db.one("INSERT INTO users (email, hashed_password, date_of_birth, is_age_verified, account_status, phone_number, profile_pic, interests, challenges, experiences, locations, join_date, role) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING *", [user.email, user.hashed_password, user.date_of_birth, user.is_age_verified, user.account_status, user.phone_number, user.profile_pic, user.interests, user.challenges, user.experiences, user.locations, user.join_date, role]);
         return createdUser;
     } catch (err) {
         console.error('Error creating new user:', err);

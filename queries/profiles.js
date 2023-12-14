@@ -23,8 +23,7 @@ const getProfileById = async (id) => {
 
 const createProfile = async (profile) => {
     try {
-        const { user_id, name, gender, profile_picture_url, bio, location } = profile;
-        const createdProfile = await db.one("INSERT INTO profiles (user_id, name, gender, profile_picture_url, bio, location) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *", [user_id, name, gender, profile_picture_url, bio, location]);
+        const createdProfile = await db.one("INSERT INTO profiles (user_id, name, gender, profile_picture_url, bio, location) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *", [profile.user_id, profile.name, profile.gender, profile.profile_picture_url, profile.bio, profile.location]);
         return createdProfile;
     } catch(err) {
         res.status(404).json({ error: " Failed to fetch all profiles"})

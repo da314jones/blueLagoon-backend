@@ -14,16 +14,16 @@ const getAllUserConsents = async () => {
 
 const getOneUserConsent = async (id) => {
     try {
-        const oneUserConsentLog = await  db.one("SELECT * FROM user_consent_logs");
+        const oneUserConsentLog = await  db.one("SELECT * FROM user_consent_logs WHERE id=$1", id);
         return oneUserConsentLog
     } catch(err) {
         return err
     }
 };
 
-const createUserConsent = async (userConsent) => {
+const createUserConsent = async (id, userConsent) => {
     try {
-        const createdUserConsent = await db.one("INSERT INTO user_consent_logs (user_id, document_id, consent_id, version) VALUES ($1, $2, $3, $4)RETURNING *" [userConsent.user_id, userConsent.document_id, userConsent.consent_date, userConsent.version]);
+        const createdUserConsent = await db.one("INSERT INTO user_consent_logs (user_id, document_id, consent_id, version) VALUES ($1, $2, $3, $4)RETURNING *" [userConsent.user_id, userConsent.document_id, userConsent.consent_date, userConsent.version, id]);
         return createdUserConsent;
     } catch(err) {
         return err

@@ -43,7 +43,7 @@ const deleteEmergencyContact = async (id) => {
 const updateEmergencyContact = async (id, emergencyContact) => {
     try {
         const { user_id, name, contact_info, description, location, emergency_contact } = emergencyContact
-        const updatedEmergencyContacts = await db.one("UPDATE emergency_contacts SET user_id=$1, name=$2, emergency_info=$3, description= $4, location=$5, emergency_contact=$6 WHERE id=$7", id);
+        const updatedEmergencyContacts = await db.one("UPDATE emergency_contacts SET user_id=$1, name=$2, emergency_info=$3, description= $4, location=$5, emergency_contact=$6 WHERE id=$7", [user_id, name, contact_info, description, location, emergency_contact, id]);
         return updatedEmergencyContacts;
     }catch(err) {
         return err

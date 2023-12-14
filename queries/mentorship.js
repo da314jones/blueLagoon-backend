@@ -24,10 +24,9 @@ const getOneMentorship = async (id) => {
 // Create a new mentorship
 const createMentorship = async (mentorship) => {
     try {
-        const { mentor_id, mentee_id, start_date, end_date,status, notes } = mentorship;
         const newMentorship = await db.one(
             'INSERT INTO mentorships (mentor_id, mentee_id, start_date, end_date, status, notes) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
-            [mentor_id, mentee_id, start_date, end_date,status, notes]
+            [mentorship.mentor_id, mentorship.mentee_id, mentorship.start_date, mentorship.end_date, mentorship.status, mentorship.notes]
         );
         return newMentorship;
     } catch (err) {

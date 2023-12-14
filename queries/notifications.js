@@ -23,7 +23,7 @@ const getOneNotification = async (id) => {
 
 const createNotification = async (notifications) => {
     try {
-    const createdNotifications = await dn.one("INSERT INTO notifications (user_id, type, message, date) VALUES ($1, $2, $3, $4) RETURNING *", [user_id, type, message, date]);
+    const createdNotifications = await dn.one("INSERT INTO notifications (user_id, type, message, date) VALUES ($1, $2, $3, $4) RETURNING *", [notifications.user_id, notifications.type, notifications.message, notifications.date]);
     return createdNotifications;
     } catch(err) {
         return err
