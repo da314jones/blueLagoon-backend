@@ -4,7 +4,7 @@ const getAllUsers = async () => {
     try {
         console.log("Executing query fetching all users")
         const allUsers = await db.any("SELECT * FROM users");
-        console.log("Query results:", all users);
+        console.log("Query results:", allUsers);
         return allUsers;
     } catch (err) {
         console.error('Error fetching all users:', err);
