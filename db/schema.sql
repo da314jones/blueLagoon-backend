@@ -34,7 +34,7 @@ CREATE TABLE users (
 );
 
 -- Create the 'user_registrations' table
-CREATE TABLE user_registrations (
+CREATE TABLE registrations (
     registration_id SERIAL PRIMARY KEY,
     user_id INTEGER REFERENCES users(user_id),
     email varchar(255),
@@ -48,7 +48,7 @@ CREATE TABLE user_registrations (
 );
 
 -- Create the 'user_security' table
-CREATE TABLE user_security (
+CREATE TABLE security (
     security_id SERIAL PRIMARY KEY,
     user_id INT UNIQUE NOT NULL REFERENCES users(user_id),
     email_verified BOOLEAN DEFAULT false,
@@ -165,7 +165,7 @@ CREATE TABLE professional_vthreads (
     vthread_id SERIAL PRIMARY KEY,
     topic VARCHAR(255),
     creator VARCHAR(255),
-    video_url TEXT,
+    video_URL TEXT,
     date DATE,
     time TIME,
     is_live BOOLEAN,
@@ -182,7 +182,7 @@ CREATE TABLE social_media_accounts (
     connected_on TIMESTAMP
 );
 
-CREATE TABLE user_connections (
+CREATE TABLE connections (
     connection_id SERIAL PRIMARY KEY,
     user1_id INT REFERENCES users(user_id),
     user2_id INT REFERENCES users(user_id),
@@ -254,7 +254,7 @@ CREATE TABLE legal_documents (
 );
 
 -- Define the 'user_consent_logs' table for user consent logs
-CREATE TABLE user_consent_logs (
+CREATE TABLE consent_logs (
     id SERIAL PRIMARY KEY,
     user_id INTEGER REFERENCES users(user_id),
     document_id INTEGER REFERENCES legal_documents(id),

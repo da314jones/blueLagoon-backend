@@ -8,10 +8,10 @@ const {
   createVthread,
   deleteVthread,
   updateVthread,
-} = require("../queries/vThreads.js");
+} = require("../queries/vthreads.js");
 
 vthreads.get("/", async (req, res) => {
-  console.log("Get /vthread endpoint hit");
+  console.log("Get vthread endpoint hit");
   try {
     const allVthreads = await getAllVthreads();
     console.log("Response from getAllVthreads:", allVthreads);

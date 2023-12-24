@@ -10,7 +10,7 @@ const errorMessages = {
     'any.required': '"{{#label}}" is a required field'
 };
 
-const userSecurityValidationSchema = Joi.object({
+const securityValidationSchema = Joi.object({
     user_id: Joi.number().integer().required().messages(errorMessages),
     email_verified: Joi.boolean().required().messages(errorMessages),
     phone_verified: Joi.boolean().required().messages(errorMessages),
@@ -19,4 +19,4 @@ const userSecurityValidationSchema = Joi.object({
     last_login: Joi.date().allow(null).messages(errorMessages)
 }).required().messages(errorMessages);
 
-module.exports = { userSecurityValidationSchema };
+module.exports = { securityValidationSchema };

@@ -15,7 +15,7 @@ INSERT INTO users (username, email, password_hash, date_of_birth, is_age_verifie
 ('user6@example.com', 'user6@example.com', 'hashed_password6', '1990-06-01', true, 'active', '1234567896', 'profile_pic_url', 'Interests6', 'Challenges6', 'Experiences6', 'Location6', '2021-06-06', 'user', '2023-01-06 09:00:00');
 
 -- User Registrations
-INSERT INTO user_registrations (user_id, email, registration_started, additional_info) VALUES
+INSERT INTO registrations (user_id, email, registration_started, additional_info) VALUES
 (1, 'user1@example.com', NOW(), 'Additional Info 1'),
 (2, 'user2@example.com', NOW(), 'Additional Info 2'),
 (3, 'user3@example.com', NOW(), 'Additional Info 3'),
@@ -25,7 +25,7 @@ INSERT INTO user_registrations (user_id, email, registration_started, additional
 (7, 'alphaOmega@example.com', NOW(), 'Admin Registration Info');
 
 -- User Security
-INSERT INTO user_security (user_id, email_verified, phone_verified) VALUES
+INSERT INTO security (user_id, email_verified, phone_verified) VALUES
 (1, true, false),
 (2, true, false),
 (3, true, false),
@@ -142,7 +142,7 @@ INSERT INTO professional_vchats (topic, creator, date, time, video_url, is_live,
 ('Technology for Kids', 'Tech Guru', '2021-07-01', '14:00', 'https://example.com/cloudchat1', TRUE, FALSE, 'https://example.com/archive7');
 
 -- Professional VThreads (Ensure this table exists in your schema)
-INSERT INTO professional_vthreads (topic, creator, video_url, date, time, is_live, archived, archive_link) VALUES
+INSERT INTO professional_vthreads (topic, creator, video_URL, date, time, is_live, archived, archive_link) VALUES
 ('Web Development Trends', 'John Doe', 'https://example.com/webdevchat1', '2023-12-10', '15:00:00', true, true, 'https://example.com/archive1'),
 ('Data Science Panel', 'Jane Smith', 'https://example.com/datasciencechat1', '2023-12-15', '14:30:00', false, true, 'https://example.com/archive2'),
 ('AI and Machine Learning', 'Alice Johnson', 'https://example.com/aichat1', '2023-12-20', '16:45:00', true, true, 'https://example.com/archive3'),
@@ -162,7 +162,7 @@ INSERT INTO social_media_accounts (user_id, social_media_platform, social_media_
 (7, 'TikTok', 'tik_id_7', 'https://tiktok.com/user7', '2021-07-07 16:00:00');
 
 -- User Connections
-INSERT INTO user_connections (user1_id, user2_id, connection_on) VALUES
+INSERT INTO connections (user1_id, user2_id, connection_on) VALUES
 (1, 2, '2021-01-01 12:00:00'),
 (1, 3, '2021-01-02 12:00:00'),
 (2, 3, '2021-01-03 12:00:00'),
@@ -242,7 +242,7 @@ INSERT INTO legal_documents (title, document_type, content, effective_date) VALU
 ('Refund Policy', 'Policy', 'Content of Refund Policy', '2023-01-07');
 
 -- User Consent Logs
-INSERT INTO user_consent_logs (user_id, document_id, consent_date, version) VALUES
+INSERT INTO consent_logs (user_id, document_id, consent_date, version) VALUES
 (1, 1, '2023-01-08', 1),
 (2, 2, '2023-01-09', 1),
 (3, 3, '2023-01-10', 1),

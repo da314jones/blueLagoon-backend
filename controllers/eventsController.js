@@ -1,6 +1,6 @@
 const express = require("express");
 const events = express.Router();
-const { eventValidationSchema } = require("../validations/checkevents.js");
+const { eventValidationSchema } = require("../validations/checkEvents.js");
 const {
   getAllEvents,
   getOneEvent,

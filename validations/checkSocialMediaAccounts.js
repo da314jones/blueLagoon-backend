@@ -11,10 +11,10 @@ const errorMessages = {
 const socialMediaAccountsValidationSchema = Joi.object({
   id: Joi.number().integer().required().messages(errorMessages),
   user_id: Joi.number().integer().required().messages(errorMessages),
-  SocialMediaPlatform: Joi.string().max(50).required().messages(errorMessages),
-  SocialMediaID: Joi.string().max(255).required().messages(errorMessages),
-  ProfileURL: Joi.string().uri().required().messages(errorMessages),
-  ConnectedOn: Joi.date().iso().required().messages(errorMessages)
+  socialMediaPlatform: Joi.string().max(50).required().messages(errorMessages),
+  socialMediaID: Joi.string().max(255).required().messages(errorMessages),
+  profileURL: Joi.string().uri().required().messages(errorMessages),
+  connectedOn: Joi.date().iso().required().messages(errorMessages)
 });
 
 module.exports = { socialMediaAccountsValidationSchema };

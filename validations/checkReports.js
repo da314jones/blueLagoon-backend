@@ -15,8 +15,8 @@ const reportsValidationSchema = Joi.object({
   id: Joi.number().integer().required().messages(errorMessages),
   reported_by_user_id: Joi.number().integer().required().messages(errorMessages),
   reported_user_id: Joi.number().integer().required().messages(errorMessages),
-  Content: Joi.string().max(65535).required().messages(errorMessages),
-  ReportDate: Joi.date().iso().required().messages(errorMessages),
+  content: Joi.string().max(65535).required().messages(errorMessages),
+  reportDate: Joi.date().iso().required().messages(errorMessages),
 });
 
 module.exports = {

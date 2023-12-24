@@ -49,8 +49,8 @@ userGroups.get("/:id", async (req, res) => {
   }
 });
 
-userGroups.post("/", async (req, res) => {
-  const { error } = userGroupValidationSchema.validate(req.body);
+userGroups.post("/",  async (req, res) => {
+  const { error } = userGroupsValidationSchema.validate(req.body);
   if (error) return res.status(400).json({ error: error.details[0].message });
 
   try {

@@ -7,7 +7,7 @@ const {
   createVChat,
   deleteVChat,
   updateVChat,
-} = require("../queries/vChats.js");
+} = require("../queries/vchats.js");
 
 vchats.get("/", async (req, res) => {
   console.log("Get vchat endpoint hit");
@@ -15,7 +15,7 @@ vchats.get("/", async (req, res) => {
     const allVchats = await getAllVChats();
     console.log("Response from getAllVchats:", allVchats);
     if (allVchats[0]) {
-      res.status(200).json({ success: true, payload: allVchats }); // Wrap response in a 'payload' object
+      res.status(200).json({ success: true, payload: allVchats }); 
     } else {
       res
         .status(500)

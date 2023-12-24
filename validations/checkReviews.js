@@ -11,10 +11,10 @@ const errorMessages = {
 const reviewsValidationSchema = Joi.object({
   id: Joi.number().integer().required().messages(errorMessages),
   user_id: Joi.number().integer().required().messages(errorMessages),
-  EventOrServiceId: Joi.number().integer().required().messages(errorMessages),
-  Rating: Joi.number().integer().min(1).max(5).required().messages(errorMessages), // Assuming a 1-5 rating scale
-  Comment: Joi.string().max(65535).required().messages(errorMessages),
-  ReviewDate: Joi.date().iso().required().messages(errorMessages)
+  eventOrServiceId: Joi.number().integer().required().messages(errorMessages),
+  rating: Joi.number().integer().min(1).max(5).required().messages(errorMessages), // Assuming a 1-5 rating scale
+  comment: Joi.string().max(65535).required().messages(errorMessages),
+  reviewDate: Joi.date().iso().required().messages(errorMessages)
 });
 
 module.exports = { reviewsValidationSchema };

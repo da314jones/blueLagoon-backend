@@ -11,10 +11,10 @@ const errorMessages = {
 
 const affiliatesValidationSchema = Joi.object({
     id: Joi.number().integer().required().messages(errorMessages),
-    Name: Joi.string().max(255).required().messages(errorMessages),
-    ServiceOrProduct: Joi.string().required().messages(errorMessages),
-    DiscountDetails: Joi.string().required().messages(errorMessages),
-    ContactInfo: Joi.string().required().messages(errorMessages)
+    name: Joi.string().max(255).required().messages(errorMessages),
+    serviceOrProduct: Joi.string().required().messages(errorMessages),
+    discountDetails: Joi.string().required().messages(errorMessages),
+    contactInfo: Joi.string().required().messages(errorMessages)
 });
 
 module.exports = {

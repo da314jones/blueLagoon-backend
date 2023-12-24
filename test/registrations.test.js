@@ -4,14 +4,14 @@ chai.use(chaiHttp);
 const { expect } = chai;
 const request = require('supertest');
 const app = require('../app.js');
-const { registrationsValidationSchema } = require('../validations/checkUserRegisters.js');
+const { registrationsValidationSchema } = require('../validations/checkRegistrations.js');
 
-describe('User Registrations CRUD Operations', () => {
+describe('Registrations CRUD Operations', () => {
     let registrationId;
   
     // Test for POST request to create a new user registration
     it('should create a new user registration', async () => {
-      const newUserRegistration = {
+      const newRegistration = {
         user_id: 1,
         email: 'john@example.com',
         registration_token: 'token123',
@@ -20,8 +20,8 @@ describe('User Registrations CRUD Operations', () => {
       };
   
       const res = await request(app)
-        .post('/useRegistrations')
-        .send(newUserRegistration);
+        .post('/registrations')
+        .send(newRegistration);
   
       expect(res).to.have.status(201);
       expect(res.body).to.be.an('object');
@@ -29,8 +29,8 @@ describe('User Registrations CRUD Operations', () => {
     });
   
     // Test for GET request to retrieve a user registration by ID
-    it('should get a user registration by ID', async () => {
-      const res = await request(app).get(`/userRegistrations/${registrationId}`);
+    it('should get a registration by ID', async () => {
+      const res = await request(app).get(`/registrations/${registrationId}`);
       expect(res).to.have.status(200);
       expect(res.body).to.be.an('object');
       expect(res.body.id).to.equal(registrationId);
@@ -38,7 +38,7 @@ describe('User Registrations CRUD Operations', () => {
   
     // Test for DELETE request to delete a user registration
     it('should delete a user registration', async () => {
-      const res = await request(app).delete(`/userRegistrations/${registrationId}`);
+      const res = await request(app).delete(`/registrations/${registrationId}`);
       expect(res).to.have.status(200);
       expect(res.body).to.be.an('object');
       expect(res.body.id).to.equal(registrationId);
@@ -46,7 +46,7 @@ describe('User Registrations CRUD Operations', () => {
   
     // Test for GET request to retrieve all user registrations
     it('should get all user registrations', async () => {
-      const res = await request(app).get('/userRegistrations');
+      const res = await request(app).get('/registrations');
       expect(res).to.have.status(200);
       expect(res.body).to.be.an('array');
     });

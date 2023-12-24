@@ -14,7 +14,7 @@ const getAllProfessionalVchats = async () => {
 
 const getOneProfessionalVchat = async (id) => {
     try {
-        const oneProfessionalVchat = await db.one("SELECT * FROM professional_vchats WHERE id=$1 RETURNING *", id);
+        const oneProfessionalVchat = await db.one("SELECT * FROM professional_vchats WHERE id=$1", id);
         return oneProfessionalVchat
     } catch(err) {
         return err
@@ -33,7 +33,7 @@ const createProfessionalVchat = async (professionalVchat) => {
 const deleteProfessionalVchat = async (id) => {
     try {
         const deletedProfessionalVchat = await db.one("DELETE FROM professional_vchats WHERE id=$1 RETURNING *", id);
-        return deleteProfessionalVchat;
+        return deletedProfessionalVchat;
     } catch(err) {
         return err
     }
@@ -42,7 +42,7 @@ const deleteProfessionalVchat = async (id) => {
 const updateProfessionalVchat = async (id, professionalVchat) => {
      try {
          const { topic, creator, video_url, date, time, is_live, archived, archived_link } = professionalVchat;
-         const updatedProfessionalVchat = await db.one("UPDATE professional_vchats SET topic=$1, creator=$2, video_url=$#, date=$4, time=$5, is_live=$6, archived=$7, archived_link=$8 WHERE id=9 RETURNING *", [topic, creator, video_url, date, time, is_live, archived, archived_link, id]);
+         const updatedProfessionalVchat = await db.one("UPDATE professional_vchats SET topic=$1, creator=$2, video_url=$3, date=$4, time=$5, is_live=$6, archived=$7, archived_link=$8 WHERE id=$9 RETURNING *", [topic, creator, video_url, date, time, is_live, archived, archived_link, id]);
          return updatedProfessionalVchat;
      } catch(err) {
         return err

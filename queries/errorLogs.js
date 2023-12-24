@@ -15,6 +15,7 @@ const getAllErrorLogs = async () => {
 const getOneErrorLog = async (id) => {
     try {
         const oneErrorLog = await db.one("SELECT * FROM error_logs WHERE id=$1", id)
+        return oneErrorLog
     }catch(err) {
         return err
     }

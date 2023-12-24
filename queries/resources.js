@@ -3,7 +3,7 @@ const db = require('../db/dbConfig.js');
 const getAllResources = async () => {
     try {
         console.log("Executing query fetching all");
-        const allResources = await db.any("SELECT * FROM");
+        const allResources = await db.any("SELECT * FROM resources");
         console.log("Query results:", allResources);
         return allResources
     } catch(err) {
@@ -14,7 +14,7 @@ const getAllResources = async () => {
 
 const getOneResource = async (id) => {
     try {
-        const oneResource = await db.one("SELECT * FROM resource WHERE id=$1 RETURNING *", id)
+        const oneResource = await db.one("SELECT * FROM resource WHERE id=$1", id)
         return oneResource
     } catch(err) {
         return err
@@ -43,6 +43,7 @@ const updateResource = async(id, resource) => {
     try {
         const { title, type, link, location_based, location } = resource;
         const updatedResource = await db.one("UPDATE resource SET title=$1, type=$2, link=$3, locationBase=$4, location=$5 WHERE id=$6 RETURNING *" [title, type, link, location_based, location, id])
+        return updatedResource
     } catch(err) {
         return err
     }

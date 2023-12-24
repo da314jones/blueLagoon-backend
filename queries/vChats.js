@@ -2,7 +2,7 @@ const db = require("../db/dbConfig");
 
 const getAllVChats = async () => {
   try {
-    const allVchats = await db.any("SELECT * FROM vchat");
+    const allVchats = await db.any("SELECT * FROM vchats");
     console.log("Query results:", allVchats);
     return allVchats;
   } catch (err) {

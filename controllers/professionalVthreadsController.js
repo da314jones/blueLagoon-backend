@@ -1,6 +1,6 @@
 const express = require("express");
 const professionalVthreads = express.Router();
-const { professionalVthreadsValidationSchema } = require("../validations/checkprofessionalVthreads.js");
+const { professionalVthreadsValidationSchema } = require("../validations/checkProfessionalVthreads.js");
 const {
   getAllProfessionalVthreads,
   getOneProfessionalVthread,
@@ -8,7 +8,6 @@ const {
   deleteProfessionalVthread,
   updateProfessionalVthread,
 } = require("../queries/professionalVthreads.js");
-const { updateProfessionalVchat, deleteProfessionalVchat } = require("../queries/professionalVchats.js");
 
 professionalVthreads.get("/", async (req, res) => {
   console.log("Get professionalVthreads endpoint hit");

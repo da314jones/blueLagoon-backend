@@ -15,9 +15,9 @@ const errorMessages = {
 const recommendationsValidationSchema = Joi.object({
   id: Joi.number().integer().required().messages(errorMessages),
   user_id: Joi.number().integer().required().messages(errorMessages),
-  Title: Joi.string().max(255).required().messages(errorMessages),
-  Description: Joi.string().max(65535).messages(errorMessages),
-  Link: Joi.string().uri().messages(errorMessages),
+  title: Joi.string().max(255).required().messages(errorMessages),
+  description: Joi.string().max(65535).messages(errorMessages),
+  link: Joi.string().uri().messages(errorMessages),
   recommendedOn: Joi.date().iso().required().messages(errorMessages),
 });
 

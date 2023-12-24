@@ -3,7 +3,6 @@ const chaiHttp = require('chai-http');
 chai.use(chaiHttp);
 const { expect } = chai;
 const request = require('supertest');
-// const app = require('../app'); // Replace with the path to your Express app
 
 describe('Emergency Contacts CRUD Operations', () => {
   let contactId;
