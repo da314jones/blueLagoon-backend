@@ -30,7 +30,7 @@ const createRecommendation = async (recommendation) => {
     }
 };
 
-const deleteRecommendations = async (id) => {
+const deleteRecommendation = async (id) => {
     try {
         const deletedRecommendation = await db.one("DELETE FROM recommendations WHERE ID=$1 RETURNING *", id);
         return deletedRecommendation;
@@ -39,7 +39,7 @@ const deleteRecommendations = async (id) => {
     }
 };
 
-const updateRecommendations = async (id, recommendation) => {
+const updateRecommendation = async (id, recommendation) => {
     try {
         const { user_id, title, link, recommended_on } = recommendation;
         const updatedRecommendation = await db.one("UPDATE recommendations SET user_id=$1, title=$2, link=$3, recommended_on=$4 WHERE id=$5 RETURNING *", [user_id, title, link, recommended_on, id]);
@@ -54,6 +54,6 @@ module.exports = {
     getAllRecommendations,
     getOneRecommendation,
     createRecommendation,
-    deleteRecommendations,
-    updateRecommendations
+    deleteRecommendation,
+    updateRecommendation
 }

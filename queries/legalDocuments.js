@@ -14,7 +14,7 @@ const getAllLegalDocuments = async () => {
 
 const getOneLegalDocument = async (id) => {
     try {
-        const oneLegalDocument =await db.one("SELECT * FROM legal_documents");
+        const oneLegalDocument =await db.one("SELECT * FROM legal_documents WHERE id=$1", id);
         return oneLegalDocument;
     }catch(err) {
         return err
@@ -23,8 +23,8 @@ const getOneLegalDocument = async (id) => {
 
 const createLegalDocument = async (legalDocument) => {
     try {
-        const createdLegalDocument = await db.one("INSERT INTO legal_documents (title, document_type, context, effective_date) VALUES ($1, $2, $3, $4) RETURNING *" [legalDocument.title, legalDocument.document_type, legalDocument.content, legalDocument.effective_date]);
-        return createLegalDocument;
+        const createdLegalDocument = await db.one("INSERT INTO legal_documents (title, document_type, content, effective_date) VALUES ($1, $2, $3, $4) RETURNING *" [legalDocument.title, legalDocument.document_type, legalDocument.content, legalDocument.effective_date]);
+        return createdLegalDocument;
     }catch(err) {
         return err
     }
@@ -42,7 +42,7 @@ const deleteLegalDocument = async (id) => {
 const updateLegalDocument = async (id, legalDocument) => {
     try {
         const { title, document_type, content, effective_date } = legalDocument;
-        const updatedLegalDocument = await db.one("UPDATE legal_documents SET title=$1, document_type=$@, content=$3, effective_sate=$4, WHERE id=$5, RETURNING *", [title, document_type, content, effective_date, id]);
+        const updatedLegalDocument = await db.one("UPDATE legal_documents SET title=$1, document_type=$2, content=$3, effective_date=$4, WHERE id=$5, RETURNING *", [title, document_type, content, effective_date, id]);
         return updatedLegalDocument
     }catch(err) {
         return err

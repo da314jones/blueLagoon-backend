@@ -49,7 +49,7 @@ const updateReport = async (id, report) => {
 };
 
 
-module.children.exports = {
+module.exports = {
     getAllReports,
     getOneReport,
     createReport,

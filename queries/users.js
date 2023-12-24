@@ -1,4 +1,4 @@
-const pool = require('../dbPool'); // Replace with your actual DB pool configuration
+const db = require('../db/dbConfig'); // Replace with your actual DB pool configuration
 
 const getAllUsers = async () => {
     try {

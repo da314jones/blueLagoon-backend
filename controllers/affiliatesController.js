@@ -1,6 +1,6 @@
 const express = require("express");
 const affiliates = express.Router();
-const { affiliatesValidationSchema } = require("../src/validations/checkAffiliates.js");
+// const { affiliatesValidationSchema } = require("../validations/checkAffiliates.js");
 
 const {
   getAllAffiliates,

@@ -12,7 +12,7 @@ const getAllResources = async () => {
     }
 };
 
-const getOneResources = async (id) => {
+const getOneResource = async (id) => {
     try {
         const oneResource = await db.one("SELECT * FROM resource WHERE id=$1 RETURNING *", id)
         return oneResource
@@ -21,7 +21,7 @@ const getOneResources = async (id) => {
     }
 };
 
-const createResources = async (resource) => {
+const createResource = async (resource) => {
     try {
         const createdResource = await db.one("INSERT INTO resources (title, type, link, location_based,location) VALUES ($1, $2, $3, $4, $5) RETURNING *", [resource.title, resource.type, resource.link, resource.location_based, resource.location]);
         return createdResource
@@ -30,7 +30,7 @@ const createResources = async (resource) => {
     }
 };
 
-const deleteResources = async (id) => {
+const deleteResource = async (id) => {
     try {
         const deletedResource = await db.one("DELETE FROM resources WHERE id=$1 RETURNING *", id);
         return deletedResource;
@@ -39,7 +39,7 @@ const deleteResources = async (id) => {
     }
 };
 
-const updateResources = async(id, resource) => {
+const updateResource = async(id, resource) => {
     try {
         const { title, type, link, location_based, location } = resource;
         const updatedResource = await db.one("UPDATE resource SET title=$1, type=$2, link=$3, locationBase=$4, location=$5 WHERE id=$6 RETURNING *" [title, type, link, location_based, location, id])
@@ -51,8 +51,8 @@ const updateResources = async(id, resource) => {
 
 module.exports = {
     getAllResources,
-    getOneResources,
-    createResources,
-    deleteResources,
-    updateResources
+    getOneResource,
+    createResource,
+    deleteResource,
+    updateResource
 }

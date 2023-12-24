@@ -10,7 +10,7 @@ const {
 } = require("../queries/vChats.js");
 
 vchats.get("/", async (req, res) => {
-  console.log("Get /vchat endpoint hit");
+  console.log("Get vchat endpoint hit");
   try {
     const allVchats = await getAllVChats();
     console.log("Response from getAllVchats:", allVchats);

@@ -23,7 +23,7 @@ const getOneGroup = async (id) => {
 
 const createGroup = async (group) => {
     try {
-        const createdGroup = await db.one("INSERT INTO group (group_name, description, creation_date) VALUES ($1, $2, $3) RETURNING *", [group.group_name, group.description, group.creation_date])
+        const createdGroup = await db.one("INSERT INTO groups (group_name, description, creation_date) VALUES ($1, $2, $3) RETURNING *", [group.group_name, group.description, group.creation_date])
         return createdGroup
     }catch(err) {
         return err
@@ -33,6 +33,7 @@ const createGroup = async (group) => {
 const deleteGroup = async (id) => {
     try {
         const deletedGroup = await db.one("DELETE FROM groups WHERE id=$1", id)
+        return deletedGroup;
     }catch(err) {
         return err
     }

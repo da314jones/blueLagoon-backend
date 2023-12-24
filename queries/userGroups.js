@@ -1,9 +1,9 @@
 const db = require('../db/dbConfig.js');
 
-const getAllGroups = async () => {
+const getAllUserGroups = async () => {
     try {
-        console.log("executing query to fetch all userGroups");
-        const allUserGroups = await db.any("SELECT *FROM userGroups")
+        console.log("executing query to fetch all UserGroups");
+        const allUserGroups = await db.any("SELECT *FROM user_groups")
         console.log("Query results:", allUserGroups);
         return allUserGroups;
     } catch(err) {
@@ -12,37 +12,37 @@ const getAllGroups = async () => {
     }
 };
 
-const getOneGroup = async (id) => {
+const getOneUserGroup = async (id) => {
     try {
-        const oneUserGroup = await db.one("SELECT * FROM userGroups WHERE id=$1", id)
+        const oneUserGroup = await db.one("SELECT * FROM user_groups WHERE id=$1", id)
         return oneUserGroup
     } catch(err) {
         return err
     }
 };
 
-const createGroup = async (userGroup) => {
+const createUserGroup = async (userGroup) => {
     try {
-        const createdUserGroup = await db.one("INSERT INTO userGroups (user_id, group-id, join_date) RETURNING*", [userGroup.user_id, userGroup.group_id, userGroup.join_date])
+        const createdUserGroup = await db.one("INSERT INTO user_groups (user_id, userGroup-id, join_date) RETURNING*", [userGroup.user_id, userGroup.userGroup_id, userGroup.join_date])
         return createdUserGroup
     } catch(err) {
         return err
     }
 };
 
-const deleteGroup = async (id) => {
+const deleteUserGroup = async (id) => {
     try {
-        const deletedUserGroup = await db.one("DELETE FROM userGroups WHERE id=$1 RETURNING *", id);
+        const deletedUserGroup = await db.one("DELETE FROMuser_groups WHERE id=$1 RETURNING *", id);
         return deletedUserGroup
     } catch(err) {
         return err
     }
 };
 
-const updateGroup = async (id, userGroup) => {
+const updateUserGroup = async (id, userGroup) => {
     try {
-        const { user_id, group_id, join_date } = userGroup;
-        const updatedUserGroup = await db.one("UPDATE userGroups SET user_id=$1, group_id=$2, join_date=$3, WHERE id=$4, RETURNING *", [user_id, group_id, join_date, id])
+        const { user_id, userGroup_id, join_date } = userGroup;
+        const updatedUserGroup = await db.one("UPDATE user_groups SET user_id=$1, userGroup_id=$2, join_date=$3, WHERE id=$4, RETURNING *", [user_id, userGroup_id, join_date, id])
         return updatedUserGroup
     } catch(err) {
         return err
@@ -51,9 +51,9 @@ const updateGroup = async (id, userGroup) => {
 
 
 module.exports = {
-    getAllGroups,
-    getOneGroup,
-    createGroup,
-    deleteGroup,
-    updateGroup
+    getAllUserGroups,
+    getOneUserGroup,
+    createUserGroup,
+    deleteUserGroup,
+    updateUserGroup
 }

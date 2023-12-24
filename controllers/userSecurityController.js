@@ -1,13 +1,13 @@
 const express = require("express");
 const userSecurity = express.Router();
-const { userSecurityValidationSchema } = require("../validations/userSecurityValidation");
 const {
     getAllUserSecurity,
     getUserSecurityById,
     createUserSecurity,
     deleteUserSecurity,
     updateUserSecurity
-} = require("../queries/userSecurityQueries");
+} = require("../queries/userSecurity.js");
+const { userSecurityValidationSchema } = require("../validations/checkUserSecurity.js");
 
 userSecurity.get("/", async (req, res) => {
     try {

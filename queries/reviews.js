@@ -1,6 +1,6 @@
 const db = require('../db/dbConfig.js');
 
-const getAllReview = async () => {
+const getAllReviews = async () => {
     try {
 console.log("Executing query fetch for all reviews");
 const allReviews = await db.any("SELECT * FROM reviews")
@@ -53,7 +53,7 @@ const updateReview = async (id, review) => {
 
 
 module.exports = {
-    getAllReview,
+    getAllReviews,
     getOneReview,
     createReview,
     deleteReview,

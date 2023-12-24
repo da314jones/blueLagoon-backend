@@ -1,6 +1,6 @@
 const express = require("express");
 const users = express.Router();
-const { userValidationSchema } = require("../src/validations/usersValidation.js");
+const { usersValidationSchema } = require("../validations/checkUsers.js");
 
 const {
   getAllUsers,
@@ -8,7 +8,7 @@ const {
   createUser,
   deleteUser,
   updateUser
-} = require("../queries/usersQueries.js");
+} = require("../queries/users.js");
 
 users.get("/", async (req, res) => {
     try {
