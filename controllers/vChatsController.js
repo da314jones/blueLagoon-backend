@@ -1,98 +1,68 @@
-const express = require("express");
+const express = require('express');
 const vchats = express.Router();
-const { vchatValidationSchema } = require("../validations/checkVchats.js");
+const vchatsValidationSchema = require('../validations/checkProfessionalVthreads');
 const {
-  getAllVChats,
-  getOneVChat,
-  createVChat,
-  deleteVChat,
-  updateVChat,
-} = require("../queries/vchats.js");
+    getAllVChats,
+    getVChatById,
+    createVChat,
+    updateVChat,
+    deleteVChat
+} = require('../queries/vchatsQueries');
 
-vchats.get("/", async (req, res) => {
-  console.log("Get vchat endpoint hit");
-  try {
-    const allVchats = await getAllVChats();
-    console.log("Response from getAllVchats:", allVchats);
-    if (allVchats[0]) {
-      res.status(200).json({ success: true, payload: allVchats }); 
-    } else {
-      res
-        .status(500)
-        .json({
-          success: false,
-          data: { error: "Server Error failed to fetch VChats" },
-        });
+// Get all VChats
+vchats.get('/', async (req, res) => {
+    try {
+        const vchats = await getAllVChats();
+        res.json(vchats);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
     }
-  } catch (err) {
-    console.error("Error in GET /vchats:", err);
-    res
-      .status(500)
-      .json({
-        success: false,
-        data: { error: "Server Error - vchats fetch failed" },
-      });
-  }
 });
 
-vchats.get("/:id", async (req, res) => {
-  const { id } = req.params;
-  try {
-    const oneVchat = await getOneVChat(id);
-    if (oneVchat) {
-      res.json(oneVchat);
-    } else {
-      res.status(404).json({ error: "VChat not found" });
+// Get VChat by ID
+vchats.get('/:id', async (req, res) => {
+    try {
+        const vchat = await getVChatById(req.params.id);
+        res.json(vchat);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
     }
-  } catch (err) {
-    res.status(500).json({ error: "Sever error" });
-  }
 });
 
-vchats.post("/", async (req, res) => {
-  const { error } = vchatValidationSchema.validate(req.body);
-  if (error) return res.status(400).json({ error: error.details[0].message });
+// Create VChat
+vchats.post('/', async (req, res) => {
+    const { error } = vchatsValidationSchema.validate(req.body);
+    if (error) return res.status(400).json({ error: error.details[0].message });
 
-  try {
-    const createdVchat = await createVChat(req.body);
-    res.status(201).json(createdVchat);
-  } catch (error) {
-    res.status(400).json({ error: "VChat creation failure" });
-  }
+    try {
+        const newVChat = await createVChat(req.body);
+        res.status(201).json(newVChat);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
 });
 
-vchats.delete("/:id", async (req, res) => {
-  try {
-    const { id } = req.params;
-    const deletedVchat = await deleteVChat(id);
-    if (deletedVchat) {
-      res.status(200).json({ success: true, payload: { data: deletedVchat } });
-    } else {
-      res.status(404).json({ error: "VChat not found" });
+// Update VChat
+vchats.put('/:id', async (req, res) => {
+    const { error } = vchatsValidationSchema.validate(req.body);
+    if (error) return res.status(400).json({ error: error.details[0].message });
+
+    try {
+        const updatedVChat = await updateVChat(req.params.id, req.body);
+        res.json(updatedVChat);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
     }
-  } catch (err) {
-    res.status(500).json({ error: "Server error" });
-  }
 });
 
-vchats.put("/:id", async (req, res) => {
-  const { id } = req.params;
-  try {
-    const existingVchat = await getOneVChat(id); // Check if the VChat exists
-    if (!existingVchat) {
-      return res.status(404).json({ error: "VChat not found with that id" });
+// Delete VChat
+vchats.delete('/:id', async (req, res) => {
+    try {
+        const deletedVChat = await deleteVChat(req.params.id);
+        res.json(deletedVChat);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
     }
-
-    const { error } = vchatValidationSchema.validate(req.body);
-    if (error) {
-      return res.status(400).json({ error: error.details[0].message });
-    }
-
-    const updatedVchat = await updateVChat(id, req.body);
-    res.status(200).json(updatedVchat);
-  } catch (err) {
-    res.status(500).json({ error: "Update failed" });
-  }
 });
 
 module.exports = vchats;

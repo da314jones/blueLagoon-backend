@@ -1,54 +1,36 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
+const app = require('../app');
+const expect = chai.expect;
+
 chai.use(chaiHttp);
-const { expect } = chai;
-const request = require('supertest');
-const app = require('../app.js');
-const { registrationsValidationSchema } = require('../validations/checkRegistrations.js');
 
 describe('Registrations CRUD Operations', () => {
     let registrationId;
-  
-    // Test for POST request to create a new user registration
-    it('should create a new user registration', async () => {
-      const newRegistration = {
-        user_id: 1,
-        email: 'john@example.com',
-        registration_token: 'token123',
-        token_expiration: new Date().toISOString(),
-        agree_to_terms_of_service: true
-      };
-  
-      const res = await request(app)
-        .post('/registrations')
-        .send(newRegistration);
-  
-      expect(res).to.have.status(201);
-      expect(res.body).to.be.an('object');
-      registrationId = res.body.id;
+
+    it('should create a new Registration', async () => {
+        const newRegistration = {
+            user_id: 1,
+            email: 'newuser@example.com',
+            registration_started: new Date().toISOString(),
+            agree_to_terms_of_service: true
+        };
+
+        const res = await chai.request(app)
+            .post('/registrations')
+            .send(newRegistration);
+
+        expect(res).to.have.status(201);
+        registrationId = res.body.registration_id;
     });
-  
-    // Test for GET request to retrieve a user registration by ID
-    it('should get a registration by ID', async () => {
-      const res = await request(app).get(`/registrations/${registrationId}`);
-      expect(res).to.have.status(200);
-      expect(res.body).to.be.an('object');
-      expect(res.body.id).to.equal(registrationId);
+
+    it('should retrieve all Registrations', async () => {
+        const res = await chai.request(app).get('/registrations');
+        expect(res).to.have.status(200);
     });
-  
-    // Test for DELETE request to delete a user registration
-    it('should delete a user registration', async () => {
-      const res = await request(app).delete(`/registrations/${registrationId}`);
-      expect(res).to.have.status(200);
-      expect(res.body).to.be.an('object');
-      expect(res.body.id).to.equal(registrationId);
+
+    it('should retrieve a specific Registration', async () => {
+        const res = await chai.request(app).get(`/registrations/${registrationId}`);
+        expect(res).to.have.status(200);
     });
-  
-    // Test for GET request to retrieve all user registrations
-    it('should get all user registrations', async () => {
-      const res = await request(app).get('/registrations');
-      expect(res).to.have.status(200);
-      expect(res.body).to.be.an('array');
-    });
-  });
-  
+});

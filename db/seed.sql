@@ -45,41 +45,35 @@ INSERT INTO profiles (user_id, name, gender, profile_picture_url, bio, location)
 (7, 'Alpha Omega', 'Male', 'https://7example.com/profile.jpg', 'Admin Bio', 'Admin Location');
 
 -- VChats
-INSERT INTO vchats (host_user_id, schedule_time, duration, archive_link, start_time, end_time, archive_url) VALUES
-(1, NOW(), 30, 'archive_link_1', NOW(), NOW(), 'archive_url_1'),
-(2, NOW(), 45, 'archive_link_2', NOW(), NOW(), 'archive_url_2'),
-(3, NOW(), 60, 'archive_link_3', NOW(), NOW(), 'archive_url_3'),
-(4, NOW(), 30, 'archive_link_4', NOW(), NOW(), 'archive_url_4'),
-(5, NOW(), 45, 'archive_link_5', NOW(), NOW(), 'archive_url_5'),
-(6, NOW(), 60, 'archive_link_6', NOW(), NOW(), 'archive_url_6'),
-(7, NOW(), 30, 'archive_link_7', NOW(), NOW(), 'archive_url_7');
+INSERT INTO vchats (host_user_id, video_url, schedule_time, duration, archive_link, start_time, end_time, archive_url) VALUES
+(1, 'https://example.com/vchat1', NOW(), 30, 'https://example.com/archive1', NOW(), NOW(), 'https://example.com/archiveurl1'),
+(2, 'https://example.com/vchat2', NOW(), 45, 'https://example.com/archive2', NOW(), NOW(), 'https://example.com/archiveurl2'),
+(3, 'https://example.com/vchat3', NOW(), 60, 'https://example.com/archive3', NOW(), NOW(), 'https://example.com/archiveurl3'),
+(4, 'https://example.com/vchat4', NOW(), 30, 'https://example.com/archive4', NOW(), NOW(), 'https://example.com/archiveurl4'),
+(5, 'https://example.com/vchat5', NOW(), 45, 'https://example.com/archive5', NOW(), NOW(), 'https://example.com/archiveurl5'),
+(6, 'https://example.com/vchat6', NOW(), 60, 'https://example.com/archive6', NOW(), NOW(), 'https://example.com/archiveurl6'),
+(7, 'https://example.com/vchat7', NOW(), 30, 'https://example.com/archive7', NOW(), NOW(), 'https://example.com/archiveurl7');
+
 
 -- VThreads
-INSERT INTO vthreads (user_id, title, video_url, category, creation_date) VALUES
-(1, 'Title 1', 'https://example.com/video1.mp4', 'Category 1', NOW()),
-(2, 'Title 2', 'https://example.com/video2.mp4', 'Category 2', NOW()),
-(3, 'Title 3', 'https://example.com/video3.mp4', 'Category 3', NOW()),
-(4, 'Title 4', 'https://example.com/video4.mp4', 'Category 4', NOW()),
-(5, 'Title 5', 'https://example.com/video5.mp4', 'Category 5', NOW()),
-(6, 'Title 6', 'https://example.com/video6.mp4', 'Category 6', NOW()),
-(7, 'Title 7', 'https://example.com/video7.mp4', 'Category 7', NOW());
+INSERT INTO vthreads (host_user_id, title, description, video_url) VALUES
+(1, 'Parenting Tips', 'Discussion on modern parenting', 'https://example.com/vthread1'),
+(2, 'Healthy Eating', 'Nutrition and children', 'https://example.com/vthread2'),
+(3, 'Education in 2023', 'Future of schooling', 'https://example.com/vthread3'),
+(4, 'Work-Life Balance', 'Managing work and family', 'https://example.com/vthread4'),
+(5, 'Fatherhood Challenges', 'Overcoming daily challenges', 'https://example.com/vthread5'),
+(6, 'Kids and Technology', 'Handling tech in parenting', 'https://example.com/vthread6'),
+(7, 'Outdoor Activities', 'Engaging kids outdoors', 'https://example.com/vthread7');
 
 -- Chat Messages
-INSERT INTO chat_messages (session_id, user_id, message, timestamp) VALUES
+INSERT INTO chat_messages (thread_id, user_id, message, timestamp) VALUES
 (1, 1, 'Hello everyone, welcome to the chat!', '2023-01-01 09:05:00'),
-(1, 2, 'Thanks for hosting this session.', '2023-01-01 09:06:00'),
-(2, 3, 'Can''t wait to start discussing today''s topic.', '2023-01-02 10:10:00'),
-(2, 4, 'I have some questions about the topic.', '2023-01-02 10:15:00'),
-(3, 5, 'Great presentation so far!', '2023-01-03 11:20:00'),
-(3, 6, 'Agreed, very informative.', '2023-01-03 11:25:00'),
-(4, 7, 'Looking forward to the next one!', '2023-01-04 12:30:00'),
-(4, 1, 'Thanks everyone for joining!', '2023-01-04 12:35:00'),
-(5, 2, 'Can we have a follow-up session?', '2023-01-05 13:40:00'),
-(5, 3, 'That would be great, count me in.', '2023-01-05 13:45:00'),
-(6, 4, 'Really enjoyed today''s chat.', '2023-01-06 14:50:00'),
-(6, 5, 'Yes, it was fantastic!', '2023-01-06 14:55:00'),
-(7, 6, 'Thanks for the insights, everyone.', '2023-01-07 15:00:00'),
-(7, 7, 'See you all next time!', '2023-01-07 15:05:00');
+(2, 2, 'Thanks for hosting this session.', '2023-01-01 09:06:00'),
+(3, 3, 'Can''t wait to start discussing today''s topic.', '2023-01-02 10:10:00'),
+(4, 4, 'I have some questions about the topic.', '2023-01-02 10:15:00'),
+(5, 5, 'Great presentation so far!', '2023-01-03 11:20:00'),
+(6, 6, 'Agreed, very informative.', '2023-01-03 11:25:00'),
+(7, 7, 'Looking forward to the next one!', '2023-01-04 12:30:00');
 
 -- Notifications
 INSERT INTO notifications (user_id, type, message, date) VALUES
@@ -132,24 +126,28 @@ INSERT INTO resources (title, type, link, location_based, location) VALUES
 ('Community Support Groups', 'Community', 'https://supportgroups.com', TRUE, 'Los Angeles');
 
 -- Professional VChats (Ensure this table exists in your schema)
-INSERT INTO professional_vchats (topic, creator, date, time, video_url, is_live, archived, archive_link) VALUES
-('Effective Parenting', 'Dr. Smith', '2021-01-01', '19:00', 'https://example.com/webdevchat1', FALSE, TRUE, 'https://example.com/archive1'),
-('Financial Management', 'John Doe', '2021-02-01', '20:00', 'https://example.com/datasciencechat1', FALSE, TRUE, 'https://example.com/archive2'),
-('Child Education', 'Jane Doe', '2021-03-01', '18:00', 'https://example.com/aichat1', TRUE, FALSE, 'https://example.com/archive3'),
-('Health and Fitness', 'Dr. Green', '2021-04-01', '17:00', 'https://example.com/productchat1', TRUE, FALSE, 'https://example.com/archive4'),
-('Cooking Healthy Meals', 'Chef Ryan', '2021-05-01', '16:00', 'https://example.com/cloudchat1', FALSE, TRUE, 'https://example.com/archive5'),
-('Mental Health Awareness', 'Dr. Brown', '2021-06-01', '15:00', 'https://example.com/securitychat1', FALSE, TRUE, 'https://example.com/archive6'),
-('Technology for Kids', 'Tech Guru', '2021-07-01', '14:00', 'https://example.com/cloudchat1', TRUE, FALSE, 'https://example.com/archive7');
+
+INSERT INTO professional_vchats (topic, creator, industry, credentials, date, time, video_url, is_live, archived, archive_link) VALUES
+('Effective Parenting', 'Dr. Smith', 'Psychology', 'PhD in Clinical Psychology', '2021-01-01', '19:00', 'https://example.com/webdevchat1', FALSE, TRUE, 'https://example.com/archive1'),
+('Financial Management', 'John Doe', 'Finance', 'Certified Financial Planner', '2021-02-01', '20:00', 'https://example.com/datasciencechat1', FALSE, TRUE, 'https://example.com/archive2'),
+('Child Education', 'Jane Doe', 'Education', 'Masters in Education', '2021-03-01', '18:00', 'https://example.com/aichat1', TRUE, FALSE, 'https://example.com/archive3'),
+('Health and Fitness', 'Dr. Green', 'Health', 'MD in General Medicine', '2021-04-01', '17:00', 'https://example.com/productchat1', TRUE, FALSE, 'https://example.com/archive4'),
+('Cooking Healthy Meals', 'Chef Ryan', 'Culinary Arts', 'Executive Chef', '2021-05-01', '16:00', 'https://example.com/cloudchat1', FALSE, TRUE, 'https://example.com/archive5'),
+('Mental Health Awareness', 'Dr. Brown', 'Psychiatry', 'Psychiatrist with 10 years experience', '2021-06-01', '15:00', 'https://example.com/securitychat1', FALSE, TRUE, 'https://example.com/archive6'),
+('Technology for Kids', 'Tech Guru', 'Technology', 'Senior Software Engineer', '2021-07-01', '14:00', 'https://example.com/cloudchat1', TRUE, FALSE, 'https://example.com/archive7');
 
 -- Professional VThreads (Ensure this table exists in your schema)
-INSERT INTO professional_vthreads (topic, creator, video_URL, date, time, is_live, archived, archive_link) VALUES
-('Web Development Trends', 'John Doe', 'https://example.com/webdevchat1', '2023-12-10', '15:00:00', true, true, 'https://example.com/archive1'),
-('Data Science Panel', 'Jane Smith', 'https://example.com/datasciencechat1', '2023-12-15', '14:30:00', false, true, 'https://example.com/archive2'),
-('AI and Machine Learning', 'Alice Johnson', 'https://example.com/aichat1', '2023-12-20', '16:45:00', true, true, 'https://example.com/archive3'),
-('Product Management', 'Bob Wilson', 'https://example.com/productchat1', '2023-12-25', '10:00:00', true, false, 'https://example.com/archive4'),
-('Blockchain Technology', 'Eve Brown', 'https://example.com/blockchainchat1', '2023-12-30', '13:15:00', false, false, 'https://example.com/archive5'),
-('Cybersecurity Trends', 'Chris Adams', 'https://example.com/securitychat1', '2024-01-05', '12:30:00', true, true, 'https://example.com/archive6'),
-('Cloud Computing', 'David Lee', 'https://example.com/cloudchat1', '2024-01-10', '11:45:00', false, true, 'https://example.com/archive7');
+INSERT INTO professional_vthreads (topic, creator, industry, credentials, date, time, discussion_url, is_active, archived, archive_link) VALUES
+('Effective Parenting Discussions', 'Dr. Smith', 'Psychology', 'PhD in Clinical Psychology', '2023-01-01', '19:00', 'https://example.com/parenting', TRUE, FALSE, 'https://example.com/archive1'),
+('Financial Management Q&A', 'John Doe', 'Finance', 'Certified Financial Planner', '2023-02-01', '20:00', 'https://example.com/finance', TRUE, FALSE, 'https://example.com/archive2'),
+('Education Innovations Chat', 'Jane Doe', 'Education', 'Masters in Education', '2023-03-01', '18:00', 'https://example.com/education', TRUE, FALSE, 'https://example.com/archive3'),
+('Health and Wellness Forum', 'Dr. Green', 'Health', 'MD in General Medicine', '2023-04-01', '17:00', 'https://example.com/health', TRUE, FALSE, 'https://example.com/archive4'),
+('Culinary Arts Corner', 'Chef Ryan', 'Culinary Arts', 'Executive Chef', '2023-05-01', '16:00', 'https://example.com/culinary', TRUE, FALSE, 'https://example.com/archive5'),
+('Mental Health Support Group', 'Dr. Brown', 'Psychiatry', 'Psychiatrist with 10 years experience', '2023-06-01', '15:00', 'https://example.com/mentalhealth', TRUE, FALSE, 'https://example.com/archive6'),
+('Tech for Kids Workshop', 'Tech Guru', 'Technology', 'Senior Software Engineer', '2023-07-01', '14:00', 'https://example.com/techforkids', TRUE, FALSE, 'https://example.com/archive7');
+
+
+
 
 -- Social Media Accounts
 INSERT INTO social_media_accounts (user_id, social_media_platform, social_media_id, profile_url, connected_on) VALUES

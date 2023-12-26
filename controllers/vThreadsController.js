@@ -1,99 +1,72 @@
-const express = require("express");
-const vthreads = express.Router();
-const { vthreadsValidationSchema } = require("../validations/checkVthreads.js");
+const express = require('express');
+const professionalVthreads = express.Router();
 
 const {
-  getAllVthreads,
-  getOneVthread,
-  createVthread,
-  deleteVthread,
-  updateVthread,
-} = require("../queries/vthreads.js");
+    getAllProfessionalVthreads,
+    getOneProfessionalVthread,
+    createProfessionalVthread,
+    deleteProfessionalVthread,
+    updateProfessionalVthread
+} = require('../queries/vthreadsQueries');
 
-vthreads.get("/", async (req, res) => {
-  console.log("Get vthread endpoint hit");
-  try {
-    const allVthreads = await getAllVthreads();
-    console.log("Response from getAllVthreads:", allVthreads);
-    if (allVthreads[0]) {
-      res.status(200).json({ success: true, payload: allVthreads });
-    } else {
-      res
-        .status(500)
-        .json({
-          success: false,
-          data: { error: "Server error failed to fetch VThreads" },
-        });
+professionalVthreads.get('/', async (req, res) => {
+    try {
+        const vThreads = await getAllProfessionalVthreads();
+        res.json(vThreads);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
     }
-  } catch (err) {
-    console.error("Error in get /vthreads:", err);
-    res
-      .status(500)
-      .json({
-        success: false,
-        data: { error: "Server Error - vthreads fetch failed" },
-      });
-  }
 });
 
-vthreads.get("/:id", async (req, res) => {
-  const { id } = req.params;
-  try {
-    const oneVthread = await getOneVthread(id);
-    if (oneVthread) {
-      res.json(oneVthread);
-    } else {
-      res.status(404).json({ error: "VThread not found" });
-    }
-  } catch (err) {
-    res.status(500).json({ error: "Vthread not found " });
-  }
-});
-
-vthreads.post("/", async (req, res) => {
-  const { error } = vthreadsValidationSchema.validate(req.body);
-  if (error) {
-    return res.status(400).json({ error: error.details[0].message });
-  }
-  try {
-    const createdVthread = await createVthread(req.body);
-    res.status(201).json(createdVthread);
-  } catch (err) {
-    res.status(201).json({ error: "VThread not found" });
-  }
-});
-
-vthreads.delete("/:id", async (req, res) => {
-  try {
+professionalVthreads.get('/:id', async (req, res) => {
     const { id } = req.params;
-    const deletedVthread = await deleteVthread(id);
-    if (deletedVthread) {
-      res.status(200).json(deletedVthread);
-    } else {
-      res.status(404).json({ error: "Vthread not found" });
+    try {
+        const vThread = await getOneProfessionalVthread(id);
+        if (vThread) {
+            res.json(vThread);
+        } else {
+            res.status(404).json({ error: 'VThread not found' });
+        }
+    } catch (err) {
+        res.status(500).json({ error: err.message });
     }
-  } catch (err) {
-    res.status(500).json({ error: "Server error" });
-  }
 });
 
-vthreads.put("/:id", async (req, res) => {
-  const { id } = req.params;
-  console.log(id);
-  try {
-    const existingVthread = await getOneVthread(id);
-    if (!existingVthread) {
-      return res.status(404).json({ error: "VThread not found with that id" });
+professionalVthreads.post('/', async (req, res) => {
+    try {
+        const vThread = await createProfessionalVthread(req.body);
+        res.status(201).json(vThread);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
     }
-    const { error } = vthreadsValidationSchema.validate(req.body);
-    if (error) {
-      return res.status(404).json({ error: error.details[0].message });
-    }
-    const updatedVthread = await updateVthread(id, req.body);
-    res.status(200).json(updatedVthread)
-  } catch (err) {
-    res.status(500).json({ error: "Update failed" });
-  }
 });
 
-module.exports = vthreads;
+professionalVthreads.delete('/:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+        const deletedVThread = await deleteProfessionalVthread(id);
+        if (deletedVThread) {
+            res.json(deletedVThread);
+        } else {
+            res.status(404).json({ error: 'VThread not found' });
+        }
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
+professionalVthreads.put('/:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+        const updatedVThread = await updateProfessionalVthread(id, req.body);
+        if (updatedVThread) {
+            res.json(updatedVThread);
+        } else {
+            res.status(404).json({ error: 'VThread not found' });
+        }
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
+module.exports = professionalVthreads;

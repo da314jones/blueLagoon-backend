@@ -14,10 +14,7 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.send("Welcome to DADS!")
 })
-// Import affiliate controller (existing route)
-// const affiliateController = require("./controllers/affiliatesController.js");
-//  Import user-related controller
-// const usersController = require("./controllers/usersController.js");
+
 const  affiliatesController = require('./controllers/affiliatesController.js');
 const chatMessagesController = require('./controllers/chatMessagesController.js')
 const connectionsController = require("./controllers/connectionsController.js");
@@ -43,10 +40,7 @@ const  userGroupsController = require('./controllers/userGroupsController.js');
 const  usersController = require('./controllers/usersController.js');
 const  vChatsController = require('./controllers/vChatsController.js');
 const  vThreadsController = require('./controllers/vThreadsController.js');
-// Define routes for user-related functionality
-// app.use("/users", usersController);
-// Define route for affiliate functionality
-// app.use("/affiliate", affiliateController);
+
 app.use("/affiliates", affiliatesController);
 app.use("/chatMessages", chatMessagesController)
 app.use("/connections", connectionsController)

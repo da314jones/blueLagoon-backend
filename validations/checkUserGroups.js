@@ -1,16 +1,9 @@
 const Joi = require('joi');
 
-const errorMessages = {
-  // Same error messages as in userConnectionsValidationSchema.js
-};
-
 const userGroupsValidationSchema = Joi.object({
-  id: Joi.number().integer().required().messages(errorMessages),
-  user_id: Joi.number().integer().required().messages(errorMessages),
-  group_id: Joi.number().integer().required().messages(errorMessages),
-  joinDate: Joi.date().iso().required().messages(errorMessages)
+    user_id: Joi.number().integer().required(),
+    group_id: Joi.number().integer().required(),
+    join_date: Joi.date().iso().required()
 });
 
-module.exports = {
-   userGroupsValidationSchema
-  };
+module.exports = { userGroupsValidationSchema };

@@ -85,17 +85,20 @@ CREATE TABLE vchats (
 -- Define the 'vthreads' table for video threads
 CREATE TABLE vthreads (
     thread_id SERIAL PRIMARY KEY,
-    user_id INTEGER REFERENCES users(user_id),
-    video_url TEXT,
+    host_user_id INTEGER REFERENCES users(user_id),
     title VARCHAR(255),
-    category VARCHAR(100),
-    creation_date DATE
+    description TEXT,
+    video_url TEXT,
+    scheduled_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    duration INTEGER,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Chat Messages Table
 CREATE TABLE chat_messages (
     message_id SERIAL PRIMARY KEY,
-    session_id INTEGER REFERENCES vchats(session_id),
+    thread_id INTEGER REFERENCES vthreads(thread_id), -- Changed to thread_id
     user_id INTEGER REFERENCES users(user_id),
     message TEXT,
     timestamp TIMESTAMP
@@ -153,6 +156,8 @@ CREATE TABLE professional_vchats (
     vchat_id SERIAL PRIMARY KEY,
     topic VARCHAR(255),
     creator VARCHAR(255),
+    industry VARCHAR(255),
+    credentials TEXT,
     date DATE,
     time TIME,
     video_url TEXT,
@@ -161,17 +166,22 @@ CREATE TABLE professional_vchats (
     archive_link TEXT
 );
 
+
 CREATE TABLE professional_vthreads (
     vthread_id SERIAL PRIMARY KEY,
     topic VARCHAR(255),
     creator VARCHAR(255),
-    video_URL TEXT,
+    industry VARCHAR(255),
+    credentials TEXT,
     date DATE,
     time TIME,
-    is_live BOOLEAN,
+    discussion_url TEXT,
+    is_active BOOLEAN,
     archived BOOLEAN,
     archive_link TEXT
 );
+
+
 
 CREATE TABLE social_media_accounts (
     account_id SERIAL PRIMARY KEY,

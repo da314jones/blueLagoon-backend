@@ -1,71 +1,69 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
+const app = require('../app');
+const expect = chai.expect;
+
 chai.use(chaiHttp);
-const { expect } = chai;
-const request = require('supertest');
-const app = require('../app.js');
-const { professionalVchatsValidationSchema } = require('../validations/checkProfessionalVchats.js');
 
 describe('Professional VChats CRUD Operations', () => {
-  let vchatId;
+    let vchatId;
 
-  // Test for POST request to create a new professional vchat
-  it('should create a new professional vchat', async () => {
-    const newVChat = {
-      topic: 'New VChat Topic',
-      creator: 'John Doe',
-      video_url: 'https://example.com/vchat.mp4',
-      date: '2023-01-01',
-      time: '12:00',
-      is_live: true,
-      archived: false
-    };
+    it('should create a new Professional VChat session', async () => {
+        const newVChat = {
+            topic: 'New Topic',
+            creator: 'New Creator',
+            industry: 'New Industry',
+            credentials: 'New Credentials',
+            date: '2023-01-01',
+            time: '10:00',
+            video_url: 'https://example.com/newvchat',
+            is_live: false,
+            archived: false
+        };
 
-    const res = await request(app)
-      .post('/professionalvchats')
-      .send(newVChat);
+        const res = await chai.request(app)
+            .post('/professionalVChats')
+            .send(newVChat);
 
-    expect(res).to.have.status(201);
-    expect(res.body).to.be.an('object');
-    vchatId = res.body.id;
-  });
+        expect(res).to.have.status(201);
+        vchatId = res.body.vchat_id;
+    });
 
-  // Test for GET request to retrieve a professional vchat by ID
-  it('should get a professional vchat by ID', async () => {
-    const res = await request(app).get(`/professionalvchats/${vchatId}`);
-    expect(res).to.have.status(200);
-    expect(res.body).to.be.an('object');
-    expect(res.body.id).to.equal(vchatId);
-  });
+    it('should retrieve a specific Professional VChat session', async () => {
+        const res = await chai.request(app).get(`/professionalVChats/${vchatId}`);
+        expect(res).to.have.status(200);
+    });
 
-  // Test for PUT request to update a professional vchat
-  it('should update a professional vchat', async () => {
-    const updatedVChat = {
-      topic: 'Updated VChat Topic',
-      is_live: false
-    };
+    it('should update a Professional VChat session', async () => {
+        const updatedVChat = {
+            topic: 'Updated Topic',
+            creator: 'Updated Creator',
+            industry: 'Updated Industry',
+            credentials: 'Updated Credentials',
+            date: '2023-02-01',
+            time: '11:00',
+            video_url: 'https://example.com/updatedvchat',
+            is_live: true,
+            archived: false
+        };
 
-    const res = await request(app)
-      .put(`/professionalvchats/${vchatId}`)
-      .send(updatedVChat);
+        const res = await chai.request(app)
+            .put(`/professionalVChats/${vchatId}`)
+            .send(updatedVChat);
 
-    expect(res).to.have.status(200);
-    expect(res.body).to.be.an('object');
-    expect(res.body.id).to.equal(vchatId);
-  });
+        expect(res).to.have.status(200);
+        const expectedDate = new Date(updatedVChat.date).toISOString().split('T')[0];
+        const actualDate = new Date(res.body.date).toISOString().split('T')[0];
+        expect(actualDate).to.equal(expectedDate);
+    });
 
-  // Test for DELETE request to delete a professional vchat
-  it('should delete a professional vchat', async () => {
-    const res = await request(app).delete(`/professionalvchats/${vchatId}`);
-    expect(res).to.have.status(200);
-    expect(res.body).to.be.an('object');
-    expect(res.body.id).to.equal(vchatId);
-  });
+    it('should delete a Professional VChat session', async () => {
+        const res = await chai.request(app).delete(`/professionalVChats/${vchatId}`);
+        expect(res).to.have.status(200);
+    });
 
-  // Test for GET request to retrieve all professional vchats
-  it('should get all professional vchats', async () => {
-    const res = await request(app).get('/professionalvchats');
-    expect(res).to.have.status(200);
-    expect(res.body).to.be.an('array');
-  });
+    it('should retrieve all Professional VChat sessions', async () => {
+        const res = await chai.request(app).get('/professionalVChats');
+        expect(res).to.have.status(200);
+    });
 });

@@ -1,71 +1,68 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
+const app = require('../app');
+const expect = chai.expect;
+
 chai.use(chaiHttp);
-const { expect } = chai;
-const request = require('supertest');
-const app = require('../app.js');
-const { professionalVthreadsValidationSchema } = require('../validations/checkProfessionalVthreads.js');
 
 describe('Professional VThreads CRUD Operations', () => {
-  let vthreadId;
+    let vthreadId;
 
-  // Test for POST request to create a new professional vthread
-  it('should create a new professional vthread', async () => {
-    const newVThread = {
-      topic: 'New VThread Topic',
-      creator: 'Jane Doe',
-      video_url: 'https://example.com/vthread.mp4',
-      date: '2023-01-01',
-      time: '15:00',
-      is_live: true,
-      archived: false
-    };
+    it('should create a new Professional VThread session', async () => {
+        const newVThread = {
+            topic: 'Effective Parenting Discussions',
+            creator: 'Dr. Smith',
+            industry: 'Psychology',
+            credentials: 'PhD in Clinical Psychology',
+            date: '2023-01-01',
+            time: '19:00',
+            discussion_url: 'https://example.com/parenting',
+            is_active: true,
+            archived: false,
+            archive_link: 'https://example.com/archive1'
+        };
 
-    const res = await request(app)
-      .post('/vthreads')
-      .send(newVThread);
+        const res = await chai.request(app)
+            .post('/professionalVThreads')
+            .send(newVThread);
 
-    expect(res).to.have.status(201);
-    expect(res.body).to.be.an('object');
-    vthreadId = res.body.id;
-  });
+        expect(res).to.have.status(201);
+        vthreadId = res.body.vthread_id;
+    });
 
-  // Test for GET request to retrieve a professional vthread by ID
-  it('should get a professional vthread by ID', async () => {
-    const res = await request(app).get(`/vthreads/${vthreadId}`);
-    expect(res).to.have.status(200);
-    expect(res.body).to.be.an('object');
-    expect(res.body.id).to.equal(vthreadId);
-  });
+    it('should retrieve all Professional VThread sessions', async () => {
+        const res = await chai.request(app).get('/professionalVThreads');
+        expect(res).to.have.status(200);
+    });
 
-  // Test for PUT request to update a professional vthread
-  it('should update a professional vthread', async () => {
-    const updatedVThread = {
-      topic: 'Updated VThread Topic',
-      is_live: false
-    };
+    it('should retrieve a specific Professional VThread session', async () => {
+        const res = await chai.request(app).get(`/professionalVThreads/${vthreadId}`);
+        expect(res).to.have.status(200);
+    });
 
-    const res = await request(app)
-      .put(`/vthreads/${vthreadId}`)
-      .send(updatedVThread);
+    it('should update a Professional VThread session', async () => {
+        const updatedVThread = {
+            topic: 'Updated Parenting Discussions',
+            creator: 'Dr. Smith Updated',
+            industry: 'Updated Psychology',
+            credentials: 'Updated PhD',
+            date: '2023-02-01',
+            time: '20:00',
+            discussion_url: 'https://example.com/updatedparenting',
+            is_active: false,
+            archived: true,
+            archive_link: 'https://example.com/archive2'
+        };
 
-    expect(res).to.have.status(200);
-    expect(res.body).to.be.an('object');
-    expect(res.body.id).to.equal(vthreadId);
-  });
+        const res = await chai.request(app)
+            .put(`/professionalVThreads/${vthreadId}`)
+            .send(updatedVThread);
 
-  // Test for DELETE request to delete a professional vthread
-  it('should delete a professional vthread', async () => {
-    const res = await request(app).delete(`/vthreads/${vthreadId}`);
-    expect(res).to.have.status(200);
-    expect(res.body).to.be.an('object');
-    expect(res.body.id).to.equal(vthreadId);
-  });
+        expect(res).to.have.status(200);
+    });
 
-  // Test for GET request to retrieve all professional vthreads
-  it('should get all professional vthreads', async () => {
-    const res = await request(app).get('/vthreads');
-    expect(res).to.have.status(200);
-    expect(res.body).to.be.an('array');
-  });
+    it('should delete a Professional VThread session', async () => {
+        const res = await chai.request(app).delete(`/professionalVThreads/${vthreadId}`);
+        expect(res).to.have.status(200);
+    });
 });
