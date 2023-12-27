@@ -4,7 +4,6 @@ chai.use(chaiHttp);
 const { expect } = chai;
 const request = require('supertest');
 const app = require('../app');
-// const { vthreadsValidationSchema } = require('../validations/checkVthreads');const { expect } = require('chai');
 
 describe('Affiliates Validation Schema', () => {
     const validAffiliate = {
