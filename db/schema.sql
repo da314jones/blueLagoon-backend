@@ -7,15 +7,9 @@ CREATE DATABASE bluelagoon_dev;
 -- Connect to the newly created database
 \c bluelagoon_dev;
 
-
--- Define the 'users' table with user-related information
--- schema.sql
-
--- Create the 'users' table
--- Users Table
--- Create the 'users' table
+-- Users seed data (1 admin and 6 generic users)
 CREATE TABLE users (
-    user_id SERIAL PRIMARY KEY,
+    user_id INTEGER PRIMARY KEY,
     username VARCHAR(255) NOT NULL,
     email VARCHAR(255),
     password_hash VARCHAR(255),
@@ -30,24 +24,25 @@ CREATE TABLE users (
     locations VARCHAR(100),
     join_date DATE,
     role VARCHAR(50),
-    last_login TIMESTAMP
+    last_login TIMESTAMP,
+    reset_token VARCHAR(255)
 );
 
--- Create the 'user_registrations' table
+--Registrations Table
 CREATE TABLE registrations (
     registration_id SERIAL PRIMARY KEY,
     user_id INTEGER REFERENCES users(user_id),
-    email varchar(255),
+    email VARCHAR(255),
     registration_started TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     initial_data JSONB,
     registration_token UUID,
     token_expiration TIMESTAMP,
     additional_info TEXT,
-    verification_process varchar(255),
+    verification_process VARCHAR(255),
     agree_to_terms_of_service BOOLEAN
 );
 
--- Create the 'user_security' table
+--Security Table
 CREATE TABLE security (
     security_id SERIAL PRIMARY KEY,
     user_id INT UNIQUE NOT NULL REFERENCES users(user_id),
@@ -58,18 +53,19 @@ CREATE TABLE security (
     last_login TIMESTAMP
 );
 
--- Create the 'profiles' table
+--Profiles Table
 CREATE TABLE profiles (
     profile_id SERIAL PRIMARY KEY,
     user_id INT UNIQUE NOT NULL REFERENCES users(user_id),
-    name VARCHAR(100),
+    firstname VARCHAR(100),
+    lastname VARCHAR(100),
     gender VARCHAR(50),
     profile_picture_url TEXT,
     bio TEXT,
     location VARCHAR(100)
 );
 
--- Define the 'vchat' table for video chat sessions
+--VChats Table
 CREATE TABLE vchats (
     session_id SERIAL PRIMARY KEY,
     host_user_id INTEGER REFERENCES users(user_id),
@@ -82,7 +78,7 @@ CREATE TABLE vchats (
     archive_url TEXT
 );
 
--- Define the 'vthreads' table for video threads
+--VThreads Table
 CREATE TABLE vthreads (
     thread_id SERIAL PRIMARY KEY,
     host_user_id INTEGER REFERENCES users(user_id),
@@ -95,33 +91,33 @@ CREATE TABLE vthreads (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Chat Messages Table
+--Chat Messages Table
 CREATE TABLE chat_messages (
     message_id SERIAL PRIMARY KEY,
-    thread_id INTEGER REFERENCES vthreads(thread_id), -- Changed to thread_id
+    thread_id INTEGER REFERENCES vthreads(thread_id),
     user_id INTEGER REFERENCES users(user_id),
     message TEXT,
     timestamp TIMESTAMP
 );
 
--- Define the 'notifications' table for user notifications
+--Notifications Table
 CREATE TABLE notifications (
     id SERIAL PRIMARY KEY,
     user_id INTEGER REFERENCES users(user_id),
-    type varchar(50),
+    type VARCHAR(50),
     message TEXT,
-    date timestamp
+    date TIMESTAMP
 );
 
--- Define the 'groups' table for user groups
+--Groups Table
 CREATE TABLE groups (
     id SERIAL PRIMARY KEY,
-    group_name varchar(100),
+    group_name VARCHAR(100),
     description TEXT,
     creation_date DATE
 );
 
--- Define the 'user_groups' table to link users with groups
+--User Groups Table
 CREATE TABLE user_groups (
     id SERIAL PRIMARY KEY,
     user_id INTEGER REFERENCES users(user_id),
@@ -129,6 +125,7 @@ CREATE TABLE user_groups (
     join_date DATE
 );
 
+--Events Table
 CREATE TABLE events (
     event_id SERIAL PRIMARY KEY,
     title VARCHAR(255),
@@ -143,6 +140,7 @@ CREATE TABLE events (
     sign_up_link TEXT
 );
 
+--Resources Table
 CREATE TABLE resources (
     resource_id SERIAL PRIMARY KEY,
     title VARCHAR(255),
@@ -152,6 +150,7 @@ CREATE TABLE resources (
     location VARCHAR(255)
 );
 
+--Professional VChats Table
 CREATE TABLE professional_vchats (
     vchat_id SERIAL PRIMARY KEY,
     topic VARCHAR(255),
@@ -166,7 +165,7 @@ CREATE TABLE professional_vchats (
     archive_link TEXT
 );
 
-
+--Professional VThreads Table
 CREATE TABLE professional_vthreads (
     vthread_id SERIAL PRIMARY KEY,
     topic VARCHAR(255),
@@ -181,8 +180,7 @@ CREATE TABLE professional_vthreads (
     archive_link TEXT
 );
 
-
-
+--Social Media Accounts Table
 CREATE TABLE social_media_accounts (
     account_id SERIAL PRIMARY KEY,
     user_id INT REFERENCES users(user_id),
@@ -192,6 +190,7 @@ CREATE TABLE social_media_accounts (
     connected_on TIMESTAMP
 );
 
+--Connections Table
 CREATE TABLE connections (
     connection_id SERIAL PRIMARY KEY,
     user1_id INT REFERENCES users(user_id),
@@ -199,6 +198,7 @@ CREATE TABLE connections (
     connection_on TIMESTAMP
 );
 
+--Recommendations Table
 CREATE TABLE recommendations (
     recommendation_id SERIAL PRIMARY KEY,
     user_id INT REFERENCES users(user_id),
@@ -208,6 +208,7 @@ CREATE TABLE recommendations (
     recommended_on TIMESTAMP
 );
 
+--Affiliates Table
 CREATE TABLE affiliates (
     affiliate_id SERIAL PRIMARY KEY,
     name VARCHAR(255),
@@ -216,6 +217,7 @@ CREATE TABLE affiliates (
     contact_info TEXT
 );
 
+--Mentorships Table
 CREATE TABLE mentorships (
     mentorship_id SERIAL PRIMARY KEY,
     mentor_id INT REFERENCES users(user_id),
@@ -226,6 +228,7 @@ CREATE TABLE mentorships (
     notes TEXT
 );
 
+--Reviews Table
 CREATE TABLE reviews (
     review_id SERIAL PRIMARY KEY,
     user_id INT REFERENCES users(user_id),
@@ -235,26 +238,26 @@ CREATE TABLE reviews (
     created_at TIMESTAMP
 );
 
--- Define the 'reports' table for user reports
+--Reports Table
 CREATE TABLE reports (
     id SERIAL PRIMARY KEY,
     reported_by_user_id INTEGER REFERENCES users(user_id),
     reported_user_id INTEGER REFERENCES users(user_id),
     content TEXT,
-    report_date timestamp
+    report_date TIMESTAMP
 );
 
--- Define the 'emergency_contacts' table for emergency contacts
+--Emergency Contacts Table
 CREATE TABLE emergency_contacts (
     id SERIAL PRIMARY KEY,
     user_id INTEGER REFERENCES users(user_id),
-    name varchar(255),
+    name VARCHAR(255),
     contact_info TEXT,
     description TEXT,
-    location varchar(255)
+    location VARCHAR(255)
 );
 
--- Define the 'legal_documents' table for legal documents
+--Legal Documents Table
 CREATE TABLE legal_documents (
     id SERIAL PRIMARY KEY,
     title VARCHAR(255),
@@ -263,7 +266,7 @@ CREATE TABLE legal_documents (
     effective_date DATE
 );
 
--- Define the 'user_consent_logs' table for user consent logs
+--User Consent Logs Table
 CREATE TABLE consent_logs (
     id SERIAL PRIMARY KEY,
     user_id INTEGER REFERENCES users(user_id),
@@ -272,7 +275,7 @@ CREATE TABLE consent_logs (
     version INT
 );
 
--- Define the 'error_logs' table for error logs
+--Error Logs Table
 CREATE TABLE error_logs (
     id SERIAL PRIMARY KEY,
     user_id INTEGER REFERENCES users(user_id),

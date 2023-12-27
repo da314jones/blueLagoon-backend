@@ -1,16 +1,19 @@
-// passwordResetQueries.js
+const db = require('../db/dbConfig'); 
 
-const db = require('../db/dbConfig');
+// Query to reset a user's password
+const resetPassword = async (userId, newPasswordHash) => {
+    const query = 'UPDATE users SET password_hash = $1 WHERE user_id = $2';
+    await db.query(query, [newPasswordHash, userId]);
+};
 
-const resetPassword = async (user_id, newPasswordHash) => {
-    try {
-        await db.none("UPDATE users SET password_hash = $1 WHERE user_id = $2", [newPasswordHash, user_id]);
-    } catch (err) {
-        console.error('Error resetting password:', err);
-        throw err;
-    }
+// Query to get user by email
+const getUserByEmail = async (email) => {
+    const query = 'SELECT * FROM users WHERE email = $1';
+    const result = await db.query(query, [email]);
+    return result.rows[0];
 };
 
 module.exports = {
-    resetPassword
+    resetPassword,
+    getUserByEmail
 };
