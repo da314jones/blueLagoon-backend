@@ -1,5 +1,6 @@
 const express = require('express');
 const vchats = express.Router();
+const { createSessionAsync, generateToken } = require('../service/openTokService')
 const vchatsValidationSchema = require('../validations/checkProfessionalVthreads');
 const {
     getAllVChats,
@@ -35,8 +36,10 @@ vchats.post('/', async (req, res) => {
     if (error) return res.status(400).json({ error: error.details[0].message });
 
     try {
-        const newVChat = await createVChat(req.body);
-        res.status(201).json(newVChat);
+        const sessionId = await createSessionAsync();
+        const token = generateToken(sessionId);
+        const newVChat = await createVChat({ ...req.body, opentok_session_id: sessionId });
+        res.status(201).json({ ...newVChat, token });
     } catch (err) {
         res.status(500).json({ error: err.message });
     }

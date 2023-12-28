@@ -69,6 +69,7 @@ CREATE TABLE profiles (
 CREATE TABLE vchats (
     session_id SERIAL PRIMARY KEY,
     host_user_id INTEGER REFERENCES users(user_id),
+    opentok_session_id VARCHAR(255),
     video_url TEXT,
     schedule_time TIMESTAMP,
     duration INTEGER,

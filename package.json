@@ -13,6 +13,7 @@
   "author": "Dwayne A. Jones",
   "license": "ISC",
   "dependencies": {
+    "@vonage/server-sdk": "^3.11.0",
     "bcrypt": "^5.1.1",
     "body-parser": "^1.20.2",
     "chai-joi": "^2.0.3",

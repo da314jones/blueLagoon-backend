@@ -8,7 +8,8 @@ const vchatsValidationSchema = Joi.object({
     archive_link: Joi.string().uri(),
     start_time: Joi.date().iso(),
     end_time: Joi.date().iso(),
-    archive_url: Joi.string().uri()
+    archive_url: Joi.string().uri(),
+    opentok_session_id: Joi.string()
 });
 
 module.exports = vchatsValidationSchema;

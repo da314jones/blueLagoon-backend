@@ -16,7 +16,8 @@ const getOneAffiliate = async (id) => {
     try {
         const oneAffiliate = await db.one("SELECT * FROM affiliates WHERE id=$1", id)
         return oneAffiliate
-    }catch(err) {
+    } catch(err) {
+        console.error('Error fetching one affiliates')
         return err
     }
 };
@@ -26,6 +27,7 @@ const createAffiliate = async (affiliate) => {
         const createdAffiliate = await db.one("INSERT INTO affiliates (name, service_or_product, discount_details, contact_info) VALUES ($1, $2, $3, $4) RETURNING *", [affiliate.name, affiliate.service_or_product, affiliate.discount_details, affiliate.contact_info])
         return createdAffiliate
     }catch(err) {
+        console.error('Error fetching creating affiliates')
         return err
     }
 };
@@ -35,6 +37,7 @@ const deleteAffiliate = async (id) => {
         const deletedAffiliate = await db.one("DELETE FROM affiliates WHERE id=$1 RETURNING *", id)
         return deletedAffiliate
     }catch(err) {
+        console.error('Error deleting all affiliates')
         return err
     }
 };
@@ -46,6 +49,7 @@ const updateAffiliate = async (id, affiliate) => {
         );
         return updatedAffiliate
     }catch(err) {
+        console.error('Error updating all affiliates')
         return err
     }
 };
