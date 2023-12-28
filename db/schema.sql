@@ -67,17 +67,32 @@ CREATE TABLE profiles (
 
 --VChats Table
 CREATE TABLE vchats (
-    session_id SERIAL PRIMARY KEY,
-    host_user_id INTEGER REFERENCES users(user_id),
-    opentok_session_id VARCHAR(255),
-    video_url TEXT,
-    schedule_time TIMESTAMP,
-    duration INTEGER,
-    archive_link TEXT,
-    start_time TIMESTAMP,
-    end_time TIMESTAMP,
-    archive_url TEXT
+    id SERIAL PRIMARY KEY,
+    session_id VARCHAR(255) UNIQUE NOT NULL,
+    session_name VARCHAR(255),
+    created_at TIMESTAMP NOT NULL,
+    updated_at TIMESTAMP NOT NULL,
+    status VARCHAR(50),
+    duration INT,
+    session_type VARCHAR(100),
+    host_id VARCHAR(255),
+    recording_status VARCHAR(50)
 );
+
+--Participants Table
+CREATE TABLE participants (
+    id SERIAL PRIMARY KEY,
+    video_session_id INT,
+    participant_id VARCHAR(255) NOT NULL,
+    participant_name VARCHAR(255),
+    join_time TIMESTAMP,
+    leave_time TIMESTAMP,
+    role VARCHAR(100),
+    audio_status VARCHAR(50),
+    video_status VARCHAR(50),
+    FOREIGN KEY (vchats_session_id) REFERENCES vchats_sessions (id)
+);
+
 
 --VThreads Table
 CREATE TABLE vthreads (

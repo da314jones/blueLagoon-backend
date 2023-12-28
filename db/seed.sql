@@ -44,14 +44,19 @@ INSERT INTO profiles (user_id, firstname, lastname, gender, profile_picture_url,
 (6, 'Foxtrot', 'Golf', 'Female', 'https://example.com/profile6.jpg', 'Bio for Foxtrot', 'Location6'),
 (7, 'Golf', 'Hotel', 'Male', 'https://example.com/profile7.jpg', 'Bio for Golf', 'Location7');
 
-INSERT INTO vchats (host_user_id, opentok_session_id, video_url, schedule_time, duration, archive_link, start_time, end_time, archive_url) VALUES
-(1, 'YOUR_SESSION_ID_1', 'https://example.com/vchat1', NOW(), 30, 'https://example.com/archive1', NOW(), NOW(), 'https://example.com/archiveurl1'),
-(2, 'YOUR_SESSION_ID_2', 'https://example.com/vchat2', NOW(), 45, 'https://example.com/archive2', NOW(), NOW(), 'https://example.com/archiveurl2'),
-(3, 'YOUR_SESSION_ID_3', 'https://example.com/vchat3', NOW(), 60, 'https://example.com/archive3', NOW(), NOW(), 'https://example.com/archiveurl3'),
-(4, 'YOUR_SESSION_ID_4', 'https://example.com/vchat4', NOW(), 30, 'https://example.com/archive4', NOW(), NOW(), 'https://example.com/archiveurl4'),
-(5, 'YOUR_SESSION_ID_5', 'https://example.com/vchat5', NOW(), 45, 'https://example.com/archive5', NOW(), NOW(), 'https://example.com/archiveurl5'),
-(6, 'YOUR_SESSION_ID_6', 'https://example.com/vchat6', NOW(), 60, 'https://example.com/archive6', NOW(), NOW(), 'https://example.com/archiveurl6'),
-(7, 'YOUR_SESSION_ID_7', 'https://example.com/vchat7', NOW(), 30, 'https://example.com/archive7', NOW(), NOW(), 'https://example.com/archiveurl7');
+INSERT INTO vchats (session_id, session_name, created_at, updated_at, status, duration, session_type, host_id, recording_status) VALUES
+('1_MX40NzgzMzA5MX5-MTcwMzc4NzI4MzQ0Nn4', 'Chat Session 1', NOW(), NOW(), 'active', 30, 'group', 'host1', 'started'),
+('2_MX40NzgzMzA5MX5-MTcwMzc4NzI4MzUxM3', 'Chat Session 2', NOW(), NOW(), 'active', 45, 'group', 'host2', 'started'),
+('3_MX40NzgzMzA5MX5-MTcwMzc4NzI4MzU2Nn4', 'Chat Session 3', NOW(), NOW(), 'active', 60, 'group', 'host3', 'started'),
+('4_MX40NzgzMzA5MX5-MTcwMzc4NzI4MzYyNH4', 'Chat Session 4', NOW(), NOW(), 'active', 30, 'group', 'host4', 'started'),
+('5_MX40NzgzMzA5MX5-MTcwMzc4NzI4MzY4N3', 'Chat Session 5', NOW(), NOW(), 'active', 45, 'group', 'host5', 'started');
+
+INSERT INTO participants (video_session_id, participant_id, participant_name, join_time, leave_time, role, audio_status, video_status) VALUES
+(1, 'participant1', 'John Doe', NOW(), NULL, 'member', 'on', 'on'),
+(1, 'participant2', 'Jane Doe', NOW(), NULL, 'member', 'off', 'on'),
+(2, 'participant3', 'Alice Smith', NOW(), NULL, 'member', 'on', 'off'),
+(2, 'participant4', 'Bob Johnson', NOW(), NULL, 'member', 'on', 'on'),
+(3, 'participant5', 'Emma Brown', NOW(), NULL, 'member', 'on', 'on');
 
 INSERT INTO vthreads (host_user_id, title, description, video_url, scheduled_time, duration) VALUES
 (1, 'Parenting Tips', 'Discussion on modern parenting', 'https://example.com/vthread1', NOW(), 30),
