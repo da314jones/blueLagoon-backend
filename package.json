@@ -8,8 +8,7 @@
     "start": "nodemon server.js",
     "test": "mocha",
     "db_schema": "psql -U postgres -f db/schema.sql",
-    "db_seed": "psql -U postgres -f db/seed.sql",
-    
+    "db_seed": "psql -U postgres -f db/seed.sql"
   },
   "author": "Dwayne A. Jones",
   "license": "ISC",
