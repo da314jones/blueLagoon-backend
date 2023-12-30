@@ -4,11 +4,11 @@ require("dotenv").config();
 const openTok = require("../service/openTokService.js");
 const { vchatsValidationSchema } = require("../validations/checkVchats.js");
 const {
-  //   getAllVChats,
-  getOneVChat,
-  createVChat,
-  deleteVChat,
-  updateVChat,
+    getAllVChats,
+    getOneVChat,
+    createVChat,
+    deleteVChat,
+    updateVChat,
 } = require("../queries/vchatsQueries.js");
 const generateSessionId = require("../service/generateSessionId.js");
 
@@ -23,7 +23,7 @@ function validateVChat(req, res, next) {
 
 const openTokService = require('../service/openTokService');
 
-vchats.get("/", async (req, res) => {
+vchats.get("/session", async (req, res) => {
     try {
         // Generate session ID
         const sessionId = await openTokService.createSessionAsync();
@@ -44,7 +44,7 @@ vchats.get("/", async (req, res) => {
 });
 
 
-vchats.get("/vchats", async (req, res) => {
+vchats.get("/", async (req, res) => {
 
   try {
     const allVChats = await getAllVChats();

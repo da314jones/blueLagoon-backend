@@ -1,16 +1,16 @@
 const db = require('../db/dbConfig.js');
 
-// const getAllVChats = async () => {
-//     try {
-//         console.log("Executing query to fetch all VChats");
-//         const allVChats = await db.any("SELECT * FROM vchats");
-//         console.log("Query result:", allVChats);
-//         return allVChats
-//     } catch(err) {
-//         console.error('Error fetching all VChats')
-//         return err
-//     }
-// };
+const getAllVChats = async () => {
+    try {
+        console.log("Executing query to fetch all VChats");
+        const allVChats = await db.any("SELECT * FROM vchats");
+        console.log("Query result:", allVChats);
+        return allVChats
+    } catch(err) {
+        console.error('Error fetching all VChats')
+        return err
+    }
+};
 
 const getOneVChat = async (id) => {
     try {
@@ -57,7 +57,7 @@ const updateVChat = async (id, vchat) => {
 };
 
 module.exports = {
-    // getAllVChats,
+    getAllVChats,
     getOneVChat,
     createVChat,
     deleteVChat,
