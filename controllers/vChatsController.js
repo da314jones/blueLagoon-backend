@@ -44,19 +44,19 @@ vchats.get("/", async (req, res) => {
 });
 
 
-// vchats.get("/", async (req, res) => {
+vchats.get("/vchats", async (req, res) => {
 
-//   try {
-//     const allVChats = await getAllVChats();
-//     if (allVChats.length) {
-//       res.status(200).json({ id: nanoid(), allVChats });
-//     } else {
-//       res.status(404).json({ success: false, error: "No vchats found" });
-//     }
-//   } catch (err) {
-//     res.status(500).json({ success: false, error: "Server Error" });
-//   }
-// });
+  try {
+    const allVChats = await getAllVChats();
+    if (allVChats.length) {
+      res.status(200).json({ id: nanoid(), allVChats });
+    } else {
+      res.status(404).json({ success: false, error: "No vchats found" });
+    }
+  } catch (err) {
+    res.status(500).json({ success: false, error: "Server Error" });
+  }
+});
 
 vchats.get("/:id", async (req, res) => {
   const { id } = req.params;
