@@ -68,7 +68,7 @@ CREATE TABLE profiles (
 --VChats Table
 CREATE TABLE vchats (
     id SERIAL PRIMARY KEY,
-    session_id VARCHAR(255) UNIQUE NOT NULL,
+    opentok_session_id VARCHAR(255), -- Added id as the primary key
     session_name VARCHAR(255),
     created_at TIMESTAMP NOT NULL,
     updated_at TIMESTAMP NOT NULL,
@@ -79,7 +79,7 @@ CREATE TABLE vchats (
     recording_status VARCHAR(50)
 );
 
---Participants Table
+-- Participants Table
 CREATE TABLE participants (
     id SERIAL PRIMARY KEY,
     video_session_id INT,
@@ -90,8 +90,9 @@ CREATE TABLE participants (
     role VARCHAR(100),
     audio_status VARCHAR(50),
     video_status VARCHAR(50),
-    FOREIGN KEY (vchats_session_id) REFERENCES vchats_sessions (id)
+    FOREIGN KEY (video_session_id) REFERENCES vchats (id) -- Corrected the foreign key reference
 );
+
 
 
 --VThreads Table

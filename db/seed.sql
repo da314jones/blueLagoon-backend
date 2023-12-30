@@ -44,7 +44,7 @@ INSERT INTO profiles (user_id, firstname, lastname, gender, profile_picture_url,
 (6, 'Foxtrot', 'Golf', 'Female', 'https://example.com/profile6.jpg', 'Bio for Foxtrot', 'Location6'),
 (7, 'Golf', 'Hotel', 'Male', 'https://example.com/profile7.jpg', 'Bio for Golf', 'Location7');
 
-INSERT INTO vchats (session_id, session_name, created_at, updated_at, status, duration, session_type, host_id, recording_status) VALUES
+INSERT INTO vchats (opentok_session_id, session_name, created_at, updated_at, status, duration, session_type, host_id, recording_status) VALUES
 ('1_MX40NzgzMzA5MX5-MTcwMzc4NzI4MzQ0Nn4', 'Chat Session 1', NOW(), NOW(), 'active', 30, 'group', 'host1', 'started'),
 ('2_MX40NzgzMzA5MX5-MTcwMzc4NzI4MzUxM3', 'Chat Session 2', NOW(), NOW(), 'active', 45, 'group', 'host2', 'started'),
 ('3_MX40NzgzMzA5MX5-MTcwMzc4NzI4MzU2Nn4', 'Chat Session 3', NOW(), NOW(), 'active', 60, 'group', 'host3', 'started'),

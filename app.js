@@ -1,6 +1,6 @@
 const cors = require("cors");
 const express = require("express");
-const OpenTok = require('')
+const OpenTok = require('opentok')
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const bodyParser = require('body-parser'); // Added this line

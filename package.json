@@ -17,6 +17,7 @@
     "bcrypt": "^5.1.1",
     "body-parser": "^1.20.2",
     "chai-joi": "^2.0.3",
+    "cookieparser": "^0.1.0",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "ejs": "^3.1.9",
@@ -24,10 +25,12 @@
     "joi": "^17.11.0",
     "jsonwebtoken": "^9.0.2",
     "jwt-generator": "^3.1.0",
+    "morgan": "^1.10.0",
     "nodemailer": "^6.9.7",
     "opentok": "^2.17.0",
     "pg": "^8.11.3",
-    "pg-promise": "^11.5.4"
+    "pg-promise": "^11.5.4",
+    "punycode": "^2.3.1"
   },
   "devDependencies": {
     "chai": "^4.3.10",
